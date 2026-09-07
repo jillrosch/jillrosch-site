@@ -102,64 +102,6 @@
             z-index: 1000 !important;
         }
 
-        @media (max-width: 640px) {
-            .fixed-contact-card {
-                bottom: 1rem !important;
-                right: 1rem !important;
-            }
-            .fixed-contact-card .bg-\[#1a1e24\] {
-                min-width: 130px !important;
-                padding: 0.3rem 0.6rem !important;
-            }
-            .fixed-contact-card .w-10 {
-                width: 1.5rem !important;
-                height: 1.5rem !important;
-            }
-            .fixed-contact-card .text-\[0\.55rem\] {
-                font-size: 0.4rem !important;
-            }
-            .fixed-contact-card .text-sm {
-                font-size: 0.55rem !important;
-            }
-            .fixed-contact-card .bg-white {
-                width: 1.5rem !important;
-                height: 1.5rem !important;
-            }
-            .fixed-contact-card .bg-white .text-black {
-                font-size: 0.6rem !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .fixed-contact-card {
-                bottom: 0.5rem !important;
-                right: 0.5rem !important;
-            }
-            .fixed-contact-card .bg-\[#1a1e24\] {
-                min-width: 150px !important;
-                padding: 0.4rem 0.75rem !important;
-                border-radius: 1rem !important;
-            }
-            .fixed-contact-card .w-10 {
-                width: 1.8rem !important;
-                height: 1.8rem !important;
-            }
-            .fixed-contact-card .text-\[0\.55rem\] {
-                font-size: 0.45rem !important;
-            }
-            .fixed-contact-card .text-sm {
-                font-size: 0.65rem !important;
-            }
-            .fixed-contact-card .bg-white {
-                width: 1.8rem !important;
-                height: 1.8rem !important;
-                border-radius: 0.5rem !important;
-            }
-            .fixed-contact-card .bg-white .text-black {
-                font-size: 0.8rem !important;
-            }
-        }
-
         .trusted-section {
             background: #ffffff;
             padding: 3rem 2rem;
@@ -429,6 +371,7 @@
             gap: 0.5rem;
             transition: gap 0.3s ease;
             align-self: flex-start;
+            cursor: pointer;
         }
         .project-card .view-link:hover { gap: 0.75rem; }
         .project-card .view-link svg {
@@ -480,6 +423,171 @@
             font-weight: 700;
         }
 
+        /* ====== MODAL STYLES ====== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 1100px;
+            width: 100%;
+            max-height: 95vh;
+            min-height: 70vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+        .modal-close {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            z-index: 10;
+            color: #333;
+        }
+        .modal-close:hover {
+            background: #e0e0e0;
+            transform: rotate(90deg);
+        }
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-top: 0.5rem;
+            min-height: 50vh;
+        }
+        .modal-body .left-col h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1a2633;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        .modal-body .left-col p {
+            color: #4a5a6a;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        .modal-body .left-col p:last-child {
+            margin-bottom: 0;
+        }
+        .modal-body .right-col {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-body .right-col .thumbnail {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            flex-shrink: 0;
+        }
+        .modal-body .right-col .thumbnail img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .modal-body .right-col .project-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1.5rem;
+            background: #f8f9fa;
+            padding: 1.25rem;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+        .modal-body .right-col .project-meta .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-body .right-col .project-meta .meta-item .label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #8a9aa8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .modal-body .right-col .project-meta .meta-item .value {
+            font-size: 0.9rem;
+            color: #1a2633;
+            font-weight: 500;
+            margin-top: 0.15rem;
+            word-break: break-all;
+        }
+        .modal-body .right-col .project-meta .meta-item .value a {
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.2s;
+            cursor: pointer;
+            word-break: break-all;
+        }
+        .modal-body .right-col .project-meta .meta-item .value a:hover {
+            text-decoration: underline;
+            color: #1d4ed8;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 1.5rem;
+                min-height: auto;
+                max-height: 95vh;
+            }
+            .modal-body {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                min-height: auto;
+            }
+            .modal-body .left-col h1 {
+                font-size: 1.3rem;
+            }
+            .modal-body .right-col .project-meta {
+                grid-template-columns: 1fr;
+            }
+            .modal-overlay {
+                padding: 1rem;
+            }
+        }
+
         /* ====== ANIMATIONS ====== */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
@@ -522,11 +630,13 @@
         .animate-logo:nth-child(5) { animation-delay: 0.5s; }
 
         .hero-container {
-            height: calc(100vh - 80px);
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
+            padding-bottom: 0 !important;
+            margin-bottom: 0 !important;
         }
 
         /* ====== MOBILE MENU ====== */
@@ -584,7 +694,7 @@
             padding: 0.5rem;
         }
 
-        /* Mobile Faint Name - separate element */
+        /* Mobile Faint Name - separate element - VISIBLE ON ALL SCREENS */
         .mobile-faint-name {
             display: none;
         }
@@ -592,7 +702,7 @@
         /* ====== TABLET & MOBILE FIXES ====== */
         @media (max-width: 1024px) {
             .hero-container {
-                height: calc(100vh - 70px);
+                height: 100vh !important;
                 padding: 0 !important;
                 margin: 0 !important;
                 display: flex;
@@ -610,7 +720,7 @@
             .mobile-faint-name {
                 display: block !important;
                 position: absolute !important;
-                top: 30% !important;
+                top: 25% !important;
                 left: 50% !important;
                 transform: translateX(-50%) !important;
                 font-size: 4.5rem !important;
@@ -648,7 +758,7 @@
                 object-fit: cover !important;
                 width: 100vw !important;
                 height: auto !important;
-                max-height: 80vh !important;
+                max-height: 75vh !important;
                 border-radius: 0 !important;
                 display: block !important;
                 margin: 0 !important;
@@ -659,7 +769,17 @@
                 display: none !important;
             }
 
-            .bottom-left-copy {
+            /* Bottom name - moved up even more */
+            .bottom-name-wrapper {
+                position: absolute !important;
+                bottom: 6rem !important;
+                left: 1.5rem !important;
+                z-index: 20 !important;
+            }
+            .bottom-name-wrapper .text-white/50 {
+                font-size: 0.6rem !important;
+            }
+            .bottom-name-wrapper h2 {
                 font-size: 2.8rem !important;
             }
             .tagline {
@@ -668,9 +788,6 @@
                 top: 0.5rem !important;
                 left: 0.5rem !important;
             }
-            .animate-name-bg {
-                bottom: 5rem !important;
-            }
         }
 
         @media (max-width: 768px) {
@@ -678,25 +795,39 @@
             .nav-links { display: none !important; }
             .mobile-faint-name {
                 font-size: 3.8rem !important;
-                top: 28% !important;
+                top: 22% !important;
                 line-height: 0.95 !important;
             }
             .portrait-wrapper img {
-                max-height: 78vh !important;
+                max-height: 72vh !important;
+            }
+            .bottom-name-wrapper {
+                bottom: 5rem !important;
+                left: 1rem !important;
+            }
+            .bottom-name-wrapper h2 {
+                font-size: 2.5rem !important;
             }
         }
 
         @media (max-width: 640px) {
             .mobile-faint-name {
                 font-size: 3rem !important;
-                top: 25% !important;
+                top: 20% !important;
                 line-height: 0.9 !important;
             }
             .portrait-wrapper img {
-                max-height: 72vh !important;
+                max-height: 68vh !important;
             }
-            .bottom-left-copy {
-                font-size: 2.2rem !important;
+            .bottom-name-wrapper {
+                bottom: 4rem !important;
+                left: 0.75rem !important;
+            }
+            .bottom-name-wrapper .text-white/50 {
+                font-size: 0.5rem !important;
+            }
+            .bottom-name-wrapper h2 {
+                font-size: 2rem !important;
             }
         }
 
@@ -765,12 +896,12 @@
 
         <!-- ====== NAVIGATION ====== -->
         <nav class="relative z-30 flex items-center justify-between px-6 md:px-10 py-5 w-full">
-            <div class="text-white font-bold text-2xl tracking-wide">Portfolioa®</div>
+            <div class="text-white font-bold text-2xl tracking-wide">Portfolio</div>
             <ul class="nav-links flex items-center gap-8 text-white font-medium text-sm uppercase tracking-wider">
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#home">Home</a></li>
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#about">About</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work">Work <span class="text-xs opacity-60">(12)</span></a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services">Services <span class="text-xs opacity-60">(08)</span></a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work">Work</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services">Services</a></li>
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger-menu" id="hamburgerToggle" onclick="toggleMobileNav()">
@@ -784,8 +915,8 @@
             <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
             <a href="#home" onclick="toggleMobileNav()">Home</a>
             <a href="#about" onclick="toggleMobileNav()">About</a>
-            <a href="#work" onclick="toggleMobileNav()">Work <span style="font-size:0.7rem;opacity:0.6;">(12)</span></a>
-            <a href="#services" onclick="toggleMobileNav()">Services <span style="font-size:0.7rem;opacity:0.6;">(08)</span></a>
+            <a href="#work" onclick="toggleMobileNav()">Work</a>
+            <a href="#services" onclick="toggleMobileNav()">Services</a>
             <a href="#contact" onclick="toggleMobileNav()">Contact</a>
         </div>
 
@@ -806,7 +937,7 @@
                 </h1>
             </div>
 
-            <!-- Mobile Faint Name - 2 rows -->
+            <!-- Mobile Faint Name - 2 rows (visible on tablet/mobile) -->
             <div class="mobile-faint-name">
                 JILL<br />RÖSCH
             </div>
@@ -823,10 +954,10 @@
                 </div>
             </div>
 
-            <!-- bottom left: "JILL RÖSCH" + ©2026 -->
-            <div class="absolute bottom-4 left-6 md:bottom-6 md:left-12 z-20 animate-name-front">
+            <!-- bottom left: "JILL RÖSCH" + ©2026 - moved up even more -->
+            <div class="bottom-name-wrapper absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20 animate-name-front">
                 <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
-                <h2 class="bottom-left-copy text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
+                <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
                     JILL RÖSCH
                 </h2>
             </div>
@@ -958,7 +1089,7 @@
                 <div class="project-card">
                     <h3>Project 1</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a href="#" class="view-link">
+                    <a class="view-link" onclick="openModal('project1')">
                         View Project
                         <svg viewBox="0 0 24 24">
                             <line x1="5" y1="12" x2="19" y2="12" />
@@ -966,10 +1097,12 @@
                         </svg>
                     </a>
                 </div>
+
+                <!-- Project 2 -->
                 <div class="project-card">
                     <h3>Project 2</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a href="#" class="view-link">
+                    <a class="view-link" onclick="openModal('project2')">
                         View Project
                         <svg viewBox="0 0 24 24">
                             <line x1="5" y1="12" x2="19" y2="12" />
@@ -977,10 +1110,12 @@
                         </svg>
                     </a>
                 </div>
+
+                <!-- Project 3 -->
                 <div class="project-card">
                     <h3>Project 3</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a href="#" class="view-link">
+                    <a class="view-link" onclick="openModal('project3')">
                         View Project
                         <svg viewBox="0 0 24 24">
                             <line x1="5" y1="12" x2="19" y2="12" />
@@ -988,10 +1123,12 @@
                         </svg>
                     </a>
                 </div>
+
+                <!-- Project 4 -->
                 <div class="project-card">
                     <h3>Project 4</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a href="#" class="view-link">
+                    <a class="view-link" onclick="openModal('project4')">
                         View Project
                         <svg viewBox="0 0 24 24">
                             <line x1="5" y1="12" x2="19" y2="12" />
@@ -1002,6 +1139,16 @@
             </div>
         </div>
     </section>
+
+    <!-- ====== PROJECT MODAL ====== -->
+    <div class="modal-overlay" id="projectModal" onclick="closeModalOutside(event)">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Dynamic content loaded via JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- ====== ABOUT ME SECTION ====== -->
     <section class="about-section" id="about">
@@ -1031,6 +1178,138 @@
     </section>
 
     <script>
+        // Project data
+        const projects = {
+            project1: {
+                title: "Absolute Integrative Physical Medicine",
+                description: "",
+                thumbnail: "https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9e71f157963560ced9fba7.png",
+                meta: {
+                    type: "Website",
+                    languages: "HTML, CSS, JS",
+                    platform: "GHL",
+                    country: "USA",
+                    liveUrl: "https://absoluteintegrativehealth.com/"
+                },
+                showDescription: false
+            },
+            project2: {
+                title: "Abiawards",
+                description: "",
+                thumbnail: "https://imgh.in/host/psyead",
+                meta: {
+                    type: "Website",
+                    languages: "PHP, HTML, CSS, JS",
+                    platform: "WordPress",
+                    country: "USA",
+                    liveUrl: "https://abiawards.com.au"
+                },
+                showDescription: false
+            },
+            project3: {
+                title: "Ozark RV Park & Cabins",
+                description: "",
+                thumbnail: "https://imgh.in/host/78nblm",
+                meta: {
+                    type: "Website",
+                    languages: "HTML, CSS, JS",
+                    platform: "GHL",
+                    country: "USA",
+                    liveUrl: "https://ozarkrvpark.com"
+                },
+                showDescription: false
+            },
+            project4: {
+                title: "Catch of The Decade",
+                description: "",
+                thumbnail: "https://imgh.in/host/d7gbmg",
+                meta: {
+                    type: "Website",
+                    languages: "HTML, CSS, JS",
+                    platform: "WordPress",
+                    country: "USA",
+                    liveUrl: "https://catchofthedecade.com/"
+                },
+                showDescription: false
+            }
+        };
+
+        function openModal(projectId) {
+            const modal = document.getElementById('projectModal');
+            const body = document.getElementById('modalBody');
+            const project = projects[projectId];
+
+            if (!project) return;
+
+            let leftColContent = '';
+            
+            if (project.showDescription !== false) {
+                const descParagraphs = (project.description || '').split('\n\n').map(p => `<p>${p}</p>`).join('');
+                leftColContent = `
+                    <h1>${project.title}</h1>
+                    ${descParagraphs}
+                `;
+            } else {
+                leftColContent = `
+                    <h1>${project.title}</h1>
+                    <div class="thumbnail" style="margin-top: 1rem;">
+                        <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" />
+                    </div>
+                `;
+            }
+
+            body.innerHTML = `
+                <div class="left-col">
+                    ${leftColContent}
+                </div>
+                <div class="right-col">
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <span class="label">Type:</span>
+                            <span class="value">${project.meta.type}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Languages:</span>
+                            <span class="value">${project.meta.languages}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Platform:</span>
+                            <span class="value">${project.meta.platform}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="label">Country:</span>
+                            <span class="value">${project.meta.country}</span>
+                        </div>
+                        <div class="meta-item" style="grid-column: 1 / -1;">
+                            <span class="label">Live URL:</span>
+                            <span class="value"><a href="${project.meta.liveUrl}" target="_blank" rel="noopener noreferrer">${project.meta.liveUrl}</a></span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('projectModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function closeModalOutside(event) {
+            if (event.target === document.getElementById('projectModal')) {
+                closeModal();
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
         function toggleMobileNav() {
             const mobileNav = document.getElementById('mobileNav');
             const hamburger = document.getElementById('hamburgerToggle');
