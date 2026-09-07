@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JILL RÖSCH · designer portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html,
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background: #0b1a2f;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Mountain top background - cool blue alpine scene */
+        .bg-mountains {
+            background:
+                linear-gradient(180deg, rgba(11, 26, 47, 0.2) 0%, rgba(11, 26, 47, 0.6) 100%),
+                url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1920&q=80');
+            background-size: cover;
+            background-position: center 30%;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Blue-tinted overlay for cooler tone */
+        .blue-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at center, rgba(30, 80, 140, 0.15) 0%, rgba(11, 26, 47, 0.3) 100%);
+        }
+
+        /* Dark overlay for depth */
+        .dark-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+        }
+
+        /* Additional dark overlay at bottom */
+        .bottom-dark-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(to top, rgba(11, 26, 47, 0.9) 0%, transparent 100%);
+        }
+
+        /* Top dark overlay */
+        .top-dark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            pointer-events: none;
+            z-index: 0;
+            background: linear-gradient(to bottom, rgba(11, 26, 47, 0.6) 0%, transparent 100%);
+        }
+
+        /* subtle grid overlay */
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: 0 0;
+        }
+
+        .z-1 {
+            z-index: 1;
+        }
+        .z-2 {
+            z-index: 2;
+        }
+        .z-3 {
+            z-index: 3;
+        }
+        .z-4 {
+            z-index: 4;
+        }
+        .z-5 {
+            z-index: 5;
+        }
+        .card-shadow {
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Trusted by section styles - white background, dark gray text */
+        .trusted-section {
+            background: #ffffff;
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .logo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            flex: 1 1 100px;
+            min-width: 80px;
+        }
+
+        .logo-item:hover {
+            opacity: 0.9;
+        }
+
+        .logo-image {
+            height: 40px;
+            width: auto;
+            max-width: 120px;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0.5);
+            transition: filter 0.3s ease;
+        }
+
+        .logo-item:hover .logo-image {
+            filter: grayscale(0%) brightness(0.8);
+        }
+
+        .logo-name {
+            color: #888;
+            font-size: 0.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* Services section styles - white background */
+        .services-section {
+            background: #ffffff;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #0f172a;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(96, 165, 250, 0.3);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+
+        .service-list li {
+            padding: 0.4rem 0;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-list li::before {
+            content: "▸";
+            color: #60a5fa;
+            font-size: 0.7rem;
+        }
+
+        /* Get a powerful website section - TWO COLUMN LAYOUT */
+        .powerful-section {
+            background: #ffffff;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .powerful-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .powerful-heading h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a2633;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .powerful-heading h2 span {
+            color: #2563eb;
+        }
+
+        .powerful-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .powerful-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .powerful-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        .powerful-card-icon {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: #eef2f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+        }
+
+        .powerful-card-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #2563eb;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .powerful-card-content {
+            flex: 1;
+        }
+
+        .powerful-card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #1a2633;
+            margin-bottom: 0.5rem;
+        }
+
+        .powerful-card-title .highlight {
+            color: #2563eb;
+        }
+
+        .powerful-card-desc {
+            font-size: 0.95rem;
+            color: #4a5a6a;
+            line-height: 1.7;
+        }
+
+        /* Featured Projects section - with bg image and overlay */
+        .projects-section {
+            background:
+                linear-gradient(180deg, rgba(11, 26, 47, 0.85) 0%, rgba(11, 26, 47, 0.9) 100%),
+                url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80');
+            background-size: cover;
+            background-position: center 35%;
+            background-repeat: no-repeat;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .projects-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .projects-header .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #60a5fa;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .projects-header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        /* Projects Grid - 2 rows, 2 columns */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(96, 165, 250, 0.3);
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .project-card .view-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #60a5fa;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .project-card .view-link:hover {
+            gap: 0.75rem;
+        }
+
+        .project-card .view-link svg {
+            width: 16px;
+            height: 16px;
+            stroke: #60a5fa;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* About Me section - white background */
+        .about-section {
+            background: #ffffff;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .about-header .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a2633;
+            letter-spacing: -0.02em;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: #4a5a6a;
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 1.25rem;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ====== ANIMATIONS ====== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideFromLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-60px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Animated elements */
+        .animate-tagline {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .animate-portrait {
+            animation: slideFromLeft 1s ease-out forwards;
+        }
+
+        .animate-portrait:hover {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-name-bg {
+            animation: fadeInUp 1.2s ease-out forwards;
+        }
+
+        .animate-name-front {
+            animation: slideInLeft 0.8s ease-out 0.3s both;
+        }
+
+        .animate-card {
+            animation: slideInRight 0.8s ease-out 0.5s both;
+        }
+
+        .animate-logo {
+            animation: fadeInScale 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .animate-logo:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+        .animate-logo:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .animate-logo:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+        .animate-logo:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+        .animate-logo:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        /* Hero container - full height flex centering */
+        .hero-container {
+            height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        @media (max-width: 992px) {
+            .powerful-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .powerful-heading h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none !important;
+            }
+            .logo-grid {
+                gap: 1.5rem;
+                justify-content: center;
+            }
+            .logo-item {
+                flex: 0 1 auto;
+                min-width: 60px;
+            }
+            .logo-image {
+                height: 30px;
+                max-width: 80px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            .powerful-heading h2 {
+                font-size: 1.5rem;
+            }
+            .powerful-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+            .about-header h2 {
+                font-size: 1.8rem;
+            }
+            .about-text {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title-bg {
+                font-size: 4.5rem !important;
+                line-height: 1;
+            }
+            .hero-title-front {
+                font-size: 2.8rem !important;
+            }
+            .tagline {
+                font-size: 0.6rem !important;
+                letter-spacing: 0.08em;
+            }
+            .bottom-left-copy {
+                font-size: 2.8rem !important;
+            }
+            .bg-mountains {
+                background-position: center 20% !important;
+            }
+            .trusted-section {
+                padding: 2rem 1rem;
+            }
+            .logo-grid {
+                gap: 1rem;
+                padding: 0;
+            }
+            .logo-image {
+                height: 24px;
+                max-width: 60px;
+            }
+            .logo-name {
+                font-size: 0.5rem;
+            }
+            .portrait-wrapper {
+                width: 280px !important;
+            }
+            .services-section {
+                padding: 3rem 1rem;
+            }
+            .service-icon {
+                width: 48px;
+                height: 48px;
+            }
+            .powerful-section {
+                padding: 3rem 1rem;
+            }
+            .powerful-heading h2 {
+                font-size: 1.3rem;
+            }
+            .powerful-card {
+                padding: 1.5rem;
+            }
+            .projects-section {
+                padding: 3rem 1rem;
+            }
+            .projects-header h2 {
+                font-size: 1.3rem;
+            }
+            .project-card {
+                padding: 1.5rem;
+            }
+            .about-section {
+                padding: 3rem 1rem;
+            }
+            .about-header h2 {
+                font-size: 1.5rem;
+            }
+            .about-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        .relative {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== HERO SECTION ====== -->
+    <div class="bg-mountains">
+
+        <!-- Overlays -->
+        <div class="blue-overlay"></div>
+        <div class="dark-overlay"></div>
+        <div class="bottom-dark-overlay"></div>
+        <div class="top-dark-overlay"></div>
+        <div class="grid-overlay"></div>
+
+        <!-- ====== NAVIGATION ====== -->
+        <nav class="relative z-30 flex items-center justify-between px-6 md:px-10 py-5 w-full">
+            <div class="text-white font-bold text-2xl tracking-wide">Portfolioa®</div>
+            <ul class="nav-links flex items-center gap-8 text-white font-medium text-sm uppercase tracking-wider">
+                <li class="hover:text-blue-200 transition cursor-pointer">Home</li>
+                <li class="hover:text-blue-200 transition cursor-pointer">About</li>
+                <li class="hover:text-blue-200 transition cursor-pointer">Work <span class="text-xs opacity-60">(12)</span></li>
+                <li class="hover:text-blue-200 transition cursor-pointer">Services <span class="text-xs opacity-60">(08)</span></li>
+                <li class="hover:text-blue-200 transition cursor-pointer">Contact</li>
+            </ul>
+            <div class="flex flex-col gap-1.5 w-6 md:w-7 cursor-pointer">
+                <span class="block h-0.5 w-full bg-white rounded"></span>
+                <span class="block h-0.5 w-full bg-white rounded"></span>
+            </div>
+        </nav>
+
+        <!-- ====== HERO CONTENT ====== -->
+        <div class="hero-container z-10 px-6 md:px-12 lg:px-16">
+
+            <!-- upper left tagline - animated -->
+            <div class="absolute top-6 left-6 md:top-8 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
+                <p class="tagline text-white/80 text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8]">
+                    I DESIGN USER‑CENTERED DIGITAL<br />EXPERIENCES THAT ARE SIMPLE<br />SMART AND IMPACTFUL
+                </p>
+            </div>
+
+            <!-- Faded background "JILL RÖSCH" - animated -->
+            <div class="absolute left-0 bottom-24 md:bottom-32 lg:bottom-40 z-0 w-full pointer-events-none select-none animate-name-bg">
+                <h1 class="hero-title-bg text-[10rem] md:text-[14rem] lg:text-[18rem] xl:text-[20rem] font-extrabold text-white/10 tracking-[0.02em] leading-[0.85] ml-[-0.05em]">
+                    JILL RÖSCH
+                </h1>
+            </div>
+
+            <!-- center portrait - bigger size -->
+            <div class="portrait-wrapper z-10 w-[320px] sm:w-[380px] md:w-[480px] lg:w-[540px] pointer-events-none animate-portrait mx-auto">
+                <div class="relative w-full aspect-[4/5] md:aspect-[3/4]">
+                    <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
+                    alt="Jill Rösch portrait"
+                    class="w-full h-full object-contain object-center drop-shadow-2xl rounded-2xl"
+                    style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0b1a2f]/30 pointer-events-none rounded-2xl"></div>
+                </div>
+            </div>
+
+            <!-- bottom left: "JILL RÖSCH" + ©2026 - animated -->
+            <div class="absolute bottom-4 left-6 md:bottom-6 md:left-12 z-20 animate-name-front">
+                <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
+                <h2 class="bottom-left-copy text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
+                    JILL RÖSCH
+                </h2>
+            </div>
+
+            <!-- bottom right contact card - EMAIL LINK -->
+            <div class="absolute bottom-4 right-6 md:bottom-6 md:right-12 z-30 animate-card">
+                <a href="mailto:jillrosch@outlook.com" class="block no-underline">
+                    <div class="bg-[#1a1e24] card-shadow rounded-2xl p-3 md:p-4 flex items-center gap-3 md:gap-4 min-w-[200px] md:min-w-[240px] hover:shadow-2xl transition cursor-pointer">
+                        <!-- avatar -->
+                        <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-500 flex-shrink-0">
+                            <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
+                            alt="Jill Rösch"
+                            class="w-full h-full object-cover"
+                            />
+                        </div>
+                        <!-- text -->
+                        <div class="flex-1">
+                            <p class="text-[0.55rem] md:text-[0.65rem] text-white/50 uppercase tracking-[0.2em] font-medium">Let's Talk</p>
+                            <p class="text-white font-bold text-sm md:text-base leading-tight">Jill Rösch</p>
+                            <p class="text-white/60 text-[0.6rem] md:text-xs">UI/UX Designer</p>
+                        </div>
+                        <!-- CTA square with arrow -->
+                        <div class="w-10 h-10 md:w-12 md:h-12 bg-white rounded-lg flex items-center justify-center hover:scale-110 transition duration-200 shadow-lg flex-shrink-0">
+                            <span class="text-black text-xl md:text-2xl font-light">↗</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <!-- end hero content -->
+
+    </div>
+    <!-- end hero section -->
+
+    <!-- ====== TRUSTED BY SECTION - WIDE LOGO LAYOUT ====== -->
+    <section class="trusted-section">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-8">
+                <p class="text-black/30 text-[0.55rem] uppercase tracking-[0.2em] font-medium mb-1">Trusted By</p>
+                <h3 class="text-black/50 text-sm md:text-base font-light tracking-wide">Brands I've worked with</h3>
+            </div>
+            <div class="logo-grid">
+                <div class="logo-item animate-logo">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/slack.svg" alt="Slack" class="logo-image" />
+                    <span class="logo-name">Slack</span>
+                </div>
+                <div class="logo-item animate-logo">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/notion.svg" alt="Notion" class="logo-image" />
+                    <span class="logo-name">Notion</span>
+                </div>
+                <div class="logo-item animate-logo">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/figma.svg" alt="Figma" class="logo-image" />
+                    <span class="logo-name">Figma</span>
+                </div>
+                <div class="logo-item animate-logo">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/canva.svg" alt="Canva" class="logo-image" />
+                    <span class="logo-name">Canva</span>
+                </div>
+                <div class="logo-item animate-logo">
+                    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/dropbox.svg" alt="Dropbox" class="logo-image" />
+                    <span class="logo-name">Dropbox</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== GET A POWERFUL WEBSITE SECTION ====== -->
+    <section class="powerful-section">
+        <div class="powerful-container">
+            <div class="powerful-heading">
+                <h2>Get a powerful website that delivers results with an <span>all-in-one</span> solution</h2>
+            </div>
+            <div class="powerful-cards">
+                <div class="powerful-card">
+                    <div class="powerful-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                    </div>
+                    <div class="powerful-card-content">
+                        <h3 class="powerful-card-title"><span class="highlight">WEB</span> DEVELOPMENT</h3>
+                        <p class="powerful-card-desc">
+                            Build fast, responsive, and scalable websites with clean code, modern development practices, and a strong focus on performance, accessibility, and usability.
+                        </p>
+                    </div>
+                </div>
+                <div class="powerful-card">
+                    <div class="powerful-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            <path d="M2 17l10 5 10-5" />
+                            <path d="M2 12l10 5 10-5" />
+                        </svg>
+                    </div>
+                    <div class="powerful-card-content">
+                        <h3 class="powerful-card-title"><span class="highlight">UI/UX</span> DESIGN</h3>
+                        <p class="powerful-card-desc">
+                            Create intuitive, user-focused interfaces that combine thoughtful visual design with seamless navigation and responsive experiences across desktop, tablet, and mobile.
+                        </p>
+                    </div>
+                </div>
+                <div class="powerful-card">
+                    <div class="powerful-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <div class="powerful-card-content">
+                        <h3 class="powerful-card-title"><span class="highlight">USER</span> RESEARCH</h3>
+                        <p class="powerful-card-desc">
+                            Use user behavior, analytics, and audience insights to identify opportunities, improve usability, and create website experiences that better support both users and business goals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FEATURED PROJECTS SECTION WITH 4 CARDS ====== -->
+    <section class="projects-section">
+        <div class="projects-container">
+            <!-- Header -->
+            <div class="projects-header">
+                <p class="subtitle">Featured Projects</p>
+                <h2>Creates a perfect digital design.</h2>
+            </div>
+
+            <!-- Projects Grid - 2 rows, 2 columns -->
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <h3>Project 1</h3>
+                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <a href="#" class="view-link">
+                        View Project
+                        <svg viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <h3>Project 2</h3>
+                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <a href="#" class="view-link">
+                        View Project
+                        <svg viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <h3>Project 3</h3>
+                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <a href="#" class="view-link">
+                        View Project
+                        <svg viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card">
+                    <h3>Project 4</h3>
+                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <a href="#" class="view-link">
+                        View Project
+                        <svg viewBox="0 0 24 24">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT ME SECTION - WHITE BACKGROUND ====== -->
+    <section class="about-section">
+        <div class="about-container">
+            <!-- Header -->
+            <div class="about-header">
+                <p class="subtitle">About Me</p>
+                <h2>ABOUT ME</h2>
+            </div>
+
+            <!-- About Text -->
+            <div class="about-text">
+                <p>
+                    I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
+                </p>
+                <p>
+                    I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
+                </p>
+                <p>
+                    My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
+                </p>
+                <p>
+                    I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions—whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
+                </p>
+                <p>
+                    I care about building websites that are functional, responsive, maintainable, and useful—not just good-looking.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
