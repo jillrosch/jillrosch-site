@@ -614,6 +614,24 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* Reverse animations for scroll */
+        @keyframes fadeOutDown {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(40px); }
+        }
+        @keyframes slideOutLeft {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(-50px); }
+        }
+        @keyframes slideOutRight {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(50px); }
+        }
+        @keyframes scaleOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.9); }
+        }
+
         .animate-tagline { 
             animation: slideInLeft 0.8s ease-out forwards; 
         }
@@ -641,6 +659,23 @@
         .animate-logo:nth-child(3) { animation-delay: 0.3s; }
         .animate-logo:nth-child(4) { animation-delay: 0.4s; }
         .animate-logo:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Scroll-triggered reverse animations */
+        .scrolled .animate-tagline {
+            animation: slideOutLeft 0.8s ease-in forwards !important;
+        }
+        .scrolled .animate-portrait {
+            animation: scaleOut 0.8s ease-in forwards !important;
+        }
+        .scrolled .animate-name-bg {
+            animation: fadeOutDown 0.8s ease-in forwards !important;
+        }
+        .scrolled .animate-name-front {
+            animation: slideOutLeft 0.8s ease-in forwards !important;
+        }
+        .scrolled .animate-card {
+            animation: slideOutRight 0.8s ease-in forwards !important;
+        }
 
         .hero-container {
             height: 100vh;
@@ -781,9 +816,10 @@
                 display: none !important;
             }
 
+            /* White name - moved up more on mobile/tablet */
             .bottom-name-wrapper {
                 position: absolute !important;
-                bottom: 6rem !important;
+                bottom: 8rem !important;
                 left: 1.5rem !important;
                 z-index: 20 !important;
             }
@@ -816,7 +852,7 @@
                 max-height: 75vh !important;
             }
             .bottom-name-wrapper {
-                bottom: 5rem !important;
+                bottom: 7rem !important;
                 left: 1rem !important;
             }
             .bottom-name-wrapper h2 {
@@ -837,7 +873,7 @@
                 max-height: 70vh !important;
             }
             .bottom-name-wrapper {
-                bottom: 4rem !important;
+                bottom: 6rem !important;
                 left: 0.75rem !important;
             }
             .bottom-name-wrapper .text-white/50 {
@@ -971,7 +1007,7 @@
                 </div>
             </div>
 
-            <!-- bottom left: "JILL RÖSCH" + ©2026 -->
+            <!-- bottom left: "JILL RÖSCH" + ©2026 - moved up on mobile -->
             <div class="bottom-name-wrapper absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20 animate-name-front">
                 <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
                 <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
@@ -1247,6 +1283,19 @@
                 showDescription: false
             }
         };
+
+        // Scroll detection for reverse animations
+        const heroSection = document.getElementById('heroSection');
+
+        window.addEventListener('scroll', function() {
+            const currentScrollY = window.scrollY;
+            
+            if (currentScrollY > 50) {
+                heroSection.classList.add('scrolled');
+            } else {
+                heroSection.classList.remove('scrolled');
+            }
+        });
 
         function openModal(projectId) {
             const modal = document.getElementById('projectModal');
