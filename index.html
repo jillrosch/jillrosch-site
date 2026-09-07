@@ -15,8 +15,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        html,
-        body {
+        html, body {
             width: 100%;
             min-height: 100vh;
             background: #0b1a2f;
@@ -24,9 +23,10 @@
             scroll-behavior: smooth;
         }
 
+        /* ----- HERO ----- */
         .bg-mountains {
             background:
-                linear-gradient(180deg, rgba(11, 26, 47, 0.2) 0%, rgba(11, 26, 47, 0.6) 100%),
+                linear-gradient(180deg, rgba(11,26,47,0.2) 0%, rgba(11,26,47,0.6) 100%),
                 url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1920&q=80');
             background-size: cover;
             background-position: center 30%;
@@ -36,22 +36,19 @@
             position: relative;
             overflow: hidden;
         }
-
         .blue-overlay {
             position: absolute;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            background:
-                radial-gradient(ellipse at center, rgba(30, 80, 140, 0.15) 0%, rgba(11, 26, 47, 0.3) 100%);
+            background: radial-gradient(ellipse at center, rgba(34,34,204,0.15) 0%, rgba(11,26,47,0.3) 100%);
         }
         .dark-overlay {
             position: absolute;
             inset: 0;
             pointer-events: none;
             z-index: 0;
-            background:
-                radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.6) 100%);
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
         }
         .bottom-dark-overlay {
             position: absolute;
@@ -61,7 +58,7 @@
             height: 50%;
             pointer-events: none;
             z-index: 0;
-            background: linear-gradient(to top, rgba(11, 26, 47, 0.9) 0%, transparent 100%);
+            background: linear-gradient(to top, rgba(11,26,47,0.9) 0%, transparent 100%);
         }
         .top-dark-overlay {
             position: absolute;
@@ -71,7 +68,7 @@
             height: 30%;
             pointer-events: none;
             z-index: 0;
-            background: linear-gradient(to bottom, rgba(11, 26, 47, 0.6) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(11,26,47,0.6) 0%, transparent 100%);
         }
         .grid-overlay {
             position: absolute;
@@ -79,10 +76,9 @@
             pointer-events: none;
             z-index: 0;
             background-image:
-                linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
             background-size: 60px 60px;
-            background-position: 0 0;
         }
 
         .z-1 { z-index: 1; }
@@ -91,10 +87,10 @@
         .z-4 { z-index: 4; }
         .z-5 { z-index: 5; }
         .card-shadow {
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8);
         }
 
-        /* Fixed Contact Card - Sticky */
+        /* fixed contact */
         .fixed-contact-card {
             position: fixed !important;
             bottom: 2rem !important;
@@ -102,10 +98,11 @@
             z-index: 1000 !important;
         }
 
+        /* trusted */
         .trusted-section {
             background: #ffffff;
             padding: 3rem 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
         .logo-grid {
             display: flex;
@@ -147,11 +144,12 @@
             text-transform: uppercase;
         }
 
+        /* services */
         .services-section {
             background: #ffffff;
             padding: 5rem 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .services-grid {
             display: grid;
@@ -164,14 +162,14 @@
             background: #0f172a;
             border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.06);
         }
         .service-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(65, 103, 152, 0.3);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            border-color: rgba(34,34,204,0.3);
         }
         .service-icon {
             width: 64px;
@@ -202,9 +200,9 @@
         }
         .service-list li {
             padding: 0.4rem 0;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
             font-size: 0.9rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -212,14 +210,17 @@
         .service-list li:last-child { border-bottom: none; }
         .service-list li::before {
             content: "▸";
-            color: #416798;
+            color: #2222cc;
             font-size: 0.7rem;
         }
 
+        /* ===== POWERFUL SECTION – SCROLL ANIMATION ===== */
         .powerful-section {
             background: #ffffff;
             padding: 5rem 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
         }
         .powerful-container {
             max-width: 1200px;
@@ -236,7 +237,7 @@
             letter-spacing: -0.02em;
             line-height: 1.2;
         }
-        .powerful-heading h2 span { color: #416798; }
+        .powerful-heading h2 span { color: #2222cc; }
         .powerful-cards {
             display: flex;
             flex-direction: column;
@@ -246,15 +247,24 @@
             background: #f8f9fa;
             border-radius: 16px;
             padding: 2rem;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
             display: flex;
             gap: 1.25rem;
             align-items: flex-start;
+            opacity: 0;
+            transform: translateX(60px);
         }
+        .powerful-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .powerful-card:nth-child(1) { transition-delay: 0.1s; }
+        .powerful-card:nth-child(2) { transition-delay: 0.2s; }
+        .powerful-card:nth-child(3) { transition-delay: 0.3s; }
         .powerful-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.06);
         }
         .powerful-card-icon {
             flex-shrink: 0;
@@ -265,12 +275,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #416798;
+            color: #2222cc;
         }
         .powerful-card-icon svg {
             width: 24px;
             height: 24px;
-            stroke: #416798;
+            stroke: #2222cc;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
@@ -283,23 +293,24 @@
             color: #1a2633;
             margin-bottom: 0.5rem;
         }
-        .powerful-card-title .highlight { color: #416798; }
+        .powerful-card-title .highlight { color: #2222cc; }
         .powerful-card-desc {
             font-size: 0.95rem;
             color: #4a5a6a;
             line-height: 1.7;
         }
 
+        /* projects */
         .projects-section {
             background:
-                linear-gradient(180deg, rgba(11, 26, 47, 0.85) 0%, rgba(11, 26, 47, 0.9) 100%),
+                linear-gradient(180deg, rgba(11,26,47,0.85) 0%, rgba(11,26,47,0.9) 100%),
                 url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80');
             background-size: cover;
             background-position: center 35%;
             background-repeat: no-repeat;
             padding: 5rem 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
         .projects-container {
             max-width: 1100px;
@@ -314,7 +325,7 @@
         .projects-header .subtitle {
             font-size: 0.75rem;
             font-weight: 600;
-            color: #416798;
+            color: #2222cc;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 0.5rem;
@@ -333,20 +344,20 @@
             margin: 0 auto;
         }
         .project-card {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(255,255,255,0.06);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 16px;
             padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
         }
         .project-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(65, 103, 152, 0.3);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            border-color: rgba(34,34,204,0.3);
         }
         .project-card h3 {
             font-size: 1.2rem;
@@ -356,7 +367,7 @@
         }
         .project-card p {
             font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255,255,255,0.6);
             line-height: 1.7;
             margin-bottom: 1.5rem;
             flex: 1;
@@ -364,7 +375,7 @@
         .project-card .view-link {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #416798;
+            color: #2222cc;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -377,81 +388,107 @@
         .project-card .view-link svg {
             width: 16px;
             height: 16px;
-            stroke: #416798;
+            stroke: #2222cc;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
-        /* About Me section - 2 columns */
+        /* ===== ABOUT ME – MODERN CARD LAYOUT ===== */
         .about-section {
             background: #ffffff;
-            padding: 0;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
-        .about-container {
+        .about-modern {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            min-height: 500px;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 3rem;
             align-items: stretch;
         }
-        .about-image {
-            width: 100%;
-            height: 100%;
+        .about-image-card {
+            border-radius: 24px;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            height: 100%;
             min-height: 400px;
+            background: #eef2f6;
         }
-        .about-image img {
+        .about-image-card img {
             width: 100%;
             height: 100%;
-            display: block;
             object-fit: cover;
+            display: block;
         }
-        .about-content {
-            padding: 4rem 3rem;
+        .about-content-card {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        .about-text {
-            font-size: 1.05rem;
-            color: #4a5a6a;
-            line-height: 1.8;
+        .about-content-card .badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #2222cc;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.75rem;
         }
-        .about-text p {
-            margin-bottom: 1.25rem;
-        }
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-        .about-text strong {
-            color: #1a2633;
-            font-weight: 700;
-        }
-        .about-header h2 {
+        .about-content-card h2 {
             font-size: 2.2rem;
             font-weight: 700;
             color: #1a2633;
             letter-spacing: -0.02em;
             margin-bottom: 1.5rem;
         }
-        .about-header .subtitle {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #416798;
+        .about-content-card p {
+            font-size: 1rem;
+            color: #4a5a6a;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+        .about-content-card p:last-child {
+            margin-bottom: 0;
+        }
+        .about-content-card strong {
+            color: #1a2633;
+            font-weight: 700;
+        }
+        .about-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+        .about-stats .stat {
+            display: flex;
+            flex-direction: column;
+        }
+        .about-stats .stat .number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1a2633;
+        }
+        .about-stats .stat .label {
+            font-size: 0.7rem;
+            color: #8a9aa8;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
         }
 
-        /* Contact Form section */
+        /* contact */
         .contact-section {
             background: #f8f9fa;
             padding: 5rem 2rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
         .contact-container {
             max-width: 700px;
@@ -464,7 +501,7 @@
         .contact-header .subtitle {
             font-size: 0.75rem;
             font-weight: 600;
-            color: #416798;
+            color: #2222cc;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 0.5rem;
@@ -484,8 +521,8 @@
             background: #ffffff;
             border-radius: 16px;
             padding: 2.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
         }
         .contact-form label {
             display: block;
@@ -508,8 +545,8 @@
         .contact-form input:focus,
         .contact-form textarea:focus {
             outline: none;
-            border-color: #416798;
-            box-shadow: 0 0 0 3px rgba(65, 103, 152, 0.15);
+            border-color: #2222cc;
+            box-shadow: 0 0 0 3px rgba(34,34,204,0.15);
             background: #ffffff;
         }
         .contact-form .form-group {
@@ -520,7 +557,7 @@
             resize: vertical;
         }
         .contact-form .submit-btn {
-            background: #416798;
+            background: #2222cc;
             color: #ffffff;
             padding: 0.85rem 2rem;
             border: none;
@@ -532,14 +569,14 @@
             width: 100%;
         }
         .contact-form .submit-btn:hover {
-            background: #34567a;
+            background: #1a1aa3;
             transform: translateY(-2px);
         }
         .contact-form .submit-btn:active {
             transform: translateY(0);
         }
 
-        /* ====== MODAL STYLES ====== */
+        /* modal */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -547,7 +584,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(8px);
             z-index: 9999;
             align-items: center;
@@ -555,9 +592,7 @@
             padding: 2rem;
             overflow-y: auto;
         }
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
         .modal-content {
             background: #ffffff;
             border-radius: 20px;
@@ -612,18 +647,11 @@
             font-size: 0.95rem;
             margin-bottom: 1rem;
         }
-        .modal-body .left-col p:last-child {
-            margin-bottom: 0;
-        }
-        .modal-body .right-col {
-            display: flex;
-            flex-direction: column;
-        }
         .modal-body .right-col .thumbnail {
             width: 100%;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             margin-bottom: 1.5rem;
             flex-shrink: 0;
         }
@@ -660,51 +688,21 @@
             word-break: break-all;
         }
         .modal-body .right-col .project-meta .meta-item .value a {
-            color: #416798;
+            color: #2222cc;
             text-decoration: none;
             transition: color 0.2s;
             cursor: pointer;
-            word-break: break-all;
         }
         .modal-body .right-col .project-meta .meta-item .value a:hover {
             text-decoration: underline;
-            color: #2a4a6e;
+            color: #1a1aa3;
         }
-
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        @media (max-width: 768px) {
-            .modal-content {
-                padding: 1.5rem;
-                min-height: auto;
-                max-height: 95vh;
-            }
-            .modal-body {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                min-height: auto;
-            }
-            .modal-body .left-col h1 {
-                font-size: 1.3rem;
-            }
-            .modal-body .right-col .project-meta {
-                grid-template-columns: 1fr;
-            }
-            .modal-overlay {
-                padding: 1rem;
-            }
-        }
-
-        /* ====== ANIMATIONS ====== */
+        /* animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
@@ -714,7 +712,7 @@
             to { opacity: 1; transform: translateX(0) scale(1); }
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
+            0%,100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
         @keyframes slideInLeft {
@@ -729,8 +727,6 @@
             from { opacity: 0; transform: scale(0.9); }
             to { opacity: 1; transform: scale(1); }
         }
-
-        /* Reverse animations for scroll */
         @keyframes fadeOutDown {
             from { opacity: 1; transform: translateY(0); }
             to { opacity: 0; transform: translateY(40px); }
@@ -748,24 +744,12 @@
             to { opacity: 0; transform: scale(0.9); }
         }
 
-        .animate-tagline { 
-            animation: slideInLeft 0.8s ease-out forwards; 
-        }
-        .animate-portrait { 
-            animation: slideFromLeft 1s ease-out forwards; 
-        }
-        .animate-portrait:hover { 
-            animation: float 3s ease-in-out infinite; 
-        }
-        .animate-name-bg { 
-            animation: fadeInUp 1.2s ease-out forwards; 
-        }
-        .animate-name-front { 
-            animation: slideInLeft 0.8s ease-out 0.3s both; 
-        }
-        .animate-card { 
-            animation: slideInRight 0.8s ease-out 0.5s both; 
-        }
+        .animate-tagline { animation: slideInLeft 0.8s ease-out forwards; }
+        .animate-portrait { animation: slideFromLeft 1s ease-out forwards; }
+        .animate-portrait:hover { animation: float 3s ease-in-out infinite; }
+        .animate-name-bg { animation: fadeInUp 1.2s ease-out forwards; }
+        .animate-name-front { animation: slideInLeft 0.8s ease-out 0.3s both; }
+        .animate-card { animation: slideInRight 0.8s ease-out 0.5s both; }
         .animate-logo {
             animation: fadeInScale 0.6s ease-out forwards;
             opacity: 0;
@@ -776,7 +760,6 @@
         .animate-logo:nth-child(4) { animation-delay: 0.4s; }
         .animate-logo:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Scroll-triggered reverse animations */
         .scrolled .animate-tagline {
             animation: slideOutLeft 0.8s ease-in forwards !important;
         }
@@ -803,7 +786,7 @@
             margin-bottom: 0 !important;
         }
 
-        /* ====== MOBILE MENU ====== */
+        /* mobile nav */
         .hamburger-menu {
             display: none;
             flex-direction: column;
@@ -827,7 +810,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(11, 26, 47, 0.98);
+            background: rgba(11,26,47,0.98);
             backdrop-filter: blur(10px);
             z-index: 40;
             flex-direction: column;
@@ -845,7 +828,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        .mobile-nav a:hover { color: #416798; }
+        .mobile-nav a:hover { color: #2222cc; }
         .mobile-nav-close {
             position: absolute;
             top: 2rem;
@@ -857,30 +840,12 @@
             border: none;
             padding: 0.5rem;
         }
+        .mobile-faint-name { display: none; }
 
-        /* Mobile Faint Name - bold, left-aligned, bigger */
-        .mobile-faint-name {
-            display: none;
-        }
-
-        /* ====== TABLET & MOBILE FIXES ====== */
+        /* responsive */
         @media (max-width: 1024px) {
-            .hero-container {
-                height: 100vh !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                position: relative;
-                width: 100vw;
-                overflow: hidden;
-            }
-
-            .hero-title-bg {
-                display: none !important;
-            }
-
+            .hero-container { height: 100vh !important; padding:0 !important; margin:0 !important; display:flex; align-items:center; justify-content:center; width:100vw; overflow:hidden; }
+            .hero-title-bg { display:none !important; }
             .mobile-faint-name {
                 display: block !important;
                 position: absolute !important;
@@ -888,7 +853,7 @@
                 left: 1.5rem !important;
                 font-size: 7rem !important;
                 font-weight: 900 !important;
-                color: rgba(255, 255, 255, 0.12) !important;
+                color: rgba(255,255,255,0.12) !important;
                 letter-spacing: 0.04em !important;
                 line-height: 0.92 !important;
                 z-index: 0 !important;
@@ -896,12 +861,11 @@
                 text-align: left !important;
                 width: 100% !important;
             }
-
             .portrait-wrapper {
                 position: absolute !important;
                 top: 50% !important;
                 left: 50% !important;
-                transform: translate(-50%, -50%) !important;
+                transform: translate(-50%,-50%) !important;
                 width: 100vw !important;
                 max-width: 100vw !important;
                 height: auto !important;
@@ -910,13 +874,7 @@
                 margin: 0 !important;
                 display: block !important;
             }
-            .portrait-wrapper .relative {
-                width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                border-radius: 0 !important;
-                display: block !important;
-            }
+            .portrait-wrapper .relative { width:100% !important; padding:0 !important; margin:0 !important; border-radius:0 !important; display:block !important; }
             .portrait-wrapper img {
                 object-fit: cover !important;
                 width: 100vw !important;
@@ -927,297 +885,170 @@
                 margin: 0 !important;
                 padding: 0 !important;
             }
-            .portrait-wrapper .absolute {
-                border-radius: 0 !important;
-                display: none !important;
-            }
-
+            .portrait-wrapper .absolute { display:none !important; }
             .bottom-name-wrapper {
                 position: absolute !important;
                 bottom: 8rem !important;
                 left: 1.5rem !important;
                 z-index: 20 !important;
             }
-            .bottom-name-wrapper .text-white/50 {
-                font-size: 0.6rem !important;
-            }
-            .bottom-name-wrapper h2 {
-                font-size: 2.8rem !important;
-            }
-            .tagline {
-                font-size: 0.5rem !important;
-                max-width: 60% !important;
-                top: 0.5rem !important;
-                left: 0.5rem !important;
-            }
+            .bottom-name-wrapper .text-white/50 { font-size:0.6rem !important; }
+            .bottom-name-wrapper h2 { font-size:2.8rem !important; }
+            .tagline { font-size:0.5rem !important; max-width:60% !important; top:0.5rem !important; left:0.5rem !important; }
 
-            /* About Me mobile fixes */
-            .about-container {
-                grid-template-columns: 1fr;
-                min-height: auto;
-                display: flex;
-                flex-direction: column;
-            }
-            .about-content {
-                order: 1;
-                padding: 2.5rem 2rem;
-            }
-            .about-image {
-                order: 2;
-                min-height: 300px;
-                height: 400px;
-            }
-            .about-header h2 {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-            .about-header .subtitle {
-                text-align: center;
-            }
-            .contact-header h2 {
-                font-size: 1.8rem;
-            }
-            .contact-form {
-                padding: 1.5rem;
-            }
+            .powerful-container { grid-template-columns:1fr; gap:2rem; }
+            .powerful-heading h2 { font-size:1.8rem; text-align:center; }
+
+            .about-modern { grid-template-columns:1fr; gap:2rem; }
+            .about-image-card { min-height:300px; }
+            .about-content-card { padding:2rem; }
+            .about-content-card h2 { font-size:1.8rem; text-align:center; }
+            .about-content-card .badge { text-align:center; }
+            .about-stats { justify-content:center; }
+
+            .contact-header h2 { font-size:1.8rem; }
+            .contact-form { padding:1.5rem; }
+            .projects-grid { grid-template-columns:1fr; max-width:500px; margin:0 auto; }
         }
 
         @media (max-width: 768px) {
-            .hamburger-menu { display: flex; }
-            .nav-links { display: none !important; }
-            .mobile-faint-name {
-                font-size: 6rem !important;
-                top: 16% !important;
-                left: 1rem !important;
-                line-height: 0.92 !important;
-                color: rgba(255, 255, 255, 0.12) !important;
-                font-weight: 900 !important;
-            }
-            .portrait-wrapper img {
-                max-height: 75vh !important;
-            }
-            .bottom-name-wrapper {
-                bottom: 7rem !important;
-                left: 1rem !important;
-            }
-            .bottom-name-wrapper h2 {
-                font-size: 2.5rem !important;
-            }
-            .about-content {
-                padding: 2rem 1.5rem;
-            }
-            .about-image {
-                height: 300px;
-                min-height: 250px;
-            }
-            .about-text {
-                font-size: 0.95rem;
-            }
-            .about-header h2 {
-                font-size: 1.5rem;
-            }
-            .contact-section {
-                padding: 3rem 1.5rem;
-            }
-            .contact-header h2 {
-                font-size: 1.5rem;
-            }
-            .contact-form {
-                padding: 1.25rem;
-            }
+            .hamburger-menu { display:flex; }
+            .nav-links { display:none !important; }
+            .mobile-faint-name { font-size:6rem !important; top:16% !important; left:1rem !important; }
+            .portrait-wrapper img { max-height:75vh !important; }
+            .bottom-name-wrapper { bottom:7rem !important; left:1rem !important; }
+            .bottom-name-wrapper h2 { font-size:2.5rem !important; }
+            .about-content-card { padding:1.5rem; }
+            .about-content-card h2 { font-size:1.5rem; }
+            .about-stats { gap:1.5rem; flex-wrap:wrap; }
+            .contact-section { padding:3rem 1.5rem; }
+            .contact-header h2 { font-size:1.5rem; }
+            .contact-form { padding:1.25rem; }
+            .projects-grid { max-width:100%; }
+            .powerful-heading h2 { font-size:1.5rem; }
         }
 
         @media (max-width: 640px) {
-            .mobile-faint-name {
-                font-size: 5rem !important;
-                top: 14% !important;
-                left: 0.75rem !important;
-                line-height: 0.9 !important;
-                color: rgba(255, 255, 255, 0.12) !important;
-                font-weight: 900 !important;
-            }
-            .portrait-wrapper img {
-                max-height: 70vh !important;
-            }
-            .bottom-name-wrapper {
-                bottom: 6rem !important;
-                left: 0.75rem !important;
-            }
-            .bottom-name-wrapper .text-white/50 {
-                font-size: 0.5rem !important;
-            }
-            .bottom-name-wrapper h2 {
-                font-size: 2rem !important;
-            }
-            .about-content {
-                padding: 1.5rem 1rem;
-            }
-            .about-image {
-                height: 250px;
-                min-height: 200px;
-            }
-            .about-header h2 {
-                font-size: 1.3rem;
-            }
-            .about-text {
-                font-size: 0.9rem;
-            }
-            .contact-section {
-                padding: 2.5rem 1rem;
-            }
-            .contact-header h2 {
-                font-size: 1.3rem;
-            }
-            .contact-form {
-                padding: 1rem;
-            }
-            .contact-form .submit-btn {
-                font-size: 0.9rem;
-                padding: 0.7rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .powerful-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            .powerful-heading h2 {
-                font-size: 1.8rem;
-                text-align: center;
-            }
+            .mobile-faint-name { font-size:5rem !important; top:14% !important; left:0.75rem !important; }
+            .portrait-wrapper img { max-height:70vh !important; }
+            .bottom-name-wrapper { bottom:6rem !important; left:0.75rem !important; }
+            .bottom-name-wrapper .text-white/50 { font-size:0.5rem !important; }
+            .bottom-name-wrapper h2 { font-size:2rem !important; }
+            .about-image-card { min-height:200px; }
+            .about-content-card { padding:1.25rem; }
+            .about-content-card h2 { font-size:1.3rem; }
+            .about-content-card p { font-size:0.9rem; }
+            .contact-section { padding:2.5rem 1rem; }
+            .contact-header h2 { font-size:1.3rem; }
+            .contact-form { padding:1rem; }
+            .powerful-heading h2 { font-size:1.3rem; }
+            .powerful-card { flex-direction:column; align-items:center; text-align:center; }
         }
 
         @media (max-width: 768px) {
-            .logo-grid { gap: 1.5rem; justify-content: center; }
-            .logo-item { flex: 0 1 auto; min-width: 60px; }
-            .logo-image { height: 30px; max-width: 80px; }
-            .services-grid { grid-template-columns: 1fr; max-width: 400px; }
-            .powerful-heading h2 { font-size: 1.5rem; }
-            .powerful-card { flex-direction: column; align-items: center; text-align: center; }
-            .projects-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .logo-grid { gap:1.5rem; justify-content:center; }
+            .logo-item { flex:0 1 auto; min-width:60px; }
+            .logo-image { height:30px; max-width:80px; }
+            .services-grid { grid-template-columns:1fr; max-width:400px; }
         }
 
         @media (max-width: 640px) {
-            .bg-mountains { background-position: center 20% !important; }
-            .trusted-section { padding: 2rem 1rem; }
-            .logo-grid { gap: 1rem; padding: 0; }
-            .logo-image { height: 24px; max-width: 60px; }
-            .logo-name { font-size: 0.5rem; }
-            .services-section { padding: 3rem 1rem; }
-            .service-icon { width: 48px; height: 48px; }
-            .powerful-section { padding: 3rem 1rem; }
-            .powerful-heading h2 { font-size: 1.3rem; }
-            .powerful-card { padding: 1.5rem; }
-            .projects-section { padding: 3rem 1rem; }
-            .projects-header h2 { font-size: 1.3rem; }
-            .project-card { padding: 1.5rem; }
+            .bg-mountains { background-position:center 20% !important; }
+            .trusted-section { padding:2rem 1rem; }
+            .logo-grid { gap:1rem; padding:0; }
+            .logo-image { height:24px; max-width:60px; }
+            .logo-name { font-size:0.5rem; }
+            .services-section { padding:3rem 1rem; }
+            .service-icon { width:48px; height:48px; }
+            .powerful-section { padding:3rem 1rem; }
+            .powerful-card { padding:1.5rem; }
+            .projects-section { padding:3rem 1rem; }
+            .projects-header h2 { font-size:1.3rem; }
+            .project-card { padding:1.5rem; }
         }
 
         @media (min-width: 1025px) {
-            .mobile-nav { display: none !important; }
-            .mobile-faint-name { display: none !important; }
+            .mobile-nav { display:none !important; }
+            .mobile-faint-name { display:none !important; }
         }
-
-        .relative { position: relative; }
-        .absolute { position: absolute; }
+        .relative { position:relative; }
+        .absolute { position:absolute; }
     </style>
 </head>
 <body>
 
-    <!-- ====== HERO SECTION ====== -->
+    <!-- HERO -->
     <div class="bg-mountains" id="heroSection">
-
-        <!-- Overlays -->
         <div class="blue-overlay"></div>
         <div class="dark-overlay"></div>
         <div class="bottom-dark-overlay"></div>
         <div class="top-dark-overlay"></div>
         <div class="grid-overlay"></div>
 
-        <!-- ====== NAVIGATION ====== -->
         <nav class="relative z-30 flex items-center justify-between px-6 md:px-10 py-5 w-full">
             <div class="text-white font-bold text-2xl tracking-wide">Portfolio</div>
             <ul class="nav-links flex items-center gap-8 text-white font-medium text-sm uppercase tracking-wider">
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#home">Home</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#about">About</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work">Work</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services">Services</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact">Contact</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#home" onclick="smoothScroll('home')">Home</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#about" onclick="smoothScroll('about')">About</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work" onclick="smoothScroll('work')">Work</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services" onclick="smoothScroll('services')">Services</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact-form" onclick="smoothScroll('contact-form')">Contact</a></li>
             </ul>
             <div class="hamburger-menu" id="hamburgerToggle" onclick="toggleMobileNav()">
-                <span></span>
-                <span></span>
+                <span></span><span></span>
             </div>
         </nav>
 
-        <!-- ====== MOBILE NAV OVERLAY ====== -->
         <div class="mobile-nav" id="mobileNav">
             <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
-            <a href="#home" onclick="toggleMobileNav()">Home</a>
-            <a href="#about" onclick="toggleMobileNav()">About</a>
-            <a href="#work" onclick="toggleMobileNav()">Work</a>
-            <a href="#services" onclick="toggleMobileNav()">Services</a>
-            <a href="#contact" onclick="toggleMobileNav()">Contact</a>
+            <a href="#home" onclick="smoothScroll('home'); toggleMobileNav();">Home</a>
+            <a href="#about" onclick="smoothScroll('about'); toggleMobileNav();">About</a>
+            <a href="#work" onclick="smoothScroll('work'); toggleMobileNav();">Work</a>
+            <a href="#services" onclick="smoothScroll('services'); toggleMobileNav();">Services</a>
+            <a href="#contact-form" onclick="smoothScroll('contact-form'); toggleMobileNav();">Contact</a>
         </div>
 
-        <!-- ====== HERO CONTENT ====== -->
         <div class="hero-container z-10 px-6 md:px-12 lg:px-16" id="home">
-
-            <!-- upper left tagline - animated -->
             <div class="absolute top-6 left-6 md:top-8 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
                 <p class="tagline text-white/80 text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8]">
                     I DESIGN USER‑CENTERED DIGITAL<br />EXPERIENCES THAT ARE SIMPLE<br />SMART AND IMPACTFUL
                 </p>
             </div>
 
-            <!-- Faded background "JILL RÖSCH" - Desktop only -->
             <div class="absolute left-0 bottom-24 md:bottom-32 lg:bottom-40 z-0 w-full pointer-events-none select-none animate-name-bg">
                 <h1 class="hero-title-bg text-[10rem] md:text-[14rem] lg:text-[18rem] xl:text-[20rem] font-extrabold text-white/10 tracking-[0.02em] leading-[0.85] ml-[-0.05em]">
                     JILL RÖSCH
                 </h1>
             </div>
 
-            <!-- Mobile Faint Name - BIG, LEFT-ALIGNED -->
-            <div class="mobile-faint-name">
-                JILL<br />RÖSCH
-            </div>
+            <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
-            <!-- center portrait -->
             <div class="portrait-wrapper z-10 w-[320px] sm:w-[380px] md:w-[480px] lg:w-[540px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
-                    alt="Jill Rösch portrait"
-                    class="w-full h-auto object-contain object-center drop-shadow-2xl rounded-2xl"
-                    style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));"
-                    />
+                        alt="Jill Rösch portrait"
+                        class="w-full h-auto object-contain object-center drop-shadow-2xl rounded-2xl"
+                        style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));" />
                     <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0b1a2f]/30 pointer-events-none rounded-2xl"></div>
                 </div>
             </div>
 
-            <!-- bottom left: "JILL RÖSCH" + ©2026 -->
             <div class="bottom-name-wrapper absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20 animate-name-front">
                 <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
                 <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
                     JILL RÖSCH
                 </h2>
             </div>
-
         </div>
-        <!-- end hero content -->
-
     </div>
-    <!-- end hero section -->
 
-    <!-- ====== FIXED CONTACT CARD - STICKY ====== -->
-    <div class="fixed-contact-card" id="contact">
+    <!-- FIXED CONTACT -->
+    <div class="fixed-contact-card">
         <a href="mailto:jillrosch@outlook.com" class="block no-underline">
             <div class="bg-[#1a1e24] card-shadow rounded-2xl p-3 md:p-4 flex items-center gap-3 md:gap-4 min-w-[200px] md:min-w-[240px] hover:shadow-2xl transition cursor-pointer">
                 <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-500 flex-shrink-0">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
-                    alt="Jill Rösch"
-                    class="w-full h-full object-cover"
-                    />
+                        alt="Jill Rösch" class="w-full h-full object-cover" />
                 </div>
                 <div class="flex-1">
                     <p class="text-[0.55rem] md:text-[0.65rem] text-white/50 uppercase tracking-[0.2em] font-medium">Let's Talk</p>
@@ -1231,7 +1062,7 @@
         </a>
     </div>
 
-    <!-- ====== TRUSTED BY SECTION ====== -->
+    <!-- TRUSTED -->
     <section class="trusted-section">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-8">
@@ -1263,63 +1094,45 @@
         </div>
     </section>
 
-    <!-- ====== GET A POWERFUL WEBSITE SECTION ====== -->
+    <!-- ===== POWERFUL SECTION – WITH SCROLL ANIMATION ===== -->
     <section class="powerful-section" id="services">
         <div class="powerful-container">
             <div class="powerful-heading">
                 <h2>Get a powerful website that delivers results with an <span>all-in-one</span> solution</h2>
             </div>
             <div class="powerful-cards">
-                <div class="powerful-card">
+                <div class="powerful-card" id="card1">
                     <div class="powerful-card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-                            <line x1="8" y1="21" x2="16" y2="21" />
-                            <line x1="12" y1="17" x2="12" y2="21" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" /></svg>
                     </div>
                     <div class="powerful-card-content">
                         <h3 class="powerful-card-title"><span class="highlight">WEB</span> DEVELOPMENT</h3>
-                        <p class="powerful-card-desc">
-                            Build fast, responsive, and scalable websites with clean code, modern development practices, and a strong focus on performance, accessibility, and usability.
-                        </p>
+                        <p class="powerful-card-desc">Build fast, responsive, and scalable websites with clean code, modern development practices, and a strong focus on performance, accessibility, and usability.</p>
                     </div>
                 </div>
-                <div class="powerful-card">
+                <div class="powerful-card" id="card2">
                     <div class="powerful-card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" /></svg>
                     </div>
                     <div class="powerful-card-content">
                         <h3 class="powerful-card-title"><span class="highlight">UI/UX</span> DESIGN</h3>
-                        <p class="powerful-card-desc">
-                            Create intuitive, user-focused interfaces that combine thoughtful visual design with seamless navigation and responsive experiences across desktop, tablet, and mobile.
-                        </p>
+                        <p class="powerful-card-desc">Create intuitive, user-focused interfaces that combine thoughtful visual design with seamless navigation and responsive experiences across desktop, tablet, and mobile.</p>
                     </div>
                 </div>
-                <div class="powerful-card">
+                <div class="powerful-card" id="card3">
                     <div class="powerful-card-icon">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                        </svg>
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
                     </div>
                     <div class="powerful-card-content">
                         <h3 class="powerful-card-title"><span class="highlight">USER</span> RESEARCH</h3>
-                        <p class="powerful-card-desc">
-                            Use user behavior, analytics, and audience insights to identify opportunities, improve usability, and create website experiences that better support both users and business goals.
-                        </p>
+                        <p class="powerful-card-desc">Use user behavior, analytics, and audience insights to identify opportunities, improve usability, and create website experiences that better support both users and business goals.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== FEATURED PROJECTS SECTION ====== -->
+    <!-- PROJECTS -->
     <section class="projects-section" id="work">
         <div class="projects-container">
             <div class="projects-header">
@@ -1327,104 +1140,89 @@
                 <h2>Creates a perfect digital design.</h2>
             </div>
             <div class="projects-grid">
-                <!-- Project 1 -->
                 <div class="project-card">
                     <h3>Project 1</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a class="view-link" onclick="openModal('project1')">
-                        View Project
-                        <svg viewBox="0 0 24 24">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                        </svg>
+                    <a class="view-link" onclick="openModal('project1')">View Project
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
-
-                <!-- Project 2 -->
                 <div class="project-card">
                     <h3>Project 2</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a class="view-link" onclick="openModal('project2')">
-                        View Project
-                        <svg viewBox="0 0 24 24">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                        </svg>
+                    <a class="view-link" onclick="openModal('project2')">View Project
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
-
-                <!-- Project 3 -->
                 <div class="project-card">
                     <h3>Project 3</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a class="view-link" onclick="openModal('project3')">
-                        View Project
-                        <svg viewBox="0 0 24 24">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                        </svg>
+                    <a class="view-link" onclick="openModal('project3')">View Project
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
-
-                <!-- Project 4 -->
                 <div class="project-card">
                     <h3>Project 4</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
-                    <a class="view-link" onclick="openModal('project4')">
-                        View Project
-                        <svg viewBox="0 0 24 24">
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <polyline points="12 5 19 12 12 19" />
-                        </svg>
+                    <a class="view-link" onclick="openModal('project4')">View Project
+                        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== PROJECT MODAL ====== -->
+    <!-- MODAL -->
     <div class="modal-overlay" id="projectModal" onclick="closeModalOutside(event)">
         <div class="modal-content" id="modalContent">
             <button class="modal-close" onclick="closeModal()">✕</button>
-            <div class="modal-body" id="modalBody">
-                <!-- Dynamic content loaded via JS -->
-            </div>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
 
-    <!-- ====== ABOUT ME SECTION ====== -->
+    <!-- ===== ABOUT – MODERN ===== -->
     <section class="about-section" id="about">
-        <div class="about-container">
-            <div class="about-content">
-                <div class="about-header">
-                    <p class="subtitle">About Me</p>
-                    <h2>ABOUT ME</h2>
-                </div>
-                <div class="about-text">
-                    <p>
-                        I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
-                    </p>
-                    <p>
-                        I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
-                    </p>
-                    <p>
-                        My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
-                    </p>
-                    <p>
-                        I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
-                    </p>
-                    <p>
-                        I care about building websites that are <strong>functional, responsive, maintainable, and useful not just good-looking.</strong>
-                    </p>
-                </div>
-            </div>
-            <div class="about-image">
+        <div class="about-modern">
+            <div class="about-image-card">
                 <img src="https://imgh.in/host/9quvny" alt="Jill Rösch" />
+            </div>
+            <div class="about-content-card">
+                <span class="badge">About Me</span>
+                <h2>Designer &amp; Developer</h2>
+                <p>
+                    I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
+                </p>
+                <p>
+                    I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
+                </p>
+                <p>
+                    My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
+                </p>
+                <p>
+                    I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
+                </p>
+                <p>
+                    I care about building websites that are <strong>functional, responsive, maintainable, and useful not just good-looking.</strong>
+                </p>
+                <div class="about-stats">
+                    <div class="stat">
+                        <span class="number">8+</span>
+                        <span class="label">Years Exp.</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">40+</span>
+                        <span class="label">Projects</span>
+                    </div>
+                    <div class="stat">
+                        <span class="number">20+</span>
+                        <span class="label">Happy Clients</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== CONTACT FORM SECTION ====== -->
+    <!-- CONTACT -->
     <section class="contact-section" id="contact-form">
         <div class="contact-container">
             <div class="contact-header">
@@ -1432,201 +1230,162 @@
                 <h2>Let's Work Together</h2>
                 <p>Have a project in mind? Reach out and let's make something great.</p>
             </div>
-
             <form class="contact-form" action="mailto:jillrosch@outlook.com" method="POST" enctype="text/plain">
                 <div class="form-group">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="Name" placeholder="John Doe" required />
                 </div>
-
                 <div class="form-group">
                     <label for="email">Your Email</label>
                     <input type="email" id="email" name="Email" placeholder="john@example.com" required />
                 </div>
-
                 <div class="form-group">
                     <label for="subject">Subject</label>
                     <input type="text" id="subject" name="Subject" placeholder="Project Inquiry" />
                 </div>
-
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="Message" placeholder="Tell me about your project..." required></textarea>
                 </div>
-
                 <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
     </section>
 
     <script>
-        // Project data
+        // ===== SMOOTH SCROLL FUNCTION =====
+        function smoothScroll(targetId) {
+            const target = document.getElementById(targetId);
+            if (target) {
+                const offsetTop = target.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // ===== SCROLL ANIMATION FOR POWERFUL CARDS =====
+        const powerfulCards = document.querySelectorAll('.powerful-card');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.1
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        powerfulCards.forEach(card => {
+            cardObserver.observe(card);
+        });
+
+        // ===== PROJECT DATA =====
         const projects = {
             project1: {
                 title: "Absolute Integrative Physical Medicine",
                 description: "",
                 thumbnail: "https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9e71f157963560ced9fba7.png",
-                meta: {
-                    type: "Website",
-                    platform: "GHL",
-                    country: "USA",
-                    liveUrl: "https://absoluteintegrativehealth.com/"
-                },
+                meta: { type: "Website", platform: "GHL", country: "USA", liveUrl: "https://absoluteintegrativehealth.com/" },
                 showDescription: false
             },
             project2: {
                 title: "Abiawards",
                 description: "",
                 thumbnail: "https://imgh.in/host/psyead",
-                meta: {
-                    type: "Website",
-                    platform: "WordPress",
-                    country: "Australia",
-                    liveUrl: "https://abiawards.com.au"
-                },
+                meta: { type: "Website", platform: "WordPress", country: "Australia", liveUrl: "https://abiawards.com.au" },
                 showDescription: false
             },
             project3: {
                 title: "Ozark RV Park & Cabins",
                 description: "",
                 thumbnail: "https://imgh.in/host/78nblm",
-                meta: {
-                    type: "Website",
-                    platform: "GHL",
-                    country: "USA",
-                    liveUrl: "https://ozarkrvpark.com"
-                },
+                meta: { type: "Website", platform: "GHL", country: "USA", liveUrl: "https://ozarkrvpark.com" },
                 showDescription: false
             },
             project4: {
                 title: "Catch of The Decade",
                 description: "",
                 thumbnail: "https://imgh.in/host/d7gbmg",
-                meta: {
-                    type: "Website",
-                    platform: "WordPress",
-                    country: "Australia",
-                    liveUrl: "https://catchofthedecade.com/"
-                },
+                meta: { type: "Website", platform: "WordPress", country: "Australia", liveUrl: "https://catchofthedecade.com/" },
                 showDescription: false
             }
         };
 
-        // Scroll detection for reverse animations
+        // scroll reverse animations for hero
         const heroSection = document.getElementById('heroSection');
-
         window.addEventListener('scroll', function() {
-            const currentScrollY = window.scrollY;
-            
-            if (currentScrollY > 50) {
-                heroSection.classList.add('scrolled');
-            } else {
-                heroSection.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) heroSection.classList.add('scrolled');
+            else heroSection.classList.remove('scrolled');
         });
 
         function openModal(projectId) {
             const modal = document.getElementById('projectModal');
             const body = document.getElementById('modalBody');
             const project = projects[projectId];
-
             if (!project) return;
 
             let leftColContent = '';
-            
             if (project.showDescription !== false) {
                 const descParagraphs = (project.description || '').split('\n\n').map(p => `<p>${p}</p>`).join('');
-                leftColContent = `
-                    <h1>${project.title}</h1>
-                    ${descParagraphs}
-                `;
+                leftColContent = `<h1>${project.title}</h1>${descParagraphs}`;
             } else {
                 leftColContent = `
                     <h1>${project.title}</h1>
-                    <div class="thumbnail" style="margin-top: 1rem;">
-                        <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);" />
+                    <div class="thumbnail" style="margin-top:1rem;">
+                        <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
                     </div>
                 `;
             }
 
             body.innerHTML = `
-                <div class="left-col">
-                    ${leftColContent}
-                </div>
+                <div class="left-col">${leftColContent}</div>
                 <div class="right-col">
                     <div class="project-meta">
-                        <div class="meta-item">
-                            <span class="label">Type:</span>
-                            <span class="value">${project.meta.type}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="label">Platform:</span>
-                            <span class="value">${project.meta.platform}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="label">Country:</span>
-                            <span class="value">${project.meta.country}</span>
-                        </div>
-                        <div class="meta-item" style="grid-column: 1 / -1;">
-                            <span class="label">Live URL:</span>
-                            <span class="value"><a href="${project.meta.liveUrl}" target="_blank" rel="noopener noreferrer">${project.meta.liveUrl}</a></span>
-                        </div>
+                        <div class="meta-item"><span class="label">Type:</span><span class="value">${project.meta.type}</span></div>
+                        <div class="meta-item"><span class="label">Platform:</span><span class="value">${project.meta.platform}</span></div>
+                        <div class="meta-item"><span class="label">Country:</span><span class="value">${project.meta.country}</span></div>
+                        <div class="meta-item" style="grid-column:1/-1;"><span class="label">Live URL:</span><span class="value"><a href="${project.meta.liveUrl}" target="_blank" rel="noopener noreferrer">${project.meta.liveUrl}</a></span></div>
                     </div>
                 </div>
             `;
-
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
-            const modal = document.getElementById('projectModal');
-            modal.classList.remove('active');
+            document.getElementById('projectModal').classList.remove('active');
             document.body.style.overflow = '';
         }
-
-        function closeModalOutside(event) {
-            if (event.target === document.getElementById('projectModal')) {
-                closeModal();
-            }
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('projectModal')) closeModal();
         }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
-        });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
         function toggleMobileNav() {
-            const mobileNav = document.getElementById('mobileNav');
-            const hamburger = document.getElementById('hamburgerToggle');
-            mobileNav.classList.toggle('open');
-            hamburger.classList.toggle('open');
+            document.getElementById('mobileNav').classList.toggle('open');
+            document.getElementById('hamburgerToggle').classList.toggle('open');
         }
-
-        document.addEventListener('click', function(event) {
-            const mobileNav = document.getElementById('mobileNav');
-            const hamburger = document.getElementById('hamburgerToggle');
-            if (mobileNav.classList.contains('open')) {
-                if (!mobileNav.contains(event.target) && !hamburger.contains(event.target)) {
-                    mobileNav.classList.remove('open');
-                    hamburger.classList.remove('open');
-                }
+        document.addEventListener('click', function(e) {
+            const nav = document.getElementById('mobileNav');
+            const ham = document.getElementById('hamburgerToggle');
+            if (nav.classList.contains('open') && !nav.contains(e.target) && !ham.contains(e.target)) {
+                nav.classList.remove('open');
+                ham.classList.remove('open');
             }
         });
-
         document.addEventListener('DOMContentLoaded', function() {
-            const mobileNav = document.getElementById('mobileNav');
-            const observer = new MutationObserver(function() {
-                if (mobileNav.classList.contains('open')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
+            const obs = new MutationObserver(function() {
+                document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
             });
-            observer.observe(mobileNav, { attributes: true, attributeFilter: ['class'] });
+            obs.observe(document.getElementById('mobileNav'), { attributes: true, attributeFilter: ['class'] });
         });
     </script>
-
 </body>
 </html>
