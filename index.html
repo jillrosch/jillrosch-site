@@ -171,7 +171,7 @@
         .service-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-            border-color: rgba(96, 165, 250, 0.3);
+            border-color: rgba(65, 103, 152, 0.3);
         }
         .service-icon {
             width: 64px;
@@ -212,7 +212,7 @@
         .service-list li:last-child { border-bottom: none; }
         .service-list li::before {
             content: "▸";
-            color: #60a5fa;
+            color: #416798;
             font-size: 0.7rem;
         }
 
@@ -236,7 +236,7 @@
             letter-spacing: -0.02em;
             line-height: 1.2;
         }
-        .powerful-heading h2 span { color: #2563eb; }
+        .powerful-heading h2 span { color: #416798; }
         .powerful-cards {
             display: flex;
             flex-direction: column;
@@ -265,12 +265,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2563eb;
+            color: #416798;
         }
         .powerful-card-icon svg {
             width: 24px;
             height: 24px;
-            stroke: #2563eb;
+            stroke: #416798;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
@@ -283,7 +283,7 @@
             color: #1a2633;
             margin-bottom: 0.5rem;
         }
-        .powerful-card-title .highlight { color: #2563eb; }
+        .powerful-card-title .highlight { color: #416798; }
         .powerful-card-desc {
             font-size: 0.95rem;
             color: #4a5a6a;
@@ -314,7 +314,7 @@
         .projects-header .subtitle {
             font-size: 0.75rem;
             font-weight: 600;
-            color: #60a5fa;
+            color: #416798;
             text-transform: uppercase;
             letter-spacing: 0.15em;
             margin-bottom: 0.5rem;
@@ -346,7 +346,7 @@
         .project-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-            border-color: rgba(96, 165, 250, 0.3);
+            border-color: rgba(65, 103, 152, 0.3);
         }
         .project-card h3 {
             font-size: 1.2rem;
@@ -364,7 +364,7 @@
         .project-card .view-link {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #60a5fa;
+            color: #416798;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
@@ -377,50 +377,166 @@
         .project-card .view-link svg {
             width: 16px;
             height: 16px;
-            stroke: #60a5fa;
+            stroke: #416798;
             fill: none;
             stroke-width: 2;
             stroke-linecap: round;
             stroke-linejoin: round;
         }
 
+        /* About Me section - 2 columns */
         .about-section {
             background: #ffffff;
-            padding: 5rem 2rem;
+            padding: 0;
             border-top: 1px solid rgba(0, 0, 0, 0.05);
         }
         .about-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            min-height: 500px;
+            align-items: stretch;
         }
-        .about-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
+        .about-image {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            min-height: 400px;
         }
-        .about-header .subtitle {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #2563eb;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
         }
-        .about-header h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1a2633;
-            letter-spacing: -0.02em;
+        .about-content {
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         .about-text {
             font-size: 1.05rem;
             color: #4a5a6a;
             line-height: 1.8;
         }
-        .about-text p { margin-bottom: 1.25rem; }
-        .about-text p:last-child { margin-bottom: 0; }
+        .about-text p {
+            margin-bottom: 1.25rem;
+        }
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
         .about-text strong {
             color: #1a2633;
             font-weight: 700;
+        }
+        .about-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a2633;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+        .about-header .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #416798;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Form section */
+        .contact-section {
+            background: #f8f9fa;
+            padding: 5rem 2rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .contact-header .subtitle {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #416798;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.5rem;
+        }
+        .contact-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1a2633;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        .contact-header p {
+            color: #6b7a8a;
+            font-size: 1rem;
+        }
+        .contact-form {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        .contact-form label {
+            display: block;
+            font-weight: 600;
+            color: #1a2633;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d9e6;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-family: inherit;
+            background: #fafbfc;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #416798;
+            box-shadow: 0 0 0 3px rgba(65, 103, 152, 0.15);
+            background: #ffffff;
+        }
+        .contact-form .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+        .contact-form .submit-btn {
+            background: #416798;
+            color: #ffffff;
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        .contact-form .submit-btn:hover {
+            background: #34567a;
+            transform: translateY(-2px);
+        }
+        .contact-form .submit-btn:active {
+            transform: translateY(0);
         }
 
         /* ====== MODAL STYLES ====== */
@@ -544,7 +660,7 @@
             word-break: break-all;
         }
         .modal-body .right-col .project-meta .meta-item .value a {
-            color: #2563eb;
+            color: #416798;
             text-decoration: none;
             transition: color 0.2s;
             cursor: pointer;
@@ -552,7 +668,7 @@
         }
         .modal-body .right-col .project-meta .meta-item .value a:hover {
             text-decoration: underline;
-            color: #1d4ed8;
+            color: #2a4a6e;
         }
 
         @keyframes modalFadeIn {
@@ -729,7 +845,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
         }
-        .mobile-nav a:hover { color: #60a5fa; }
+        .mobile-nav a:hover { color: #416798; }
         .mobile-nav-close {
             position: absolute;
             top: 2rem;
@@ -816,7 +932,6 @@
                 display: none !important;
             }
 
-            /* White name - moved up more on mobile/tablet */
             .bottom-name-wrapper {
                 position: absolute !important;
                 bottom: 8rem !important;
@@ -834,6 +949,36 @@
                 max-width: 60% !important;
                 top: 0.5rem !important;
                 left: 0.5rem !important;
+            }
+
+            /* About Me mobile fixes */
+            .about-container {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+            }
+            .about-content {
+                order: 1;
+                padding: 2.5rem 2rem;
+            }
+            .about-image {
+                order: 2;
+                min-height: 300px;
+                height: 400px;
+            }
+            .about-header h2 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            .about-header .subtitle {
+                text-align: center;
+            }
+            .contact-header h2 {
+                font-size: 1.8rem;
+            }
+            .contact-form {
+                padding: 1.5rem;
             }
         }
 
@@ -857,6 +1002,28 @@
             }
             .bottom-name-wrapper h2 {
                 font-size: 2.5rem !important;
+            }
+            .about-content {
+                padding: 2rem 1.5rem;
+            }
+            .about-image {
+                height: 300px;
+                min-height: 250px;
+            }
+            .about-text {
+                font-size: 0.95rem;
+            }
+            .about-header h2 {
+                font-size: 1.5rem;
+            }
+            .contact-section {
+                padding: 3rem 1.5rem;
+            }
+            .contact-header h2 {
+                font-size: 1.5rem;
+            }
+            .contact-form {
+                padding: 1.25rem;
             }
         }
 
@@ -882,6 +1049,32 @@
             .bottom-name-wrapper h2 {
                 font-size: 2rem !important;
             }
+            .about-content {
+                padding: 1.5rem 1rem;
+            }
+            .about-image {
+                height: 250px;
+                min-height: 200px;
+            }
+            .about-header h2 {
+                font-size: 1.3rem;
+            }
+            .about-text {
+                font-size: 0.9rem;
+            }
+            .contact-section {
+                padding: 2.5rem 1rem;
+            }
+            .contact-header h2 {
+                font-size: 1.3rem;
+            }
+            .contact-form {
+                padding: 1rem;
+            }
+            .contact-form .submit-btn {
+                font-size: 0.9rem;
+                padding: 0.7rem 1.5rem;
+            }
         }
 
         @media (max-width: 992px) {
@@ -903,8 +1096,6 @@
             .powerful-heading h2 { font-size: 1.5rem; }
             .powerful-card { flex-direction: column; align-items: center; text-align: center; }
             .projects-grid { grid-template-columns: 1fr; max-width: 400px; }
-            .about-header h2 { font-size: 1.8rem; }
-            .about-text { font-size: 0.95rem; }
         }
 
         @media (max-width: 640px) {
@@ -921,9 +1112,6 @@
             .projects-section { padding: 3rem 1rem; }
             .projects-header h2 { font-size: 1.3rem; }
             .project-card { padding: 1.5rem; }
-            .about-section { padding: 3rem 1rem; }
-            .about-header h2 { font-size: 1.5rem; }
-            .about-text { font-size: 0.9rem; }
         }
 
         @media (min-width: 1025px) {
@@ -1007,7 +1195,7 @@
                 </div>
             </div>
 
-            <!-- bottom left: "JILL RÖSCH" + ©2026 - moved up on mobile -->
+            <!-- bottom left: "JILL RÖSCH" + ©2026 -->
             <div class="bottom-name-wrapper absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20 animate-name-front">
                 <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
                 <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
@@ -1207,27 +1395,67 @@
     <!-- ====== ABOUT ME SECTION ====== -->
     <section class="about-section" id="about">
         <div class="about-container">
-            <div class="about-header">
-                <p class="subtitle">About Me</p>
-                <h2>ABOUT ME</h2>
+            <div class="about-content">
+                <div class="about-header">
+                    <p class="subtitle">About Me</p>
+                    <h2>ABOUT ME</h2>
+                </div>
+                <div class="about-text">
+                    <p>
+                        I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
+                    </p>
+                    <p>
+                        I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
+                    </p>
+                    <p>
+                        My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
+                    </p>
+                    <p>
+                        I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
+                    </p>
+                    <p>
+                        I care about building websites that are <strong>functional, responsive, maintainable, and useful not just good-looking.</strong>
+                    </p>
+                </div>
             </div>
-            <div class="about-text">
-                <p>
-                    I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
-                </p>
-                <p>
-                    I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
-                </p>
-                <p>
-                    My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
-                </p>
-                <p>
-                    I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions—whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
-                </p>
-                <p>
-                    I care about building websites that are <strong>functional, responsive, maintainable, and useful—not just good-looking.</strong>
-                </p>
+            <div class="about-image">
+                <img src="https://imgh.in/host/9quvny" alt="Jill Rösch" />
             </div>
+        </div>
+    </section>
+
+    <!-- ====== CONTACT FORM SECTION ====== -->
+    <section class="contact-section" id="contact-form">
+        <div class="contact-container">
+            <div class="contact-header">
+                <p class="subtitle">Get In Touch</p>
+                <h2>Let's Work Together</h2>
+                <p>Have a project in mind? Reach out and let's make something great.</p>
+            </div>
+
+            <form class="contact-form" action="mailto:jillrosch@outlook.com" method="POST" enctype="text/plain">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="Name" placeholder="John Doe" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="Email" placeholder="john@example.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="Subject" placeholder="Project Inquiry" />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="Message" placeholder="Tell me about your project..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </div>
     </section>
 
