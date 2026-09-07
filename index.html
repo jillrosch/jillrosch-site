@@ -614,11 +614,24 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        .animate-tagline { animation: slideInLeft 0.8s ease-out forwards; }
-        .animate-portrait { animation: slideFromLeft 1s ease-out forwards; }
-        .animate-portrait:hover { animation: float 3s ease-in-out infinite; }
-        .animate-name-bg { animation: fadeInUp 1.2s ease-out forwards; }
-        .animate-name-front { animation: slideInLeft 0.8s ease-out 0.3s both; }
+        .animate-tagline { 
+            animation: slideInLeft 0.8s ease-out forwards; 
+        }
+        .animate-portrait { 
+            animation: slideFromLeft 1s ease-out forwards; 
+        }
+        .animate-portrait:hover { 
+            animation: float 3s ease-in-out infinite; 
+        }
+        .animate-name-bg { 
+            animation: fadeInUp 1.2s ease-out forwards; 
+        }
+        .animate-name-front { 
+            animation: slideInLeft 0.8s ease-out 0.3s both; 
+        }
+        .animate-card { 
+            animation: slideInRight 0.8s ease-out 0.5s both; 
+        }
         .animate-logo {
             animation: fadeInScale 0.6s ease-out forwards;
             opacity: 0;
@@ -694,7 +707,7 @@
             padding: 0.5rem;
         }
 
-        /* Mobile Faint Name - separate element - VISIBLE ON ALL SCREENS */
+        /* Mobile Faint Name - bold, left-aligned, bigger */
         .mobile-faint-name {
             display: none;
         }
@@ -720,17 +733,16 @@
             .mobile-faint-name {
                 display: block !important;
                 position: absolute !important;
-                top: 25% !important;
-                left: 50% !important;
-                transform: translateX(-50%) !important;
-                font-size: 4.5rem !important;
-                font-weight: 800 !important;
-                color: rgba(255, 255, 255, 0.08) !important;
-                letter-spacing: 0.02em !important;
-                line-height: 0.95 !important;
+                top: 18% !important;
+                left: 1.5rem !important;
+                font-size: 7rem !important;
+                font-weight: 900 !important;
+                color: rgba(255, 255, 255, 0.12) !important;
+                letter-spacing: 0.04em !important;
+                line-height: 0.92 !important;
                 z-index: 0 !important;
                 pointer-events: none !important;
-                text-align: center !important;
+                text-align: left !important;
                 width: 100% !important;
             }
 
@@ -758,7 +770,7 @@
                 object-fit: cover !important;
                 width: 100vw !important;
                 height: auto !important;
-                max-height: 75vh !important;
+                max-height: 78vh !important;
                 border-radius: 0 !important;
                 display: block !important;
                 margin: 0 !important;
@@ -769,7 +781,6 @@
                 display: none !important;
             }
 
-            /* Bottom name - moved up even more */
             .bottom-name-wrapper {
                 position: absolute !important;
                 bottom: 6rem !important;
@@ -794,12 +805,15 @@
             .hamburger-menu { display: flex; }
             .nav-links { display: none !important; }
             .mobile-faint-name {
-                font-size: 3.8rem !important;
-                top: 22% !important;
-                line-height: 0.95 !important;
+                font-size: 6rem !important;
+                top: 16% !important;
+                left: 1rem !important;
+                line-height: 0.92 !important;
+                color: rgba(255, 255, 255, 0.12) !important;
+                font-weight: 900 !important;
             }
             .portrait-wrapper img {
-                max-height: 72vh !important;
+                max-height: 75vh !important;
             }
             .bottom-name-wrapper {
                 bottom: 5rem !important;
@@ -812,12 +826,15 @@
 
         @media (max-width: 640px) {
             .mobile-faint-name {
-                font-size: 3rem !important;
-                top: 20% !important;
+                font-size: 5rem !important;
+                top: 14% !important;
+                left: 0.75rem !important;
                 line-height: 0.9 !important;
+                color: rgba(255, 255, 255, 0.12) !important;
+                font-weight: 900 !important;
             }
             .portrait-wrapper img {
-                max-height: 68vh !important;
+                max-height: 70vh !important;
             }
             .bottom-name-wrapper {
                 bottom: 4rem !important;
@@ -885,7 +902,7 @@
 <body>
 
     <!-- ====== HERO SECTION ====== -->
-    <div class="bg-mountains">
+    <div class="bg-mountains" id="heroSection">
 
         <!-- Overlays -->
         <div class="blue-overlay"></div>
@@ -937,7 +954,7 @@
                 </h1>
             </div>
 
-            <!-- Mobile Faint Name - 2 rows (visible on tablet/mobile) -->
+            <!-- Mobile Faint Name - BIG, LEFT-ALIGNED -->
             <div class="mobile-faint-name">
                 JILL<br />RÖSCH
             </div>
@@ -954,7 +971,7 @@
                 </div>
             </div>
 
-            <!-- bottom left: "JILL RÖSCH" + ©2026 - moved up even more -->
+            <!-- bottom left: "JILL RÖSCH" + ©2026 -->
             <div class="bottom-name-wrapper absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20 animate-name-front">
                 <p class="text-white/50 text-[0.6rem] md:text-xs font-medium tracking-widest uppercase mb-1">©2026</p>
                 <h2 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.05] tracking-tight">
@@ -1086,6 +1103,7 @@
                 <h2>Creates a perfect digital design.</h2>
             </div>
             <div class="projects-grid">
+                <!-- Project 1 -->
                 <div class="project-card">
                     <h3>Project 1</h3>
                     <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
@@ -1186,7 +1204,6 @@
                 thumbnail: "https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9e71f157963560ced9fba7.png",
                 meta: {
                     type: "Website",
-                    languages: "HTML, CSS, JS",
                     platform: "GHL",
                     country: "USA",
                     liveUrl: "https://absoluteintegrativehealth.com/"
@@ -1199,9 +1216,8 @@
                 thumbnail: "https://imgh.in/host/psyead",
                 meta: {
                     type: "Website",
-                    languages: "PHP, HTML, CSS, JS",
                     platform: "WordPress",
-                    country: "USA",
+                    country: "Australia",
                     liveUrl: "https://abiawards.com.au"
                 },
                 showDescription: false
@@ -1212,7 +1228,6 @@
                 thumbnail: "https://imgh.in/host/78nblm",
                 meta: {
                     type: "Website",
-                    languages: "HTML, CSS, JS",
                     platform: "GHL",
                     country: "USA",
                     liveUrl: "https://ozarkrvpark.com"
@@ -1225,9 +1240,8 @@
                 thumbnail: "https://imgh.in/host/d7gbmg",
                 meta: {
                     type: "Website",
-                    languages: "HTML, CSS, JS",
                     platform: "WordPress",
-                    country: "USA",
+                    country: "Australia",
                     liveUrl: "https://catchofthedecade.com/"
                 },
                 showDescription: false
@@ -1267,10 +1281,6 @@
                         <div class="meta-item">
                             <span class="label">Type:</span>
                             <span class="value">${project.meta.type}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="label">Languages:</span>
-                            <span class="value">${project.meta.languages}</span>
                         </div>
                         <div class="meta-item">
                             <span class="label">Platform:</span>
