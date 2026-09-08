@@ -144,76 +144,6 @@
             text-transform: uppercase;
         }
 
-        /* services */
-        .services-section {
-            background: #ffffff;
-            padding: 5rem 2rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-        .service-card {
-            background: #0f172a;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.06);
-        }
-        .service-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-            border-color: rgba(34,34,204,0.3);
-        }
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            filter: brightness(0) invert(1);
-        }
-        .service-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .service-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            text-align: left;
-        }
-        .service-list li {
-            padding: 0.4rem 0;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .service-list li:last-child { border-bottom: none; }
-        .service-list li::before {
-            content: "▸";
-            color: #2222cc;
-            font-size: 0.7rem;
-        }
-
         /* ===== POWERFUL SECTION – SCROLL ANIMATION ===== */
         .powerful-section {
             background: #ffffff;
@@ -395,185 +325,83 @@
             stroke-linejoin: round;
         }
 
-        /* ===== ABOUT ME – MODERN CARD LAYOUT ===== */
-        .about-section {
-            background: #ffffff;
+        /* ===== CONTACT – FREELANCE SECTION (wider, less compressed) ===== */
+        .freelance-section {
+            background: #f8fafc;
             padding: 5rem 2rem;
             border-top: 1px solid rgba(0,0,0,0.05);
         }
-        .about-modern {
-            max-width: 1200px;
+        .freelance-container {
+            max-width: 1300px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 3rem;
-            align-items: stretch;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            align-items: start;
         }
-        .about-image-card {
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            height: 100%;
-            min-height: 400px;
-            background: #eef2f6;
-        }
-        .about-image-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .about-content-card {
-            background: #f8fafc;
-            border-radius: 24px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.04);
-            border: 1px solid rgba(0,0,0,0.02);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .about-content-card .badge {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #2222cc;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.75rem;
-        }
-        .about-content-card h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #1a2633;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-        }
-        .about-content-card p {
-            font-size: 1rem;
-            color: #4a5a6a;
-            line-height: 1.8;
-            margin-bottom: 1.25rem;
-        }
-        .about-content-card p:last-child {
-            margin-bottom: 0;
-        }
-        .about-content-card strong {
-            color: #1a2633;
-            font-weight: 700;
-        }
-        .about-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(0,0,0,0.06);
-        }
-        .about-stats .stat {
-            display: flex;
-            flex-direction: column;
-        }
-        .about-stats .stat .number {
-            font-size: 1.5rem;
+        .freelance-left h2 {
+            font-size: 2.5rem;
             font-weight: 800;
             color: #1a2633;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
         }
-        .about-stats .stat .label {
-            font-size: 0.7rem;
-            color: #8a9aa8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .freelance-left .sub-text {
+            font-size: 1.05rem;
+            color: #4a5a6a;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
-
-        /* contact */
-        .contact-section {
-            background: #f8f9fa;
-            padding: 5rem 2rem;
-            border-top: 1px solid rgba(0,0,0,0.05);
-        }
-        .contact-container {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .contact-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
-        .contact-header .subtitle {
-            font-size: 0.75rem;
+        .freelance-left .email-link {
+            display: inline-block;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #2222cc;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.5rem;
+            text-decoration: none;
+            transition: color 0.2s;
         }
-        .contact-header h2 {
-            font-size: 2.2rem;
+        .freelance-left .email-link:hover {
+            color: #1a1aa3;
+        }
+
+        /* ===== TESTIMONIALS – wider, less compressed ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .testimonials-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .testimonial {
+            background: transparent;
+            padding: 0;
+        }
+        .testimonial blockquote {
+            font-size: 0.95rem;
+            color: #4a5a6a;
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+        .testimonial .attribution {
+            font-size: 0.85rem;
+            color: #1a2633;
+        }
+        .testimonial .attribution strong {
             font-weight: 700;
             color: #1a2633;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-        .contact-header p {
-            color: #6b7a8a;
-            font-size: 1rem;
-        }
-        .contact-form {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-        .contact-form label {
             display: block;
-            font-weight: 600;
-            color: #1a2633;
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
         }
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1px solid #d1d9e6;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            font-family: inherit;
-            background: #fafbfc;
-        }
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            outline: none;
-            border-color: #2222cc;
-            box-shadow: 0 0 0 3px rgba(34,34,204,0.15);
-            background: #ffffff;
-        }
-        .contact-form .form-group {
-            margin-bottom: 1.25rem;
-        }
-        .contact-form textarea {
-            min-height: 140px;
-            resize: vertical;
-        }
-        .contact-form .submit-btn {
-            background: #2222cc;
-            color: #ffffff;
-            padding: 0.85rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
-            width: 100%;
-        }
-        .contact-form .submit-btn:hover {
-            background: #1a1aa3;
-            transform: translateY(-2px);
-        }
-        .contact-form .submit-btn:active {
-            transform: translateY(0);
+        .testimonial .attribution .role {
+            display: block;
+            font-weight: 400;
+            color: #8a9aa8;
+            font-size: 0.8rem;
+            margin-top: 0.1rem;
         }
 
         /* modal */
@@ -899,15 +727,10 @@
             .powerful-container { grid-template-columns:1fr; gap:2rem; }
             .powerful-heading h2 { font-size:1.8rem; text-align:center; }
 
-            .about-modern { grid-template-columns:1fr; gap:2rem; }
-            .about-image-card { min-height:300px; }
-            .about-content-card { padding:2rem; }
-            .about-content-card h2 { font-size:1.8rem; text-align:center; }
-            .about-content-card .badge { text-align:center; }
-            .about-stats { justify-content:center; }
-
-            .contact-header h2 { font-size:1.8rem; }
-            .contact-form { padding:1.5rem; }
+            .freelance-container { grid-template-columns:1fr; gap:3rem; max-width:100%; padding:0 1rem; }
+            .freelance-left h2 { font-size:2rem; }
+            .testimonials-grid { grid-template-columns:1fr; gap:2rem; }
+            .testimonials-stack { gap:2rem; }
             .projects-grid { grid-template-columns:1fr; max-width:500px; margin:0 auto; }
         }
 
@@ -918,12 +741,10 @@
             .portrait-wrapper img { max-height:75vh !important; }
             .bottom-name-wrapper { bottom:7rem !important; left:1rem !important; }
             .bottom-name-wrapper h2 { font-size:2.5rem !important; }
-            .about-content-card { padding:1.5rem; }
-            .about-content-card h2 { font-size:1.5rem; }
-            .about-stats { gap:1.5rem; flex-wrap:wrap; }
-            .contact-section { padding:3rem 1.5rem; }
-            .contact-header h2 { font-size:1.5rem; }
-            .contact-form { padding:1.25rem; }
+            .freelance-section { padding:3rem 1rem; }
+            .freelance-left h2 { font-size:1.8rem; }
+            .freelance-left .sub-text { font-size:0.95rem; }
+            .testimonial blockquote { font-size:0.9rem; }
             .projects-grid { max-width:100%; }
             .powerful-heading h2 { font-size:1.5rem; }
         }
@@ -934,13 +755,11 @@
             .bottom-name-wrapper { bottom:6rem !important; left:0.75rem !important; }
             .bottom-name-wrapper .text-white/50 { font-size:0.5rem !important; }
             .bottom-name-wrapper h2 { font-size:2rem !important; }
-            .about-image-card { min-height:200px; }
-            .about-content-card { padding:1.25rem; }
-            .about-content-card h2 { font-size:1.3rem; }
-            .about-content-card p { font-size:0.9rem; }
-            .contact-section { padding:2.5rem 1rem; }
-            .contact-header h2 { font-size:1.3rem; }
-            .contact-form { padding:1rem; }
+            .freelance-section { padding:2rem 0.75rem; }
+            .freelance-left h2 { font-size:1.5rem; }
+            .freelance-left .sub-text { font-size:0.9rem; }
+            .freelance-left .email-link { font-size:1rem; }
+            .testimonial blockquote { font-size:0.85rem; }
             .powerful-heading h2 { font-size:1.3rem; }
             .powerful-card { flex-direction:column; align-items:center; text-align:center; }
         }
@@ -949,7 +768,6 @@
             .logo-grid { gap:1.5rem; justify-content:center; }
             .logo-item { flex:0 1 auto; min-width:60px; }
             .logo-image { height:30px; max-width:80px; }
-            .services-grid { grid-template-columns:1fr; max-width:400px; }
         }
 
         @media (max-width: 640px) {
@@ -958,8 +776,6 @@
             .logo-grid { gap:1rem; padding:0; }
             .logo-image { height:24px; max-width:60px; }
             .logo-name { font-size:0.5rem; }
-            .services-section { padding:3rem 1rem; }
-            .service-icon { width:48px; height:48px; }
             .powerful-section { padding:3rem 1rem; }
             .powerful-card { padding:1.5rem; }
             .projects-section { padding:3rem 1rem; }
@@ -989,10 +805,9 @@
             <div class="text-white font-bold text-2xl tracking-wide">Portfolio</div>
             <ul class="nav-links flex items-center gap-8 text-white font-medium text-sm uppercase tracking-wider">
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#home" onclick="smoothScroll('home')">Home</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#about" onclick="smoothScroll('about')">About</a></li>
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work" onclick="smoothScroll('work')">Work</a></li>
                 <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services" onclick="smoothScroll('services')">Services</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact-form" onclick="smoothScroll('contact-form')">Contact</a></li>
+                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact" onclick="smoothScroll('contact')">Contact</a></li>
             </ul>
             <div class="hamburger-menu" id="hamburgerToggle" onclick="toggleMobileNav()">
                 <span></span><span></span>
@@ -1002,10 +817,9 @@
         <div class="mobile-nav" id="mobileNav">
             <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
             <a href="#home" onclick="smoothScroll('home'); toggleMobileNav();">Home</a>
-            <a href="#about" onclick="smoothScroll('about'); toggleMobileNav();">About</a>
             <a href="#work" onclick="smoothScroll('work'); toggleMobileNav();">Work</a>
             <a href="#services" onclick="smoothScroll('services'); toggleMobileNav();">Services</a>
-            <a href="#contact-form" onclick="smoothScroll('contact-form'); toggleMobileNav();">Contact</a>
+            <a href="#contact" onclick="smoothScroll('contact'); toggleMobileNav();">Contact</a>
         </div>
 
         <div class="hero-container z-10 px-6 md:px-12 lg:px-16" id="home">
@@ -1180,75 +994,50 @@
         </div>
     </div>
 
-    <!-- ===== ABOUT – MODERN ===== -->
-    <section class="about-section" id="about">
-        <div class="about-modern">
-            <div class="about-image-card">
-                <img src="https://imgh.in/host/9quvny" alt="Jill Rösch" />
+    <!-- ===== CONTACT – FREELANCE SECTION (wider, less compressed) ===== -->
+    <section class="freelance-section" id="contact">
+        <div class="freelance-container">
+            <div class="freelance-left">
+                <h2>Available for select freelance opportunities</h2>
+                <p class="sub-text">
+                    Have an exciting project you need help with?<br />
+                    Send me an email or contact me via instant message!
+                </p>
+                <a href="mailto:jillrosch@outlook.com" class="email-link">jillrosch@outlook.com</a>
             </div>
-            <div class="about-content-card">
-                <span class="badge">About Me</span>
-                <h2>Designer &amp; Developer</h2>
-                <p>
-                    I'm a web developer and designer with experience across front-end development, back-end functionality, UI/UX, SEO, and analytics.
-                </p>
-                <p>
-                    I build and manage responsive websites, develop custom functionality, troubleshoot technical issues, and work closely with marketing teams to improve both user experience and website performance. I also work with GA4 and other analytics tools to understand user behavior and make data-informed improvements.
-                </p>
-                <p>
-                    My work isn't limited to the front end. I've built custom forms and QA systems involving structured data, scoring logic, dynamic content, and automated report generation. I enjoy working on the technical side of websites just as much as the visual side.
-                </p>
-                <p>
-                    I'm a hands-on developer who likes figuring things out, solving problems, and finding practical solutions whether that means fixing a stubborn mobile issue, improving SEO, building a custom tool, or optimizing how a website functions.
-                </p>
-                <p>
-                    I care about building websites that are <strong>functional, responsive, maintainable, and useful not just good-looking.</strong>
-                </p>
-                <div class="about-stats">
-                    <div class="stat">
-                        <span class="number">8+</span>
-                        <span class="label">Years Exp.</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">40+</span>
-                        <span class="label">Projects</span>
-                    </div>
-                    <div class="stat">
-                        <span class="number">20+</span>
-                        <span class="label">Happy Clients</span>
+            <div class="testimonials-grid">
+                <!-- Left column: first testimonial -->
+                <div class="testimonial">
+                    <blockquote>
+                        “Since 2018 Jill has been responsible for the development of our website which has been instrumental to the growth of our company. Even while working remotely she's been highly responsive, organized and strategic in her thinking. In addition to staying on top of day-to-day site changes and builds, she's provided us with great advice to stay on top of the current changes in web technologies. She's also implemented effective project management and Q&amp;A processes. As a result Jill has been a highly valued and impactful member of our team.”
+                    </blockquote>
+                    <div class="attribution">
+                        <strong>— Mark Greenspan</strong>
+                        <span class="role">Founder at influenceTHIS Canada</span>
                     </div>
                 </div>
+                <!-- Right column: two stacked testimonials -->
+                <div class="testimonials-stack">
+                    <div class="testimonial">
+                        <blockquote>
+                            “Jill is AMAZING! If you have any doubt about hiring her, ask me – I am really impressed by this gal!”
+                        </blockquote>
+                        <div class="attribution">
+                            <strong>— Wilfried Hajek</strong>
+                            <span class="role">Agile Coach | Speaker | Trainer</span>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <blockquote>
+                            “Jill is one of the best professionals that we have known in web development skills. Between her skills you can find good communication and accuracy with the planning in complex projects.”
+                        </blockquote>
+                        <div class="attribution">
+                            <strong>— Jonathan Castro</strong>
+                            <span class="role">CEO &amp; Founder at The Cliff</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact-section" id="contact-form">
-        <div class="contact-container">
-            <div class="contact-header">
-                <p class="subtitle">Get In Touch</p>
-                <h2>Let's Work Together</h2>
-                <p>Have a project in mind? Reach out and let's make something great.</p>
-            </div>
-            <form class="contact-form" action="mailto:jillrosch@outlook.com" method="POST" enctype="text/plain">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="Name" placeholder="John Doe" required />
-                </div>
-                <div class="form-group">
-                    <label for="email">Your Email</label>
-                    <input type="email" id="email" name="Email" placeholder="john@example.com" required />
-                </div>
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="Subject" placeholder="Project Inquiry" />
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="Message" placeholder="Tell me about your project..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
         </div>
     </section>
 
