@@ -1398,16 +1398,14 @@
                 text-align: center;
             }
 
-            /* Hero image at bottom - BIGGER on mobile */
+            /* ===== HERO IMAGE - TWICE THE SIZE ON MOBILE ===== */
             .portrait-wrapper {
                 position: absolute !important;
                 bottom: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                top: auto !important;
-                transform: none !important;
-                width: 100% !important;
-                max-width: 100% !important;
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 200% !important;
+                max-width: 200% !important;
                 height: auto !important;
                 z-index: 1 !important;
                 padding: 0 !important;
@@ -1427,7 +1425,7 @@
                 object-fit: contain !important;
                 width: 100% !important;
                 height: auto !important;
-                max-height: 85vh !important;
+                max-height: 95vh !important;
                 border-radius: 0 !important;
                 display: block !important;
                 margin: 0 !important;
@@ -1681,7 +1679,7 @@
 
             <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
-            <!-- Portrait -->
+            <!-- Portrait - bigger on mobile via responsive CSS -->
             <div class="portrait-wrapper z-10 w-[380px] sm:w-[440px] md:w-[520px] lg:w-[600px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
