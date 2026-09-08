@@ -23,6 +23,121 @@
             scroll-behavior: smooth;
         }
 
+        /* ----- FIXED NAVIGATION - TRANSPARENT ----- */
+        .fixed-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: transparent;
+            padding: 1.25rem 2rem;
+            transition: all 0.3s ease;
+        }
+        .fixed-nav .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .fixed-nav .logo {
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+        .fixed-nav .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .fixed-nav .nav-links li a {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .fixed-nav .nav-links li a:hover {
+            color: #ffffff;
+        }
+        .fixed-nav .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 0.35rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.25rem;
+        }
+        .fixed-nav .hamburger span {
+            display: block;
+            width: 1.5rem;
+            height: 0.125rem;
+            background: #ffffff;
+            border-radius: 9999px;
+            transition: all 0.3s ease;
+        }
+        .fixed-nav .hamburger.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .fixed-nav .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .fixed-nav .hamburger.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile nav overlay */
+        .mobile-nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(11, 26, 47, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-nav-overlay.open {
+            display: flex;
+        }
+        .mobile-nav-overlay a {
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .mobile-nav-overlay a:hover {
+            color: #2222cc;
+        }
+        .mobile-nav-overlay .close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            color: #ffffff;
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
         /* ----- HERO ----- */
         .bg-mountains {
             background:
@@ -35,6 +150,7 @@
             height: 100vh;
             position: relative;
             overflow: hidden;
+            margin-top: 0;
         }
         .blue-overlay {
             position: absolute;
@@ -325,7 +441,7 @@
             stroke-linejoin: round;
         }
 
-        /* ===== CONTACT – FREELANCE SECTION (wider, less compressed) ===== */
+        /* ===== CONTACT – FREELANCE SECTION ===== */
         .freelance-section {
             background: #f8fafc;
             padding: 5rem 2rem;
@@ -365,7 +481,7 @@
             color: #1a1aa3;
         }
 
-        /* ===== TESTIMONIALS – wider, less compressed ===== */
+        /* ===== TESTIMONIALS ===== */
         .testimonials-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -404,7 +520,7 @@
             margin-top: 0.1rem;
         }
 
-        /* modal */
+        /* ===== MODAL - FULL PAGE IMAGE GALLERY ===== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -412,122 +528,114 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(4px);
             z-index: 9999;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 2rem;
+            padding: 1.5rem;
             overflow-y: auto;
         }
         .modal-overlay.active { display: flex; }
         .modal-content {
-            background: #ffffff;
-            border-radius: 20px;
-            max-width: 1100px;
+            background: transparent;
+            border-radius: 0;
+            max-width: 1400px;
             width: 100%;
-            max-height: 95vh;
-            min-height: 70vh;
-            overflow-y: auto;
-            padding: 2.5rem;
+            max-height: none;
+            min-height: auto;
+            overflow-y: visible;
+            padding: 0;
             position: relative;
             animation: modalFadeIn 0.3s ease-out;
         }
         .modal-close {
-            position: sticky;
-            top: 0;
-            float: right;
-            background: #f0f0f0;
-            border: none;
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+            width: 48px;
+            height: 48px;
+            font-size: 1.4rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            z-index: 10;
-            color: #333;
+            transition: all 0.3s ease;
+            z-index: 100;
+            color: #ffffff;
         }
         .modal-close:hover {
-            background: #e0e0e0;
+            background: rgba(255,255,255,0.25);
             transform: rotate(90deg);
         }
         .modal-body {
+            display: block;
+            margin-top: 0;
+            min-height: auto;
+            width: 100%;
+        }
+
+        .modal-gallery-full {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            margin-top: 0.5rem;
-            min-height: 50vh;
-        }
-        .modal-body .left-col h1 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1a2633;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-        .modal-body .left-col p {
-            color: #4a5a6a;
-            line-height: 1.8;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        .modal-body .right-col .thumbnail {
+            gap: 1.5rem;
             width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-bottom: 1.5rem;
-            flex-shrink: 0;
         }
-        .modal-body .right-col .thumbnail img {
+        .modal-gallery-full img {
             width: 100%;
             height: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
             display: block;
+            transition: transform 0.3s ease;
         }
-        .modal-body .right-col .project-meta {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem 1.5rem;
-            background: #f8f9fa;
-            padding: 1.25rem;
-            border-radius: 12px;
-            flex-shrink: 0;
+        .modal-gallery-full img:hover {
+            transform: scale(1.01);
         }
-        .modal-body .right-col .project-meta .meta-item {
-            display: flex;
-            flex-direction: column;
+        .modal-gallery-full img:first-child {
+            grid-column: 1 / -1;
         }
-        .modal-body .right-col .project-meta .meta-item .label {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: #8a9aa8;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
         }
-        .modal-body .right-col .project-meta .meta-item .value {
-            font-size: 0.9rem;
-            color: #1a2633;
-            font-weight: 500;
-            margin-top: 0.15rem;
-            word-break: break-all;
-        }
-        .modal-body .right-col .project-meta .meta-item .value a {
-            color: #2222cc;
-            text-decoration: none;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-        .modal-body .right-col .project-meta .meta-item .value a:hover {
-            text-decoration: underline;
-            color: #1a1aa3;
-        }
+
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .modal-gallery-full {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .modal-gallery-full img:first-child {
+                grid-column: 1;
+            }
+            .modal-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+            .modal-overlay {
+                padding: 1rem;
+            }
+            .modal-close {
+                top: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
 
         /* animations */
@@ -612,67 +720,39 @@
             position: relative;
             padding-bottom: 0 !important;
             margin-bottom: 0 !important;
+            padding-top: 4rem;
         }
 
-        /* mobile nav */
-        .hamburger-menu {
-            display: none;
-            flex-direction: column;
-            gap: 0.375rem;
-            width: 1.5rem;
-            cursor: pointer;
-            z-index: 50;
-        }
-        .hamburger-menu span {
-            display: block;
-            height: 0.125rem;
-            width: 100%;
-            background-color: #ffffff;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-        }
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(11,26,47,0.98);
-            backdrop-filter: blur(10px);
-            z-index: 40;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-        }
-        .mobile-nav.open { display: flex; }
-        .mobile-nav a {
-            color: #ffffff;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .mobile-nav a:hover { color: #2222cc; }
-        .mobile-nav-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            color: #ffffff;
-            font-size: 2rem;
-            cursor: pointer;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-        }
-        .mobile-faint-name { display: none; }
+        .relative { position:relative; }
+        .absolute { position:absolute; }
 
         /* responsive */
+        @media (max-width: 768px) {
+            .fixed-nav .nav-links {
+                display: none;
+            }
+            .fixed-nav .hamburger {
+                display: flex;
+            }
+            .fixed-nav {
+                padding: 0.75rem 1.25rem;
+            }
+            .fixed-nav .logo {
+                font-size: 1rem;
+            }
+            .hero-container {
+                padding-top: 3.5rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .mobile-nav-overlay {
+                display: none !important;
+            }
+        }
+
         @media (max-width: 1024px) {
-            .hero-container { height: 100vh !important; padding:0 !important; margin:0 !important; display:flex; align-items:center; justify-content:center; width:100vw; overflow:hidden; }
+            .hero-container { height: 100vh !important; padding:0 !important; margin:0 !important; display:flex; align-items:center; justify-content:center; width:100vw; overflow:hidden; padding-top: 4rem; }
             .hero-title-bg { display:none !important; }
             .mobile-faint-name {
                 display: block !important;
@@ -735,8 +815,6 @@
         }
 
         @media (max-width: 768px) {
-            .hamburger-menu { display:flex; }
-            .nav-links { display:none !important; }
             .mobile-faint-name { font-size:6rem !important; top:16% !important; left:1rem !important; }
             .portrait-wrapper img { max-height:75vh !important; }
             .bottom-name-wrapper { bottom:7rem !important; left:1rem !important; }
@@ -784,16 +862,41 @@
         }
 
         @media (min-width: 1025px) {
-            .mobile-nav { display:none !important; }
             .mobile-faint-name { display:none !important; }
         }
-        .relative { position:relative; }
-        .absolute { position:absolute; }
+        .mobile-faint-name { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- HERO -->
+    <!-- ===== FIXED NAVIGATION - TRANSPARENT ===== -->
+    <nav class="fixed-nav" id="mainNav">
+        <div class="nav-inner">
+            <a href="#home" class="logo" onclick="smoothScroll('home')">Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#home" onclick="smoothScroll('home')">Home</a></li>
+                <li><a href="#work" onclick="smoothScroll('work')">Work</a></li>
+                <li><a href="#services" onclick="smoothScroll('services')">Services</a></li>
+                <li><a href="#contact" onclick="smoothScroll('contact')">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburgerToggle" onclick="toggleMobileNav()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== MOBILE NAV OVERLAY ===== -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <button class="close-btn" onclick="toggleMobileNav()">✕</button>
+        <a href="#home" onclick="smoothScroll('home'); toggleMobileNav();">Home</a>
+        <a href="#work" onclick="smoothScroll('work'); toggleMobileNav();">Work</a>
+        <a href="#services" onclick="smoothScroll('services'); toggleMobileNav();">Services</a>
+        <a href="#contact" onclick="smoothScroll('contact'); toggleMobileNav();">Contact</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
     <div class="bg-mountains" id="heroSection">
         <div class="blue-overlay"></div>
         <div class="dark-overlay"></div>
@@ -801,29 +904,9 @@
         <div class="top-dark-overlay"></div>
         <div class="grid-overlay"></div>
 
-        <nav class="relative z-30 flex items-center justify-between px-6 md:px-10 py-5 w-full">
-            <div class="text-white font-bold text-2xl tracking-wide">Portfolio</div>
-            <ul class="nav-links flex items-center gap-8 text-white font-medium text-sm uppercase tracking-wider">
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#home" onclick="smoothScroll('home')">Home</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#work" onclick="smoothScroll('work')">Work</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#services" onclick="smoothScroll('services')">Services</a></li>
-                <li class="hover:text-blue-200 transition cursor-pointer"><a href="#contact" onclick="smoothScroll('contact')">Contact</a></li>
-            </ul>
-            <div class="hamburger-menu" id="hamburgerToggle" onclick="toggleMobileNav()">
-                <span></span><span></span>
-            </div>
-        </nav>
-
-        <div class="mobile-nav" id="mobileNav">
-            <button class="mobile-nav-close" onclick="toggleMobileNav()">✕</button>
-            <a href="#home" onclick="smoothScroll('home'); toggleMobileNav();">Home</a>
-            <a href="#work" onclick="smoothScroll('work'); toggleMobileNav();">Work</a>
-            <a href="#services" onclick="smoothScroll('services'); toggleMobileNav();">Services</a>
-            <a href="#contact" onclick="smoothScroll('contact'); toggleMobileNav();">Contact</a>
-        </div>
-
         <div class="hero-container z-10 px-6 md:px-12 lg:px-16" id="home">
-            <div class="absolute top-6 left-6 md:top-8 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
+            <!-- Tagline moved further down -->
+            <div class="absolute top-24 left-6 md:top-32 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
                 <p class="tagline text-white/80 text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8]">
                     I DESIGN USER‑CENTERED DIGITAL<br />EXPERIENCES THAT ARE SIMPLE<br />SMART AND IMPACTFUL
                 </p>
@@ -837,9 +920,10 @@
 
             <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
-            <div class="portrait-wrapper z-10 w-[320px] sm:w-[380px] md:w-[480px] lg:w-[540px] pointer-events-none animate-portrait mx-auto">
+            <!-- Portrait with updated PNG image -->
+            <div class="portrait-wrapper z-10 w-[380px] sm:w-[440px] md:w-[560px] lg:w-[640px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
-                    <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
+                    <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
                         alt="Jill Rösch portrait"
                         class="w-full h-auto object-contain object-center drop-shadow-2xl rounded-2xl"
                         style="filter: drop-shadow(0 20px 30px rgba(0,0,0,0.6));" />
@@ -861,7 +945,7 @@
         <a href="mailto:jillrosch@outlook.com" class="block no-underline">
             <div class="bg-[#1a1e24] card-shadow rounded-2xl p-3 md:p-4 flex items-center gap-3 md:gap-4 min-w-[200px] md:min-w-[240px] hover:shadow-2xl transition cursor-pointer">
                 <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-500 flex-shrink-0">
-                    <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9cf7d59fa5199bb3515214.png"
+                    <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
                         alt="Jill Rösch" class="w-full h-full object-cover" />
                 </div>
                 <div class="flex-1">
@@ -908,7 +992,7 @@
         </div>
     </section>
 
-    <!-- ===== POWERFUL SECTION – WITH SCROLL ANIMATION ===== -->
+    <!-- ===== POWERFUL SECTION ===== -->
     <section class="powerful-section" id="services">
         <div class="powerful-container">
             <div class="powerful-heading">
@@ -956,14 +1040,14 @@
             <div class="projects-grid">
                 <div class="project-card">
                     <h3>Project 1</h3>
-                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <p>Ozark RV Park & Cabins - A full-service RV park and cabin rental landing page.</p>
                     <a class="view-link" onclick="openModal('project1')">View Project
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
                 <div class="project-card">
                     <h3>Project 2</h3>
-                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <p>Absolute Integrative Physical Medicine - A medical practice website.</p>
                     <a class="view-link" onclick="openModal('project2')">View Project
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
@@ -994,7 +1078,7 @@
         </div>
     </div>
 
-    <!-- ===== CONTACT – FREELANCE SECTION (wider, less compressed) ===== -->
+    <!-- ===== CONTACT – FREELANCE SECTION ===== -->
     <section class="freelance-section" id="contact">
         <div class="freelance-container">
             <div class="freelance-left">
@@ -1006,7 +1090,6 @@
                 <a href="mailto:jillrosch@outlook.com" class="email-link">jillrosch@outlook.com</a>
             </div>
             <div class="testimonials-grid">
-                <!-- Left column: first testimonial -->
                 <div class="testimonial">
                     <blockquote>
                         “Since 2018 Jill has been responsible for the development of our website which has been instrumental to the growth of our company. Even while working remotely she's been highly responsive, organized and strategic in her thinking. In addition to staying on top of day-to-day site changes and builds, she's provided us with great advice to stay on top of the current changes in web technologies. She's also implemented effective project management and Q&amp;A processes. As a result Jill has been a highly valued and impactful member of our team.”
@@ -1016,7 +1099,6 @@
                         <span class="role">Founder at influenceTHIS Canada</span>
                     </div>
                 </div>
-                <!-- Right column: two stacked testimonials -->
                 <div class="testimonials-stack">
                     <div class="testimonial">
                         <blockquote>
@@ -1046,7 +1128,8 @@
         function smoothScroll(targetId) {
             const target = document.getElementById(targetId);
             if (target) {
-                const offsetTop = target.getBoundingClientRect().top + window.pageYOffset;
+                const navHeight = document.getElementById('mainNav').offsetHeight;
+                const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
@@ -1075,27 +1158,52 @@
             cardObserver.observe(card);
         });
 
+        // ===== MOBILE NAV TOGGLE =====
+        function toggleMobileNav() {
+            const overlay = document.getElementById('mobileNavOverlay');
+            const hamburger = document.getElementById('hamburgerToggle');
+            overlay.classList.toggle('open');
+            hamburger.classList.toggle('open');
+            document.body.style.overflow = overlay.classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(e) {
+            const overlay = document.getElementById('mobileNavOverlay');
+            const hamburger = document.getElementById('hamburgerToggle');
+            if (overlay.classList.contains('open') && !overlay.contains(e.target) && !hamburger.contains(e.target)) {
+                overlay.classList.remove('open');
+                hamburger.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
         // ===== PROJECT DATA =====
         const projects = {
             project1: {
-                title: "Absolute Integrative Physical Medicine",
-                description: "",
-                thumbnail: "https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9e71f157963560ced9fba7.png",
-                meta: { type: "Website", platform: "GHL", country: "USA", liveUrl: "https://absoluteintegrativehealth.com/" },
-                showDescription: false
+                title: "Ozark RV Park & Cabins",
+                images: [
+                    "https://imgh.in/host/nvjkss",
+                    "https://imgh.in/host/6zk1py",
+                    "https://imgh.in/host/qy8gcc"
+                ],
+                isFullGallery: true
             },
             project2: {
+                title: "Absolute Integrative Physical Medicine",
+                images: [
+                    "https://imgh.in/host/irtqm5",
+                    "https://imgh.in/host/r7espw",
+                    "https://imgh.in/host/mytn5s",
+                    "https://imgh.in/host/ap27sr"
+                ],
+                isFullGallery: true
+            },
+            project3: {
                 title: "Abiawards",
                 description: "",
                 thumbnail: "https://imgh.in/host/psyead",
                 meta: { type: "Website", platform: "WordPress", country: "Australia", liveUrl: "https://abiawards.com.au" },
-                showDescription: false
-            },
-            project3: {
-                title: "Ozark RV Park & Cabins",
-                description: "",
-                thumbnail: "https://imgh.in/host/78nblm",
-                meta: { type: "Website", platform: "GHL", country: "USA", liveUrl: "https://ozarkrvpark.com" },
                 showDescription: false
             },
             project4: {
@@ -1120,30 +1228,55 @@
             const project = projects[projectId];
             if (!project) return;
 
-            let leftColContent = '';
-            if (project.showDescription !== false) {
-                const descParagraphs = (project.description || '').split('\n\n').map(p => `<p>${p}</p>`).join('');
-                leftColContent = `<h1>${project.title}</h1>${descParagraphs}`;
+            let content = '';
+
+            if (project.isFullGallery) {
+                // Full page image gallery
+                const imagesHtml = project.images.map(img => 
+                    `<img src="${img}" alt="${project.title} screenshot" loading="lazy" />`
+                ).join('');
+                content = `
+                    <h1 class="modal-title">${project.title}</h1>
+                    <div class="modal-gallery-full">
+                        ${imagesHtml}
+                    </div>
+                `;
             } else {
-                leftColContent = `
-                    <h1>${project.title}</h1>
-                    <div class="thumbnail" style="margin-top:1rem;">
-                        <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
+                // Other projects - original layout
+                let leftColContent = '';
+                if (project.showDescription !== false) {
+                    const descParagraphs = (project.description || '').split('\n\n').map(p => `<p>${p}</p>`).join('');
+                    leftColContent = `<h1>${project.title}</h1>${descParagraphs}`;
+                } else {
+                    leftColContent = `
+                        <h1>${project.title}</h1>
+                        <div class="thumbnail" style="margin-top:1rem;">
+                            <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
+                        </div>
+                    `;
+                }
+
+                let metaHtml = '';
+                if (project.meta) {
+                    metaHtml = `
+                        <div class="project-meta">
+                            <div class="meta-item"><span class="label">Type:</span><span class="value">${project.meta.type}</span></div>
+                            <div class="meta-item"><span class="label">Platform:</span><span class="value">${project.meta.platform}</span></div>
+                            <div class="meta-item"><span class="label">Country:</span><span class="value">${project.meta.country}</span></div>
+                            <div class="meta-item" style="grid-column:1/-1;"><span class="label">Live URL:</span><span class="value"><a href="${project.meta.liveUrl}" target="_blank" rel="noopener noreferrer">${project.meta.liveUrl}</a></span></div>
+                        </div>
+                    `;
+                }
+
+                content = `
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; max-width:1100px; margin:0 auto; padding:2rem 0;">
+                        <div>${leftColContent}</div>
+                        <div>${metaHtml}</div>
                     </div>
                 `;
             }
 
-            body.innerHTML = `
-                <div class="left-col">${leftColContent}</div>
-                <div class="right-col">
-                    <div class="project-meta">
-                        <div class="meta-item"><span class="label">Type:</span><span class="value">${project.meta.type}</span></div>
-                        <div class="meta-item"><span class="label">Platform:</span><span class="value">${project.meta.platform}</span></div>
-                        <div class="meta-item"><span class="label">Country:</span><span class="value">${project.meta.country}</span></div>
-                        <div class="meta-item" style="grid-column:1/-1;"><span class="label">Live URL:</span><span class="value"><a href="${project.meta.liveUrl}" target="_blank" rel="noopener noreferrer">${project.meta.liveUrl}</a></span></div>
-                    </div>
-                </div>
-            `;
+            body.innerHTML = content;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -1156,25 +1289,6 @@
             if (e.target === document.getElementById('projectModal')) closeModal();
         }
         document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-        function toggleMobileNav() {
-            document.getElementById('mobileNav').classList.toggle('open');
-            document.getElementById('hamburgerToggle').classList.toggle('open');
-        }
-        document.addEventListener('click', function(e) {
-            const nav = document.getElementById('mobileNav');
-            const ham = document.getElementById('hamburgerToggle');
-            if (nav.classList.contains('open') && !nav.contains(e.target) && !ham.contains(e.target)) {
-                nav.classList.remove('open');
-                ham.classList.remove('open');
-            }
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const obs = new MutationObserver(function() {
-                document.body.style.overflow = document.getElementById('mobileNav').classList.contains('open') ? 'hidden' : '';
-            });
-            obs.observe(document.getElementById('mobileNav'), { attributes: true, attributeFilter: ['class'] });
-        });
     </script>
 </body>
 </html>
