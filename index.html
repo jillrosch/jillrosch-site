@@ -708,7 +708,16 @@
             from { opacity: 1; transform: scale(1); }
             to { opacity: 0; transform: scale(0.9); }
         }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        @-webkit-keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
 
+        /* ===== HERO ANIMATIONS - DESKTOP ===== */
         .animate-tagline { animation: slideInLeft 0.8s ease-out forwards; }
         .animate-portrait { animation: slideFromLeft 1s ease-out forwards; }
         .animate-portrait:hover { animation: float 3s ease-in-out infinite; }
@@ -725,6 +734,73 @@
         .animate-logo:nth-child(4) { animation-delay: 0.4s; }
         .animate-logo:nth-child(5) { animation-delay: 0.5s; }
 
+        /* ===== HERO ANIMATIONS - MOBILE (Image fades, text slides) ===== */
+        @media (max-width: 768px) {
+            /* Image fades in - no movement */
+            .hero-container .animate-portrait {
+                animation: fadeIn 1.2s ease-out forwards !important;
+                -webkit-animation: fadeIn 1.2s ease-out forwards !important;
+            }
+            .hero-container .animate-portrait:hover {
+                animation: none !important;
+            }
+            
+            /* Text elements slide from left */
+            .hero-container .animate-tagline {
+                animation: slideInLeftMobile 0.8s ease-out forwards !important;
+                -webkit-animation: slideInLeftMobile 0.8s ease-out forwards !important;
+            }
+            .hero-container .animate-name-bg {
+                animation: fadeInUpMobile 1.2s ease-out forwards !important;
+                -webkit-animation: fadeInUpMobile 1.2s ease-out forwards !important;
+            }
+            .hero-container .animate-name-front {
+                animation: slideInLeftMobile 0.8s ease-out 0.3s both !important;
+                -webkit-animation: slideInLeftMobile 0.8s ease-out 0.3s both !important;
+            }
+            .hero-container .animate-card {
+                animation: slideInRightMobile 0.8s ease-out 0.5s both !important;
+                -webkit-animation: slideInRightMobile 0.8s ease-out 0.5s both !important;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @-webkit-keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeftMobile {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @-webkit-keyframes slideInLeftMobile {
+            from { opacity: 0; -webkit-transform: translateX(-30px); }
+            to { opacity: 1; -webkit-transform: translateX(0); }
+        }
+
+        @keyframes slideInRightMobile {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @-webkit-keyframes slideInRightMobile {
+            from { opacity: 0; -webkit-transform: translateX(30px); }
+            to { opacity: 1; -webkit-transform: translateX(0); }
+        }
+
+        @keyframes fadeInUpMobile {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @-webkit-keyframes fadeInUpMobile {
+            from { opacity: 0; -webkit-transform: translateY(30px); }
+            to { opacity: 1; -webkit-transform: translateY(0); }
+        }
+
+        /* Reverse animations - desktop */
         .scrolled .animate-tagline {
             animation: slideOutLeft 0.8s ease-in forwards !important;
         }
@@ -739,6 +815,18 @@
         }
         .scrolled .animate-card {
             animation: slideOutRight 0.8s ease-in forwards !important;
+        }
+
+        /* Reverse animations - mobile (fade out all) */
+        @media (max-width: 768px) {
+            .scrolled .animate-tagline,
+            .scrolled .animate-portrait,
+            .scrolled .animate-name-bg,
+            .scrolled .animate-name-front,
+            .scrolled .animate-card {
+                animation: fadeOut 0.6s ease-in forwards !important;
+                -webkit-animation: fadeOut 0.6s ease-in forwards !important;
+            }
         }
 
         .hero-container {
@@ -773,7 +861,7 @@
                 padding-top: 3.5rem;
             }
             
-            /* iOS-optimized mobile animation */
+            /* iOS-optimized mobile animation for powerful cards */
             .powerful-card {
                 padding: 1.5rem;
                 -webkit-transform: translate3d(20px, 0, 0);
@@ -797,6 +885,18 @@
             .powerful-heading h2 {
                 font-size: 1.5rem;
                 text-align: center;
+            }
+
+            /* ===== MOBILE HERO - BIGGER IMAGE ===== */
+            .portrait-wrapper {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            .portrait-wrapper img {
+                width: 100% !important;
+                height: auto !important;
+                max-height: 85vh !important;
+                object-fit: contain !important;
             }
         }
 
@@ -871,7 +971,6 @@
 
         @media (max-width: 768px) {
             .mobile-faint-name { font-size:6rem !important; top:16% !important; left:1rem !important; }
-            .portrait-wrapper img { max-height:75vh !important; }
             .bottom-name-wrapper { bottom:7rem !important; left:1rem !important; }
             .bottom-name-wrapper h2 { font-size:2.5rem !important; }
             .freelance-section { padding:3rem 1rem; }
@@ -884,7 +983,6 @@
 
         @media (max-width: 640px) {
             .mobile-faint-name { font-size:5rem !important; top:14% !important; left:0.75rem !important; }
-            .portrait-wrapper img { max-height:70vh !important; }
             .bottom-name-wrapper { bottom:6rem !important; left:0.75rem !important; }
             .bottom-name-wrapper .text-white/50 { font-size:0.5rem !important; }
             .bottom-name-wrapper h2 { font-size:2rem !important; }
@@ -960,7 +1058,7 @@
         <div class="grid-overlay"></div>
 
         <div class="hero-container z-10 px-6 md:px-12 lg:px-16" id="home">
-            <!-- Tagline moved further down -->
+            <!-- Tagline -->
             <div class="absolute top-24 left-6 md:top-32 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
                 <p class="tagline text-white/80 text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8]">
                     I DESIGN USER‑CENTERED DIGITAL<br />EXPERIENCES THAT ARE SIMPLE<br />SMART AND IMPACTFUL
@@ -975,8 +1073,8 @@
 
             <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
-            <!-- Portrait -->
-            <div class="portrait-wrapper z-10 w-[380px] sm:w-[440px] md:w-[560px] lg:w-[640px] pointer-events-none animate-portrait mx-auto">
+            <!-- Portrait - bigger on mobile -->
+            <div class="portrait-wrapper z-10 w-[320px] sm:w-[380px] md:w-[480px] lg:w-[540px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
                         alt="Jill Rösch portrait"
