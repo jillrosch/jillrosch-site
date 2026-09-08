@@ -26,6 +26,60 @@
             cursor: none;
         }
 
+        /* ===== LOADING SCREEN ===== */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0b1a2f;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid rgba(34,34,204,0.1);
+            border-top-color: #2222cc;
+            animation: spin 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            position: relative;
+        }
+        .loader-ring::after {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 2px solid rgba(34,34,204,0.05);
+            border-top-color: #2222cc;
+            animation: spin 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+        }
+        .loader-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
         /* ----- CUSTOM CURSOR ----- */
         .cursor-dot {
             width: 8px;
@@ -273,7 +327,7 @@
             background-size: 60px 60px;
         }
 
-        /* Animated particles - Hero */
+        /* Animated snow particles - Hero */
         #hero-particles {
             position: absolute;
             top: 0;
@@ -284,7 +338,7 @@
             pointer-events: none;
         }
 
-        /* Animated particles - Projects section */
+        /* Animated snow particles - Projects section */
         #projects-particles {
             position: absolute;
             top: 0;
@@ -448,6 +502,69 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             transition: color 0.3s ease;
+        }
+
+        /* ===== ABOUT MICRO-SECTION ===== */
+        .about-micro {
+            background: #ffffff;
+            padding: 4rem 2rem;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .about-micro-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-micro-text h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1a2633;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+        .about-micro-text h3 span {
+            color: #2222cc;
+        }
+        .about-micro-text p {
+            color: #4a5a6a;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+        .about-micro-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .about-micro-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+        .about-micro-stat:hover {
+            transform: translateY(-4px);
+            border-color: #2222cc;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+        .about-micro-stat .number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #2222cc;
+            display: block;
+        }
+        .about-micro-stat .label {
+            font-size: 0.75rem;
+            color: #8a9aa8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.3rem;
+            display: block;
         }
 
         /* ===== POWERFUL SECTION ===== */
@@ -1246,7 +1363,20 @@
                 overflow: hidden;
                 padding-top: 4rem;
             }
-            
+
+            /* Fix tagline visibility on mobile - white text */
+            .tagline {
+                font-size: 0.55rem !important;
+                max-width: 70% !important;
+                color: #ffffff !important;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+                opacity: 1 !important;
+            }
+            .hero-container .tagline {
+                color: #ffffff !important;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+            }
+
             .powerful-card {
                 padding: 1.5rem;
                 transform: translateY(30px);
@@ -1268,7 +1398,7 @@
                 text-align: center;
             }
 
-            /* Hero image at bottom */
+            /* Hero image at bottom - BIGGER on mobile */
             .portrait-wrapper {
                 position: absolute !important;
                 bottom: 0 !important;
@@ -1297,7 +1427,7 @@
                 object-fit: contain !important;
                 width: 100% !important;
                 height: auto !important;
-                max-height: 80vh !important;
+                max-height: 85vh !important;
                 border-radius: 0 !important;
                 display: block !important;
                 margin: 0 !important;
@@ -1316,7 +1446,7 @@
                 left: 1.5rem !important;
                 font-size: 7rem !important;
                 font-weight: 900 !important;
-                color: rgba(255,255,255,0.08) !important;
+                color: rgba(255,255,255,0.06) !important;
                 letter-spacing: 0.04em !important;
                 line-height: 0.92 !important;
                 z-index: 0 !important;
@@ -1338,12 +1468,32 @@
                 color: #ffffff !important;
                 font-size: 2.5rem !important;
             }
-            .tagline { 
-                font-size: 0.5rem !important; 
-                max-width: 60% !important; 
-                top: 0.5rem !important; 
-                left: 0.5rem !important; 
-                color: rgba(255,255,255,0.6) !important;
+
+            /* About micro - mobile */
+            .about-micro-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .about-micro-text h3 {
+                font-size: 1.6rem;
+                text-align: center;
+            }
+            .about-micro-text p {
+                text-align: center;
+                font-size: 0.95rem;
+            }
+            .about-micro-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+            .about-micro-stat {
+                padding: 1rem 0.5rem;
+            }
+            .about-micro-stat .number {
+                font-size: 1.6rem;
+            }
+            .about-micro-stat .label {
+                font-size: 0.65rem;
             }
 
             .freelance-container { 
@@ -1389,6 +1539,10 @@
             .fixed-contact-card .avatar {
                 width: 32px;
                 height: 32px;
+            }
+
+            .about-micro {
+                padding: 3rem 1rem;
             }
         }
 
@@ -1443,12 +1597,24 @@
             .logo-image { height: 24px; max-width: 60px; }
             .logo-name { font-size: 0.5rem; }
             .project-card { padding: 1.25rem; }
+            .about-micro-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+            .about-micro-stat:last-child {
+                grid-column: 1 / -1;
+            }
         }
 
         .mobile-faint-name { display: none; }
     </style>
 </head>
 <body>
+
+    <!-- ===== LOADING SCREEN ===== -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">Loading...</div>
+    </div>
 
     <!-- ===== CUSTOM CURSOR ===== -->
     <div class="cursor-dot" id="cursorDot"></div>
@@ -1460,6 +1626,7 @@
             <a href="#home" class="logo" onclick="smoothScroll('home')">Portfolio</a>
             <ul class="nav-links">
                 <li><a href="#home" onclick="smoothScroll('home')">Home</a></li>
+                <li><a href="#about" onclick="smoothScroll('about')">About</a></li>
                 <li><a href="#work" onclick="smoothScroll('work')">Work</a></li>
                 <li><a href="#services" onclick="smoothScroll('services')">Services</a></li>
                 <li><a href="#contact" onclick="smoothScroll('contact')">Contact</a></li>
@@ -1476,6 +1643,7 @@
     <div class="mobile-nav-overlay" id="mobileNavOverlay">
         <button class="close-btn" onclick="toggleMobileNav()">✕</button>
         <a href="#home" onclick="smoothScroll('home'); toggleMobileNav();">Home</a>
+        <a href="#about" onclick="smoothScroll('about'); toggleMobileNav();">About</a>
         <a href="#work" onclick="smoothScroll('work'); toggleMobileNav();">Work</a>
         <a href="#services" onclick="smoothScroll('services'); toggleMobileNav();">Services</a>
         <a href="#contact" onclick="smoothScroll('contact'); toggleMobileNav();">Contact</a>
@@ -1494,13 +1662,13 @@
         <div class="top-dark-overlay"></div>
         <div class="grid-overlay"></div>
         
-        <!-- Animated particles background - Hero -->
+        <!-- Animated snow particles - Hero -->
         <canvas id="hero-particles"></canvas>
 
         <div class="hero-container z-10 px-6 md:px-12 lg:px-16" id="home">
             <!-- Tagline -->
             <div class="absolute top-24 left-6 md:top-32 md:left-12 z-20 max-w-xs md:max-w-sm animate-tagline">
-                <p class="tagline text-white/80 text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8]">
+                <p class="tagline text-white text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.15em] font-medium leading-[1.8] drop-shadow-lg">
                     CRAFTING USER-CENTERED<br />DIGITAL EXPERIENCES<br />THAT ARE SIMPLE, SMART<br />AND IMPACTFUL
                 </p>
             </div>
@@ -1514,7 +1682,7 @@
             <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
             <!-- Portrait -->
-            <div class="portrait-wrapper z-10 w-[320px] sm:w-[380px] md:w-[480px] lg:w-[540px] pointer-events-none animate-portrait mx-auto">
+            <div class="portrait-wrapper z-10 w-[380px] sm:w-[440px] md:w-[520px] lg:w-[600px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
                         alt="Jill Rösch portrait"
@@ -1582,6 +1750,34 @@
         </div>
     </section>
 
+    <!-- ===== ABOUT MICRO-SECTION ===== -->
+    <section class="about-micro" id="about">
+        <div class="about-micro-container">
+            <div class="about-micro-text">
+                <h3>Designing <span>meaningful</span> digital experiences</h3>
+                <p>
+                    I'm a web developer and designer with a passion for creating websites that are 
+                    functional, responsive, and user-centered. With 8+ years of experience, I blend 
+                    clean code with thoughtful design to build digital solutions that actually work.
+                </p>
+            </div>
+            <div class="about-micro-stats">
+                <div class="about-micro-stat">
+                    <span class="number">8+</span>
+                    <span class="label">Years Experience</span>
+                </div>
+                <div class="about-micro-stat">
+                    <span class="number">40+</span>
+                    <span class="label">Projects Delivered</span>
+                </div>
+                <div class="about-micro-stat">
+                    <span class="number">20+</span>
+                    <span class="label">Happy Clients</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== POWERFUL SECTION ===== -->
     <section class="powerful-section" id="services">
         <div class="powerful-container">
@@ -1622,7 +1818,7 @@
 
     <!-- ===== PROJECTS ===== -->
     <section class="projects-section" id="work">
-        <!-- Animated particles background - Projects -->
+        <!-- Animated snow particles - Projects -->
         <canvas id="projects-particles"></canvas>
         
         <div class="projects-container">
@@ -1721,12 +1917,19 @@
     </section>
 
     <script>
+        // ===== LOADING SCREEN =====
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+                document.body.style.cursor = 'none';
+            }, 800);
+        });
+
         // ===== CUSTOM CURSOR =====
         const cursorDot = document.getElementById('cursorDot');
         const cursorRing = document.getElementById('cursorRing');
         let mouseX = 0, mouseY = 0;
         let ringX = 0, ringY = 0;
-        let isHovering = false;
 
         document.addEventListener('mousemove', function(e) {
             mouseX = e.clientX;
@@ -1760,8 +1963,8 @@
             });
         });
 
-        // ===== PARTICLES - HERO SECTION =====
-        function createParticleSystem(canvasId, count, color, speed, sizeRange) {
+        // ===== SNOW PARTICLES - HERO SECTION (Balanced speed) =====
+        function createSnowParticles(canvasId, count, speed) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return null;
             
@@ -1779,41 +1982,68 @@
             resize();
             window.addEventListener('resize', resize);
 
-            class Particle {
+            class Snowflake {
                 constructor() {
                     this.reset();
+                    this.fastSpeed = (Math.random() * 1.2 + 1.0) * speed;
+                    this.slowSpeed = (Math.random() * 0.3 + 0.15) * speed;
+                    this.fallingSpeed = this.fastSpeed;
+                    this.fallStartY = -20;
+                    this.fallEndY = height * (0.3 + Math.random() * 0.25);
+                    this.hasSlowed = false;
                 }
                 reset() {
                     this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.size = Math.random() * (sizeRange.max - sizeRange.min) + sizeRange.min;
-                    this.speedX = (Math.random() - 0.5) * speed;
-                    this.speedY = (Math.random() - 0.5) * speed;
-                    this.opacity = Math.random() * 0.6 + 0.2;
-                    this.pulse = Math.random() * Math.PI * 2;
-                    this.pulseSpeed = 0.01 + Math.random() * 0.02;
+                    this.y = Math.random() * height - height;
+                    this.size = Math.random() * 3.5 + 1.5;
+                    this.opacity = Math.random() * 0.35 + 0.15;
+                    this.swing = Math.random() * 100;
+                    this.swingSpeed = 0.008 + Math.random() * 0.015;
+                    this.fallingSpeed = this.fastSpeed;
+                    this.fallEndY = height * (0.3 + Math.random() * 0.25);
+                    this.hasSlowed = false;
                 }
                 update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    this.pulse += this.pulseSpeed;
+                    if (!this.hasSlowed && this.y > this.fallEndY) {
+                        this.fallingSpeed = this.slowSpeed;
+                        this.hasSlowed = true;
+                    }
                     
-                    if (this.x < 0 || this.x > width) this.speedX *= -1;
-                    if (this.y < 0 || this.y > height) this.speedY *= -1;
+                    this.y += this.fallingSpeed;
+                    this.x += Math.sin(this.swing) * 0.25;
+                    this.swing += this.swingSpeed;
                     
-                    // Slight pulsing opacity
-                    this.currentOpacity = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+                    if (this.y > height + 20) {
+                        this.reset();
+                        this.y = -20;
+                    }
+                    if (this.x < -20) this.x = width + 20;
+                    if (this.x > width + 20) this.x = -20;
                 }
                 draw() {
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = color.replace('OPACITY', this.currentOpacity);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
                     ctx.fill();
+                    
+                    if (this.size > 3) {
+                        ctx.shadowColor = 'rgba(255, 255, 255, 0.08)';
+                        ctx.shadowBlur = 6;
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                    }
                 }
             }
 
             for (let i = 0; i < count; i++) {
-                particles.push(new Particle());
+                const flake = new Snowflake();
+                flake.y = Math.random() * height;
+                flake.fallEndY = height * (0.3 + Math.random() * 0.25);
+                if (flake.y > flake.fallEndY) {
+                    flake.hasSlowed = true;
+                    flake.fallingSpeed = flake.slowSpeed;
+                }
+                particles.push(flake);
             }
 
             function animate() {
@@ -1826,24 +2056,101 @@
             }
             animate();
 
-            // Handle resize
+            const resizeObserver = new ResizeObserver(() => {
+                resize();
+                particles.forEach(p => {
+                    p.reset();
+                    p.fallEndY = height * (0.3 + Math.random() * 0.25);
+                });
+            });
+            resizeObserver.observe(canvas.parentElement);
+
+            return { resize, particles };
+        }
+
+        // Hero snow - balanced speed
+        const heroSnow = createSnowParticles('hero-particles', 100, 0.6);
+
+        // Projects snow - gentle
+        function createProjectSnow(canvasId, count, speed) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return null;
+            
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let width, height;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                width = rect.width;
+                height = rect.height;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            class Snowflake {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height - height;
+                    this.size = Math.random() * 2.5 + 1.5;
+                    this.speedY = (Math.random() * 0.3 + 0.15) * speed;
+                    this.speedX = (Math.random() - 0.5) * 0.12;
+                    this.opacity = Math.random() * 0.25 + 0.12;
+                    this.swing = Math.random() * 100;
+                    this.swingSpeed = 0.008 + Math.random() * 0.012;
+                }
+                update() {
+                    this.y += this.speedY;
+                    this.x += Math.sin(this.swing) * 0.15;
+                    this.swing += this.swingSpeed;
+                    
+                    if (this.y > height + 20) {
+                        this.reset();
+                        this.y = -20;
+                    }
+                    if (this.x < -20) this.x = width + 20;
+                    if (this.x > width + 20) this.x = -20;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < count; i++) {
+                const flake = new Snowflake();
+                flake.y = Math.random() * height;
+                particles.push(flake);
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+
             const resizeObserver = new ResizeObserver(() => {
                 resize();
                 particles.forEach(p => p.reset());
             });
             resizeObserver.observe(canvas.parentElement);
 
-            return {
-                resize,
-                particles
-            };
+            return { resize, particles };
         }
 
-        // Hero particles - more visible with larger size and brighter color
-        const heroParticles = createParticleSystem('hero-particles', 80, 'rgba(34, 34, 204, OPACITY)', 0.4, { min: 2, max: 4 });
-
-        // Projects particles - also visible but slightly different
-        const projectsParticles = createParticleSystem('projects-particles', 60, 'rgba(34, 34, 204, OPACITY)', 0.3, { min: 1.5, max: 3.5 });
+        // Projects snow - gentle
+        const projectSnow = createProjectSnow('projects-particles', 40, 0.4);
 
         // ===== SCROLL TO TOP BUTTON =====
         const scrollTopBtn = document.getElementById('scrollTopBtn');
