@@ -23,7 +23,7 @@
             scroll-behavior: smooth;
         }
 
-        /* ----- FIXED NAVIGATION - TRANSPARENT ----- */
+        /* ----- FIXED NAVIGATION - TRANSPARENT BY DEFAULT, DARK ON SCROLL ----- */
         .fixed-nav {
             position: fixed;
             top: 0;
@@ -32,7 +32,13 @@
             z-index: 1000;
             background: transparent;
             padding: 1.25rem 2rem;
-            transition: all 0.3s ease;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+        }
+        .fixed-nav.scrolled {
+            background: rgba(11, 26, 47, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
         }
         .fixed-nav .nav-inner {
             max-width: 1200px;
@@ -869,7 +875,7 @@
 </head>
 <body>
 
-    <!-- ===== FIXED NAVIGATION - TRANSPARENT ===== -->
+    <!-- ===== FIXED NAVIGATION - TRANSPARENT BY DEFAULT, DARK ON SCROLL ===== -->
     <nav class="fixed-nav" id="mainNav">
         <div class="nav-inner">
             <a href="#home" class="logo" onclick="smoothScroll('home')">Portfolio</a>
@@ -920,7 +926,7 @@
 
             <div class="mobile-faint-name">JILL<br />RÖSCH</div>
 
-            <!-- Portrait with updated PNG image -->
+            <!-- Portrait -->
             <div class="portrait-wrapper z-10 w-[380px] sm:w-[440px] md:w-[560px] lg:w-[640px] pointer-events-none animate-portrait mx-auto">
                 <div class="relative w-full flex items-center justify-center">
                     <img src="https://assets.cdn.filesafe.space/BeUq3apsjLfVlEJyO5IF/media/6a9fa3bebcef8b5f2c39d2b9.png"
@@ -1054,14 +1060,14 @@
                 </div>
                 <div class="project-card">
                     <h3>Project 3</h3>
-                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <p>ABIA Awards - A prestigious awards platform.</p>
                     <a class="view-link" onclick="openModal('project3')">View Project
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
                 </div>
                 <div class="project-card">
                     <h3>Project 4</h3>
-                    <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate.</p>
+                    <p>Catch of The Decade - A best-selling Australian business book.</p>
                     <a class="view-link" onclick="openModal('project4')">View Project
                         <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
                     </a>
@@ -1137,6 +1143,31 @@
             }
         }
 
+        // ===== NAVIGATION SCROLL EFFECT =====
+        const nav = document.getElementById('mainNav');
+        let lastScrollY = 0;
+
+        window.addEventListener('scroll', function() {
+            const currentScrollY = window.scrollY;
+            
+            // Add/remove scrolled class for background
+            if (currentScrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Hero reverse animations
+            const heroSection = document.getElementById('heroSection');
+            if (currentScrollY > 50) {
+                heroSection.classList.add('scrolled');
+            } else {
+                heroSection.classList.remove('scrolled');
+            }
+            
+            lastScrollY = currentScrollY;
+        });
+
         // ===== SCROLL ANIMATION FOR POWERFUL CARDS =====
         const powerfulCards = document.querySelectorAll('.powerful-card');
 
@@ -1200,27 +1231,24 @@
                 isFullGallery: true
             },
             project3: {
-                title: "Abiawards",
-                description: "",
-                thumbnail: "https://imgh.in/host/psyead",
-                meta: { type: "Website", platform: "WordPress", country: "Australia", liveUrl: "https://abiawards.com.au" },
-                showDescription: false
+                title: "ABIA Awards",
+                images: [
+                    "https://imgh.in/host/ydec8q",
+                    "https://imgh.in/host/jsjmu3",
+                    "https://imgh.in/host/kaghwi"
+                ],
+                isFullGallery: true
             },
             project4: {
                 title: "Catch of The Decade",
-                description: "",
-                thumbnail: "https://imgh.in/host/d7gbmg",
-                meta: { type: "Website", platform: "WordPress", country: "Australia", liveUrl: "https://catchofthedecade.com/" },
-                showDescription: false
+                images: [
+                    "https://imgh.in/host/wsyaf3",
+                    "https://imgh.in/host/qcz50o",
+                    "https://imgh.in/host/qojb2k"
+                ],
+                isFullGallery: true
             }
         };
-
-        // scroll reverse animations for hero
-        const heroSection = document.getElementById('heroSection');
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 50) heroSection.classList.add('scrolled');
-            else heroSection.classList.remove('scrolled');
-        });
 
         function openModal(projectId) {
             const modal = document.getElementById('projectModal');
@@ -1242,19 +1270,13 @@
                     </div>
                 `;
             } else {
-                // Other projects - original layout
-                let leftColContent = '';
-                if (project.showDescription !== false) {
-                    const descParagraphs = (project.description || '').split('\n\n').map(p => `<p>${p}</p>`).join('');
-                    leftColContent = `<h1>${project.title}</h1>${descParagraphs}`;
-                } else {
-                    leftColContent = `
-                        <h1>${project.title}</h1>
-                        <div class="thumbnail" style="margin-top:1rem;">
-                            <img src="${project.thumbnail}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
-                        </div>
-                    `;
-                }
+                // Other projects - original layout (fallback)
+                let leftColContent = `
+                    <h1>${project.title}</h1>
+                    <div class="thumbnail" style="margin-top:1rem;">
+                        <img src="${project.thumbnail || ''}" alt="${project.title} thumbnail" style="width:100%; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.1);" />
+                    </div>
+                `;
 
                 let metaHtml = '';
                 if (project.meta) {
