@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Jill Rösch · Hero</title>
+    
+    <!-- ============================================ -->
+    <!-- SOCIAL MEDIA THUMBNAIL (Open Graph)          -->
+    <!-- ============================================ -->
+    <meta property="og:image" content="https://i.picrd.com/images/oWnRiqx9vEe.webp">
+    <meta property="og:title" content="Jill Rösch · Hero">
+    <meta property="og:description" content="I design and develop websites that are elegant, intuitive, and accessible.">
+    <meta property="og:type" content="website">
+    <!-- ============================================ -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -2300,6 +2310,53 @@
                 window.dispatchEvent(new Event('carousel-recalc'));
             }, 150);
         });
+
+
+        // ============================================
+// MOBILE SCROLL INDICATOR — toggles direction & scrolls
+// ============================================
+(function initScrollIndicator() {
+    const btn = document.querySelector('.scroll-indicator');
+    if (!btn) return;
+    const icon = btn.querySelector('i');
+    if (!icon) return;
+
+    function updateState() {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const atBottom = (scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 4);
+
+        if (atBottom) {
+            // At the bottom: point up and scroll back to top
+            icon.classList.remove('fa-arrow-down');
+            icon.classList.add('fa-arrow-up');
+            btn.dataset.dir = 'up';
+        } else {
+            // Anywhere else: point down and scroll to bottom
+            icon.classList.remove('fa-arrow-up');
+            icon.classList.add('fa-arrow-down');
+            btn.dataset.dir = 'down';
+        }
+    }
+
+    btn.addEventListener('click', function () {
+        const dir = btn.dataset.dir || 'down';
+        if (dir === 'up') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+        }
+    });
+
+    // Update icon whenever the user scrolls or resizes
+    if (window.__scrollEngine) {
+        window.__scrollEngine.subscribe(updateState);
+    } else {
+        window.addEventListener('scroll', updateState, { passive: true });
+        window.addEventListener('resize', updateState, { passive: true });
+    }
+
+    updateState();
+})();
     </script>
 </body>
 </html>
