@@ -232,31 +232,63 @@
         .mobile-nav-dock { display: none; }
         .scroll-indicator { display: none; }
 
+        /* ============================================ */
+        /* SIDE TAB — visible by default, slides in from right */
+        /* ============================================ */
         .side-tab {
-            position: fixed; top: 50%; right: 0;
-            transform: translateY(-50%) translateX(100%);
+            position: fixed;
+            top: 50%;
+            right: 0;
             z-index: 900;
-            display: inline-flex; align-items: center; justify-content: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: clamp(1rem, 1.4vw, 1.4rem) clamp(0.5rem, 0.7vw, 0.7rem);
-            background: #a9d6d0; color: #0e1e3a;
+            background: #a9d6d0;
+            color: #0e1e3a;
             font-size: clamp(0.7rem, 0.85vw, 0.85rem);
-            font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             text-decoration: none;
-            border-top-left-radius: 10px; border-bottom-left-radius: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
             writing-mode: vertical-rl;
             box-shadow: -6px 0 22px rgba(0, 0, 0, 0.08);
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease, padding 0.3s ease;
-            cursor: pointer; will-change: transform;
+            cursor: pointer;
+            /* Default position: fully visible, vertically centered */
+            transform: translateY(-50%) translateX(0);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                        background 0.3s ease,
+                        box-shadow 0.3s ease,
+                        color 0.3s ease;
+            will-change: transform, opacity;
         }
-        .side-tab.visible { transform: translateY(-50%) translateX(0); }
-        .side-tab:hover { background: #1d4ed8; color: #ffffff; box-shadow: -10px 0 32px rgba(29, 78, 216, 0.35); }
-        .side-tab .side-tab-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #0e1e3a; margin-bottom: 0.6rem; animation: sideTabPulse 1.8s ease-in-out infinite; }
+        /* Slide-in on load */
+        body.ready .side-tab {
+            opacity: 1;
+            transform: translateY(-50%) translateX(0);
+        }
+        .side-tab:hover {
+            background: #1d4ed8;
+            color: #ffffff;
+            box-shadow: -10px 0 32px rgba(29, 78, 216, 0.35);
+        }
+        .side-tab .side-tab-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #0e1e3a;
+            margin-bottom: 0.6rem;
+            animation: sideTabPulse 1.8s ease-in-out infinite;
+        }
         .side-tab:hover .side-tab-dot { background: #ffffff; }
         @keyframes sideTabPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.75); } }
 
-        /* ============================================ */
-        /* SIMPLE THIN DIVIDER (no shooting animation) */
-        /* ============================================ */
+        /* Simple thin divider */
         .section-divider {
             width: 100%;
             height: 1px;
@@ -294,60 +326,113 @@
             box-shadow: 0 0 8px rgba(29,78,216,0.5); border-radius: 2px;
         }
 
-        /* ============================================ */
-        /* MESSENGER CONVERSATION */
-        /* ============================================ */
-        .messenger-conversation { width: 100%; max-width: 100%; display: flex; flex-direction: column; gap: clamp(0.8rem, 1.5vw, 1.2rem); padding: 0.5rem 0; }
-        .msg-row {
-            display: flex; align-items: flex-start; gap: clamp(0.6rem, 1vw, 1rem);
-            opacity: 0; transform: translateY(20px) scale(0.98);
-            transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-            will-change: opacity, transform;
-        }
-        .msg-row.right { flex-direction: row-reverse; }
-        .msg-row.visible { opacity: 1; transform: translateY(0) scale(1); }
-        .msg-avatar { width: clamp(32px, 4vw, 44px); height: clamp(32px, 4vw, 44px); border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #e8ecf3; border: 2px solid #f0f2f5; display: flex; align-items: center; justify-content: center; font-size: clamp(0.9rem, 1.2vw, 1.4rem); }
-        .msg-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .msg-avatar .fallback-avatar { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #8a9aae; background: #e8ecf3; }
-        .msg-bubble-wrapper { display: flex; flex-direction: column; gap: 0.2rem; max-width: 75%; }
-        .msg-bubble {
-            padding: clamp(0.7rem, 1.2vw, 0.9rem) clamp(1rem, 1.5vw, 1.5rem);
-            border-radius: 20px;
-            font-size: clamp(0.88rem, 1vw, 1.05rem);
-            line-height: 1.6; color: #1a1f2e; background: #f1f3f7;
-            word-wrap: break-word; position: relative;
-            text-align: left; /* always left-aligned */
-        }
-        .msg-row.left .msg-bubble { border-top-left-radius: 4px; background: #f1f3f7; }
-        .msg-row.right .msg-bubble { border-top-right-radius: 4px; background: #e3edff; color: #0e1e3a; }
-        .msg-name { font-size: clamp(0.65rem, 0.75vw, 0.75rem); font-weight: 600; color: #8a9aae; text-align: left; }
-        .msg-row.right .msg-name { text-align: right; }
+/* ============================================ */
+/* MESSENGER CONVERSATION — hard-capped bubbles */
+/* ============================================ */
+.messenger-conversation {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+.messenger-conversation .msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.messenger-conversation .msg-row.right { flex-direction: row-reverse; }
+.messenger-conversation .msg-row.visible { opacity: 1; transform: translateY(0); }
 
-        /* Typing indicator */
-        .typing-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 0.6rem 1rem;
-            background: #f1f3f7;
-            border-radius: 20px;
-            border-top-left-radius: 4px;
-        }
-        .typing-indicator span {
-            display: block;
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: #a8b0c0;
-            animation: typingBounce 1.4s infinite ease-in-out both;
-        }
-        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
-        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0s; }
-        @keyframes typingBounce {
-            0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
-            40% { transform: scale(1); opacity: 1; }
-        }
+.messenger-conversation .msg-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: 0 0 40px;
+    background: #e8ecf3;
+    border: 2px solid #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.messenger-conversation .msg-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.messenger-conversation .msg-avatar .fallback-avatar {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; color: #8a9aae; background: #e8ecf3;
+}
 
+/* Wrapper is hard-capped so the bubble can never exceed this */
+.messenger-conversation .msg-bubble-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    /* The critical part: this wrapper cannot grow past 460px */
+    flex: 0 1 460px;
+    max-width: 460px;
+    min-width: 0;
+    align-items: flex-start;
+}
+.messenger-conversation .msg-row.right .msg-bubble-wrapper {
+    align-items: flex-end;
+}
+
+.messenger-conversation .msg-bubble {
+    display: inline-block;
+    padding: 0.9rem 1.3rem;
+    border-radius: 20px;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #1a1f2e;
+    background: #f1f3f7;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    text-align: left;
+    max-width: 100%;
+    width: auto;
+}
+.messenger-conversation .msg-row.left .msg-bubble {
+    border-top-left-radius: 4px;
+    background: #f1f3f7;
+}
+.messenger-conversation .msg-row.right .msg-bubble {
+    border-top-right-radius: 4px;
+    background: #e3edff;
+    color: #0e1e3a;
+}
+
+.messenger-conversation .msg-name {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #8a9aae;
+    text-align: left;
+}
+.messenger-conversation .msg-row.right .msg-name { text-align: right; }
+
+/* Responsive — shrink the cap on smaller screens */
+@media (max-width: 900px) {
+    .messenger-conversation .msg-bubble-wrapper { flex: 0 1 400px; max-width: 400px; }
+}
+@media (max-width: 768px) {
+    .messenger-conversation .msg-bubble-wrapper { flex: 0 1 340px; max-width: 340px; }
+    .messenger-conversation .msg-avatar { width: 34px; height: 34px; flex: 0 0 34px; font-size: 1rem; }
+}
+@media (max-width: 480px) {
+    .messenger-conversation .msg-bubble-wrapper { flex: 0 1 260px; max-width: 260px; }
+    .messenger-conversation .msg-avatar { width: 30px; height: 30px; flex: 0 0 30px; font-size: 0.9rem; }
+    .messenger-conversation .msg-bubble { padding: 0.7rem 1rem; font-size: 0.9rem; }
+}
+@media (min-width: 1920px) {
+    .messenger-conversation .msg-bubble-wrapper { flex: 0 1 540px; max-width: 540px; }
+}
         .now-section-wrapper { opacity: 0; transform: translateY(30px); transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); }
         .now-section-wrapper.visible { opacity: 1; transform: translateY(0); }
         .now-section { width: 100%; padding: clamp(1.5rem, 3vw, 3rem) 0 clamp(0.75rem, 1.5vw, 1.5rem) 0; text-align: left; display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
@@ -463,9 +548,6 @@
         .carousel-arrow-left { left: clamp(4px, 1vw, 12px); }
         .carousel-arrow-right { right: clamp(4px, 1vw, 12px); }
 
-        /* ============================================ */
-        /* ABOUT SECTION — very light grey background   */
-        /* ============================================ */
         .about-section {
             padding: clamp(2rem, 3vw, 3rem) clamp(1.5rem, 3vw, 3rem);
             text-align: left;
@@ -514,6 +596,7 @@
             .testimonials-grid { grid-template-columns: 1fr; gap: 2.5rem; }
             .market-grid { grid-template-columns: 1fr; }
             .highlight-grid { grid-template-columns: 1fr; }
+            .msg-bubble-wrapper { max-width: 72%; }
         }
 
         @media (max-width: 768px) {
@@ -699,6 +782,8 @@
             .carousel-arrow { width: 44px; height: 44px; font-size: 0.95rem; }
             .carousel-arrow-left { left: 4px; }
             .carousel-arrow-right { right: 4px; }
+
+            .msg-bubble-wrapper { max-width: 82%; }
         }
 
         @media (max-width: 480px) {
@@ -734,6 +819,8 @@
 
             .projects-title { font-size: 1.5rem; }
             .project-tile { flex: 0 0 calc(100% / 1.1); }
+
+            .msg-bubble-wrapper { max-width: 85%; }
         }
 
         @media (min-width: 1920px) {
@@ -752,7 +839,7 @@
             .typing-wrapper { max-width: 1100px; }
             .market-grid { max-width: 1200px; margin-left: auto; margin-right: auto; }
             .faq-section { max-width: 1100px; margin-left: auto; margin-right: auto; }
-            .msg-bubble-wrapper { max-width: 65%; }
+            .msg-bubble-wrapper { max-width: 50%; }
         }
 
         @media (min-width: 2560px) {
@@ -765,6 +852,7 @@
             .main-content { padding-top: 8rem; }
             .avatar { width: 170px; height: 170px; }
             .nav-item { font-size: 1.2rem; padding: 0.9rem 1.4rem; }
+            .msg-bubble-wrapper { max-width: 45%; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1071,7 +1159,6 @@
                         </div>
                     </section>
 
-                    <!-- SIMPLE THIN DIVIDER -->
                     <div class="section-divider" id="sectionDivider" aria-hidden="true"></div>
 
                     <section class="about-section" id="aboutSection">
@@ -1132,6 +1219,9 @@
         });
         window.addEventListener('DOMContentLoaded', function () {
             if (window.scrollY > 0) window.scrollTo(0, 0);
+
+            // Add body.ready class so side-tab fades in
+            setTimeout(() => document.body.classList.add('ready'), 100);
         });
 
         (function scrollEngine() {
@@ -1277,7 +1367,7 @@
             list.forEach(el => observer.observe(el));
         }
 
-        /* HERO TYPING — 45ms */
+        /* HERO TYPING */
         document.addEventListener('DOMContentLoaded', function() {
             const cursor = document.getElementById('typingCursor');
             const subheadline = document.getElementById('subheadline');
@@ -1397,17 +1487,14 @@
                         startHowItWorksTyping();
                     }, 500);
 
-                    setTimeout(function() {
-                        const sideTab = document.getElementById('sideTab');
-                        if (sideTab) sideTab.classList.add('visible');
-                    }, 700);
+                    // Side tab is now always visible via body.ready (added on DOMContentLoaded)
                 }
             }
 
             setTimeout(typeNextChar, 1200);
         });
 
-        /* HOW IT WORKS TYPING — 40ms per character */
+        /* HOW IT WORKS TYPING */
         let howTypingStarted = false;
         function startHowItWorksTyping() {
             if (howTypingStarted) return;
@@ -1515,9 +1602,7 @@
             setTimeout(typeHowNextChar, 300);
         }
 
-        /* ============================================ */
-        /* MESSENGER — sequential with typing indicator */
-        /* ============================================ */
+        /* MESSENGER — sequential */
         let messengerShown = false;
         function showMessengerConvo() {
             if (messengerShown) return;
@@ -1530,7 +1615,6 @@
                 { side: 'left', name: '', text: 'Perfect, when do we start <span class="emoji">:)</span>?' }
             ];
 
-            // Pre-build all rows hidden
             const msgElements = [];
             messages.forEach((msg) => {
                 const row = document.createElement('div');
@@ -1562,7 +1646,6 @@
                 msgElements.push(row);
             });
 
-            // Reveal sequentially
             const REVEAL_DELAY = 1100;
             msgElements.forEach((el, i) => {
                 setTimeout(() => {
@@ -1574,7 +1657,7 @@
             setTimeout(() => { startNowTyping(); }, totalConvoTime);
         }
 
-        /* NOW TYPING — 40ms */
+        /* NOW TYPING */
         let nowTypingStarted = false;
         function startNowTyping() {
             if (nowTypingStarted) return;
@@ -1671,7 +1754,7 @@
             setTimeout(() => { startDesignTyping(); }, 800);
         }
 
-        /* DESIGN TYPING — 40ms */
+        /* DESIGN TYPING */
         let designTypingStarted = false;
         function startDesignTyping() {
             if (designTypingStarted) return;
@@ -1822,7 +1905,7 @@
             setTimeout(() => { startFinalTyping(); }, 900);
         }
 
-        /* FINAL TYPING — 40ms */
+        /* FINAL TYPING */
         let finalTypingStarted = false;
         function startFinalTyping() {
             if (finalTypingStarted) return;
@@ -1912,7 +1995,7 @@
             setTimeout(typeFinalChar, 300);
         }
 
-        /* WONDERING TYPING — 40ms */
+        /* WONDERING TYPING */
         let wonderingTypingStarted = false;
         function startWonderingTyping() {
             if (wonderingTypingStarted) return;
