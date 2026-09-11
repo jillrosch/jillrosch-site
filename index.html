@@ -1359,12 +1359,12 @@
         list.forEach(el => observer.observe(el));
     }
 
-    /* Helper: run callback once when element enters viewport */
+    /* MOBILE-SAFE onEnterViewport */
     function onEnterViewport(el, callback, options) {
         if (!el) return;
         const opts = Object.assign({
-            threshold: 0.25,
-            rootMargin: '0px 0px -80px 0px',
+            threshold: 0.05,
+            rootMargin: '0px 0px -10% 0px',
             once: true
         }, options || {});
 
@@ -1382,6 +1382,7 @@
 
     /* =====================================================
        HERO TYPING (always runs on load)
+       RAF wrappers removed → safe on mobile
        ===================================================== */
     document.addEventListener('DOMContentLoaded', function() {
         const cursor = document.getElementById('typingCursor');
@@ -1465,7 +1466,7 @@
                         numSpan.style.transition = 'opacity 0.05s ease';
                         wrapper.appendChild(numSpan);
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     index += 2;
                     setTimeout(typeNextChar, typingSpeed);
@@ -1485,7 +1486,7 @@
                 const container = charData.lineElement.querySelector('.line-content');
                 if (container) container.appendChild(span);
 
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
                 index++;
                 setTimeout(typeNextChar, typingSpeed);
             } else {
@@ -1503,7 +1504,7 @@
     });
 
     /* =====================================================
-       HOW IT WORKS (01 / 02) — scroll-triggered
+       HOW IT WORKS (01 / 02)
        ===================================================== */
     let howTypingStarted = false;
     function startHowItWorksTyping() {
@@ -1578,7 +1579,7 @@
                         numSpan.style.transition = 'opacity 0.05s ease';
                         wrapper.appendChild(numSpan);
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     howIndex += 2;
                     setTimeout(typeHowNextChar, howSpeed);
@@ -1596,12 +1597,11 @@
 
                 const container = charData.lineElement.querySelector('.how-line-content');
                 if (container) container.appendChild(span);
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
 
                 howIndex++;
                 setTimeout(typeHowNextChar, howSpeed);
             } else {
-                // ✅ 01/02 finished → hide cursor → start bubbles
                 setTimeout(() => {
                     howCursor.style.opacity = '0';
                     howCursor.style.transition = 'opacity 0.3s ease';
@@ -1614,8 +1614,7 @@
     }
 
     /* =====================================================
-       MESSENGER — sequential bubbles
-       When the LAST bubble appears → start 03/04 typing
+       MESSENGER — last bubble triggers 03/04
        ===================================================== */
     let messengerShown = false;
     function showMessengerConvo() {
@@ -1666,8 +1665,6 @@
         msgElements.forEach((el, i) => {
             setTimeout(() => {
                 el.classList.add('visible');
-
-                // ✅ Last bubble appears → start 03/04 typing at the same moment
                 if (i === lastIndex) {
                     startNowTyping();
                 }
@@ -1676,7 +1673,7 @@
     }
 
     /* =====================================================
-       NOW (03 / 04) — triggered by last bubble
+       NOW (03 / 04)
        ===================================================== */
     let nowTypingStarted = false;
     function startNowTyping() {
@@ -1733,7 +1730,7 @@
                     wrapper.appendChild(numSpan);
                     if (container) {
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     currentIndex += 2;
                     setTimeout(typeNowChar, nowSpeed);
@@ -1751,7 +1748,7 @@
                 else if (charData.element === nowLine2) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
 
                 if (container) container.appendChild(span);
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
                 currentIndex++;
                 setTimeout(typeNowChar, nowSpeed);
             } else {
@@ -1831,7 +1828,7 @@
                     wrapper.appendChild(numSpan);
                     if (container) {
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     currentIndex += 2;
                     setTimeout(typeDesignChar, designSpeed);
@@ -1849,7 +1846,7 @@
                 else if (charData.element === designLine2) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
 
                 if (container) container.appendChild(span);
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
                 currentIndex++;
                 setTimeout(typeDesignChar, designSpeed);
             } else {
@@ -1983,7 +1980,7 @@
                     wrapper.appendChild(numSpan);
                     if (container) {
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     currentIndex += 2;
                     setTimeout(typeFinalChar, finalSpeed);
@@ -2001,7 +1998,7 @@
                 else if (charData.element === finalLine2) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
 
                 if (container) container.appendChild(span);
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
                 currentIndex++;
                 setTimeout(typeFinalChar, finalSpeed);
             } else {
@@ -2074,7 +2071,7 @@
                     wrapper.appendChild(numSpan);
                     if (container) {
                         container.appendChild(wrapper);
-                        requestAnimationFrame(() => { numSpan.style.opacity = '1'; });
+                        numSpan.style.opacity = '1';
                     }
                     currentIndex += 2;
                     setTimeout(typeWonderingChar, wonderingSpeed);
@@ -2092,7 +2089,7 @@
                 else if (charData.element === wonderingLine2) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
 
                 if (container) container.appendChild(span);
-                requestAnimationFrame(() => { span.style.opacity = '1'; });
+                span.style.opacity = '1';
                 currentIndex++;
                 setTimeout(typeWonderingChar, wonderingSpeed);
             } else {
@@ -2180,17 +2177,35 @@
     })();
 
     /* =====================================================
-       SCROLL-TRIGGER BINDING
-       Only 01/02 is scroll-gated.
-       Chain: 01/02 → bubbles → (last bubble) 03/04 → market →
-              05/06 → highlight → 07/08 → final → 09/10 → FAQ
+       SCROLL-TRIGGER BINDING + MOBILE FALLBACK
        ===================================================== */
     document.addEventListener('DOMContentLoaded', function() {
         onEnterViewport(document.getElementById('howTypingWrapper'), () => {
             document.getElementById('howItWorks').classList.add('visible');
             startHowItWorksTyping();
-        }, { threshold: 0.35, rootMargin: '0px 0px -100px 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
     });
+
+    (function mobileHowFallback() {
+        let fired = false;
+        function check() {
+            if (fired) return;
+            const el = document.getElementById('howTypingWrapper');
+            if (!el) return;
+            const rect = el.getBoundingClientRect();
+            const vh = window.innerHeight;
+            if (rect.top < vh * 0.9 && rect.bottom > 0) {
+                fired = true;
+                document.getElementById('howItWorks').classList.add('visible');
+                if (typeof startHowItWorksTyping === 'function') {
+                    startHowItWorksTyping();
+                }
+            }
+        }
+        window.addEventListener('scroll', check, { passive: true });
+        window.addEventListener('resize', check, { passive: true });
+        setTimeout(check, 400);
+    })();
 
     (function initProjectsCarousel() {
         const section = document.getElementById('projectsShowcase');
