@@ -1406,860 +1406,14 @@ function getProgress(el, scrollY, vh) {
     return Math.max(0, Math.min(1, seen / total));
 }
 
-setTimeout(() => document.getElementById('loadingOverlay').classList.add('hidden'), 1800);
-
-(function preloadImages() {
-    [
-        'https://i.picrd.com/images/KTAynODkFPc.webp',
-        'https://i.picrd.com/images/Ap9Nq0HQhFx.webp',
-        'https://i.picrd.com/images/pKxUK7OigHa.webp',
-        'https://i.picrd.com/images/FFdSIh2iioL.webp',
-        'https://i.picrd.com/images/XmXjFUclVaZ.webp',
-        'https://i.picrd.com/images/XOe58D7DQ9p.webp',
-        'https://i.picrd.com/images/usqRFiHi4dn.webp'
-    ].forEach(url => { const img = new Image(); img.src = url; });
-})();
-
-/* ---------- nav / learn more ---------- */
-document.addEventListener('DOMContentLoaded', () => {
-    const btnLearn = document.getElementById('btnLearn');
-    if (btnLearn) btnLearn.addEventListener('click', () => {
-        const t = document.getElementById('howTypingWrapper') || document.getElementById('howItWorks');
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    });
-});
-
-(function initNav() {
-    const allNavItems = document.querySelectorAll('.nav-item, .mobile-nav-dock a');
-    if (!allNavItems.length) return;
-    allNavItems.forEach(item => item.addEventListener('click', e => {
-        e.preventDefault();
-        const id = item.dataset.target; if (!id) return;
-        const t = document.getElementById(id); if (!t) return;
-        t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        allNavItems.forEach(el => el.classList.toggle('active', el.dataset.target === id));
-    }));
-    const sections = [
-        { id: 'heroTop', el: document.getElementById('heroTop') },
-        { id: 'projectsShowcase', el: document.getElementById('projectsShowcase') },
-        { id: 'aboutSection', el: document.getElementById('aboutSection') }
-    ].filter(s => s.el);
-    if (!sections.length || !window.__scrollEngine) return;
-    window.__scrollEngine.subscribe((scrollY, vh) => {
-        const focus = vh * 0.35;
-        let best = sections[0], bestDist = Infinity;
-        sections.forEach(s => {
-            const d = Math.abs(s.el.getBoundingClientRect().top - focus);
-            if (d < bestDist) { bestDist = d; best = s; }
-        });
-        if (scrollY < 80) best = sections[0];
-        allNavItems.forEach(el => el.classList.toggle('active', el.dataset.target === best.id));
-    });
-})();
-
-(function initCtaSlide() {
-    const about = document.getElementById('aboutSection');
-    if (!about) return;
-    new IntersectionObserver(entries => {
-        entries.forEach(e => document.body.classList.toggle('about-active', e.isIntersecting));
-    }, { threshold: 0.15, rootMargin: '0px 0px -30% 0px' }).observe(about);
-})();
-
-function watchReversible(elements, options) {
-    const opts = Object.assign({ threshold: 0.12, rootMargin: '0px 0px -40px 0px', stagger: 0, className: 'visible' }, options || {});
-    if (!elements || !elements.length) return;
-    const list = Array.from(elements);
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            const el = entry.target;
-            if (entry.isIntersecting) {
-                const i = list.indexOf(el);
-                setTimeout(() => el.classList.add(opts.className), i >= 0 ? i * opts.stagger : 0);
-            } else el.classList.remove(opts.className);
-        });
-    }, { threshold: opts.threshold, rootMargin: opts.rootMargin });
-    list.forEach(el => obs.observe(el));
+/* ---------- fast-scroll helpers ---------- */
+function isAboveViewport(el) {
+    if (!el) return false;
+    return el.getBoundingClientRect().bottom < 0;
 }
-
-/* ============================================================
-   HERO TYPING
-   ============================================================ */
-document.addEventListener('DOMContentLoaded', function () {
-    const cursor = document.getElementById('typingCursor');
-    const subheadline = document.getElementById('subheadline');
-    const learnMore = document.getElementById('learnMore');
-    const line1 = document.getElementById('line1');
-    const line2 = document.getElementById('line2');
-    const line3 = document.getElementById('line3');
-
-    const lines = [
-        { element: line1, parts: [
-            { text: '01', style: 'num', isGradient: true },
-            { text: '  ' }, { text: '<Hello, I\'m ', style: 'tag' },
-            { text: 'Jill!', style: 'highlight-blue' }, { text: '>', style: 'tag-closing' }
-        ]},
-        { element: line2, parts: [
-            { text: '02', style: 'num' }, { text: '  ' },
-            { text: '<I ', style: 'tag' }, { text: 'design ', style: 'highlight-blue' },
-            { text: ', and ', style: 'tag' }, { text: 'develop', style: 'highlight-blue' }
-        ]},
-        { element: line3, parts: [
-            { text: '03', style: 'num' }, { text: '  ' },
-            { text: 'websites.', style: 'highlight-blue' }, { text: '>', style: 'tag-closing' }
-        ]}
-    ];
-
-    const allChars = [];
-    lines.forEach(line => line.parts.forEach(part => {
-        if (!part.text) return;
-        for (let i = 0; i < part.text.length; i++) {
-            allChars.push({ char: part.text[i], style: part.style, lineElement: line.element, isGradient: part.isGradient || false });
-        }
-    }));
-
-    let index = 0;
-    const speed = 45;
-    lines.forEach(line => {
-        const c = document.createElement('span');
-        c.className = 'line-content';
-        line.element.appendChild(c);
-    });
-
-    function typeNextChar() {
-        if (index < allChars.length) {
-            const d = allChars[index];
-            if (d.isGradient && d.char === '0') {
-                const container = d.lineElement.querySelector('.line-content');
-                if (container) {
-                    const wrapper = document.createElement('span');
-                    wrapper.className = 'gradient-wrap';
-                    const box = document.createElement('span'); box.className = 'gradient-box';
-                    wrapper.appendChild(box);
-                    const num = document.createElement('span');
-                    num.className = 'num'; num.textContent = '01';
-                    num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                    wrapper.appendChild(num); container.appendChild(wrapper);
-                    num.style.opacity = '1';
-                }
-                index += 2; setTimeout(typeNextChar, speed); return;
-            }
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.style === 'num') span.className = 'num';
-            else if (d.style === 'tag') { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            else if (d.style === 'highlight-blue') { span.style.color = '#1d4ed8'; span.style.fontWeight = '700'; }
-            else if (d.style === 'tag-closing') { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            const container = d.lineElement.querySelector('.line-content');
-            if (container) container.appendChild(span);
-            span.style.opacity = '1';
-            index++; setTimeout(typeNextChar, speed);
-        } else {
-            setTimeout(() => { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; }, 400);
-            setTimeout(() => subheadline.classList.add('visible'), 200);
-            setTimeout(() => learnMore.classList.add('visible'), 400);
-        }
-    }
-    setTimeout(typeNextChar, 1200);
-});
-
-/* ============================================================
-   HOW IT WORKS (01/02) — intro
-   ============================================================ */
-const howStages = (function () {
-    let started = false;
-    return function (done) {
-        if (started) { if (typeof done === 'function') done(); return; }
-        started = true;
-
-        const w = document.getElementById('howTypingWrapper');
-        if (w) w.classList.add('visible');
-        const cursor = document.getElementById('howTypingCursor');
-        const line1 = document.getElementById('howLine1');
-        const line2 = document.getElementById('howLine2');
-
-        const c1 = document.createElement('span'); c1.className = 'how-line-content';
-        const c2 = document.createElement('span'); c2.className = 'how-line-content';
-        while (line1.firstChild) line1.removeChild(line1.firstChild);
-        while (line2.firstChild) line2.removeChild(line2.firstChild);
-        line1.appendChild(c1); line2.appendChild(c2);
-
-        // NOTE: the two-digit label is drawn ONCE by the gradient box.
-        // It is NOT part of the char stream. That's why "3" is no longer
-        // duplicated after the gradient square.
-        const chars = [];
-        chars.push({ gradient: true, gradientText: '01', container: c1 });
-        ' First, we need an'.split('').forEach(ch => chars.push({ char: ch, container: c1, dark: true }));
-        chars.push({ numText: '02', container: c2 });
-        ' idea...'.split('').forEach(ch => chars.push({ char: ch, container: c2, blue: true }));
-
-        let i = 0;
-        function step() {
-            if (i >= chars.length) {
-                setTimeout(() => { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; }, 300);
-                setTimeout(() => showMessengerConvo(done), 400);
-                return;
-            }
-            const d = chars[i];
-
-            if (d.gradient) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'gradient-wrap';
-                const box = document.createElement('span'); box.className = 'gradient-box';
-                wrapper.appendChild(box);
-                const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
-                num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            if (d.numText) {
-                const span = document.createElement('span');
-                span.className = 'num'; span.textContent = d.numText;
-                span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-                d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.dark) { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            else if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
-            d.container.appendChild(span);
-            span.style.opacity = '1';
-            i++; setTimeout(step, 40);
-        }
-        setTimeout(step, 300);
-    };
-})();
-
-/* ============================================================
-   MESSENGER
-   ============================================================ */
-let messengerShown = false;
-function showMessengerConvo(done) {
-    if (messengerShown) { if (typeof done === 'function') done(); return; }
-    messengerShown = true;
-
-    const convo = document.getElementById('messengerConvo');
-    const messages = [
-        { side: 'left', name: '', text: 'I need a website for my cosmetics brand, <strong>NINTH AVENUE</strong>.<br>We specialize in clean, cruelty-free beauty products made for every skin tone.' },
-        { side: 'right', name: 'Jill', text: 'Alright, great!<br>I\'ll handle everything, first the design that I\'ll share with you. Once validated, I\'ll develop your website and put it online with a <strong>product catalog</strong>!' },
-        { side: 'left', name: '', text: 'Perfect, when do we start <span class="emoji">:)</span>?' }
-    ];
-
-    const rows = [];
-    messages.forEach(msg => {
-        const row = document.createElement('div');
-        row.className = `msg-row ${msg.side}`;
-        const avatar = document.createElement('div');
-        avatar.className = 'msg-avatar';
-        if (msg.side === 'left') avatar.innerHTML = `<div class="fallback-avatar">👤</div>`;
-        else avatar.innerHTML = `<img src="https://imgh.in/host/ucslog" alt="Jill Rösch" onerror="this.innerHTML='<div class=\\'fallback-avatar\\'>🧑🏻</div>'">`;
-        const bw = document.createElement('div');
-        bw.className = 'msg-bubble-wrapper';
-        if (msg.name) {
-            const n = document.createElement('span');
-            n.className = 'msg-name'; n.textContent = msg.name; bw.appendChild(n);
-        }
-        const b = document.createElement('div');
-        b.className = 'msg-bubble'; b.innerHTML = msg.text; bw.appendChild(b);
-        row.appendChild(avatar); row.appendChild(bw);
-        convo.appendChild(row); rows.push(row);
-    });
-
-    const DELAY = 1100;
-    const last = rows.length - 1;
-    rows.forEach((el, i) => setTimeout(() => {
-        el.classList.add('visible');
-        if (i === last && typeof done === 'function') setTimeout(done, 600);
-    }, i * DELAY));
-}
-
-/* ============================================================
-   NOW (03/04)
-   ============================================================ */
-const startNowTyping = (function () {
-    let started = false;
-    return function (done) {
-        if (started) { if (typeof done === 'function') done(); return; }
-        started = true;
-        const w = document.getElementById('nowSectionWrapper');
-        if (w) w.classList.add('visible');
-        const cursor = document.getElementById('nowTypingCursor');
-        const line1 = document.getElementById('nowLine1');
-        const line2 = document.getElementById('nowLine2');
-        const c1 = line1.querySelector('.now-line-content');
-        const c2 = line2.querySelector('.now-line-content');
-        if (c1) c1.innerHTML = ''; if (c2) c2.innerHTML = '';
-
-        const chars = [];
-        chars.push({ gradient: true, gradientText: '03', container: c1 });
-        ' Then an analysis'.split('').forEach(ch => chars.push({ char: ch, container: c1 }));
-        chars.push({ numText: '04', container: c2 });
-        ' and a direction...'.split('').forEach(ch => chars.push({ char: ch, container: c2, blue: true }));
-
-        let i = 0;
-        function step() {
-            if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                setTimeout(() => document.getElementById('nowArrowDown').classList.add('visible'), 400);
-                if (typeof done === 'function') setTimeout(done, 500);
-                return;
-            }
-            const d = chars[i];
-
-            if (d.gradient) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'gradient-wrap';
-                const box = document.createElement('span'); box.className = 'gradient-box';
-                wrapper.appendChild(box);
-                const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
-                num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            if (d.numText) {
-                const span = document.createElement('span');
-                span.className = 'num'; span.textContent = d.numText;
-                span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-                d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
-            else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            d.container.appendChild(span);
-            span.style.opacity = '1';
-            i++; setTimeout(step, 40);
-        }
-        setTimeout(step, 300);
-    };
-})();
-
-/* ============================================================
-   MARKET
-   ============================================================ */
-let marketShown = false;
-function showMarketAnalysis(done) {
-    if (marketShown) { if (typeof done === 'function') done(); return; }
-    marketShown = true;
-    const sec = document.getElementById('marketAnalysis');
-    sec.classList.add('visible');
-    void sec.offsetHeight;
-    watchReversible(sec.querySelectorAll('.market-column'), { stagger: 120 });
-    if (typeof done === 'function') setTimeout(done, 900);
-}
-
-/* ============================================================
-   DESIGN (05/06)
-   ============================================================ */
-const startDesignTyping = (function () {
-    let started = false;
-    return function (done) {
-        if (started) { if (typeof done === 'function') done(); return; }
-        started = true;
-        document.getElementById('designSection').classList.add('visible');
-        const cursor = document.getElementById('designTypingCursor');
-        const line1 = document.getElementById('designLine1');
-        const line2 = document.getElementById('designLine2');
-        const c1 = line1.querySelector('.design-line-content');
-        const c2 = line2.querySelector('.design-line-content');
-        if (c1) c1.innerHTML = ''; if (c2) c2.innerHTML = '';
-
-        const chars = [];
-        chars.push({ gradient: true, gradientText: '05', container: c1 });
-        ' Creativity takes place'.split('').forEach(ch => chars.push({ char: ch, container: c1 }));
-        chars.push({ numText: '06', container: c2 });
-        ' for the design.'.split('').forEach(ch => chars.push({ char: ch, container: c2, blue: true }));
-
-        let i = 0;
-        function step() {
-            if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                if (typeof done === 'function') setTimeout(done, 500);
-                return;
-            }
-            const d = chars[i];
-
-            if (d.gradient) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'gradient-wrap';
-                const box = document.createElement('span'); box.className = 'gradient-box';
-                wrapper.appendChild(box);
-                const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
-                num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            if (d.numText) {
-                const span = document.createElement('span');
-                span.className = 'num'; span.textContent = d.numText;
-                span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-                d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
-            else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            d.container.appendChild(span);
-            span.style.opacity = '1';
-            i++; setTimeout(step, 40);
-        }
-        setTimeout(step, 300);
-    };
-})();
-
-/* ============================================================
-   HIGHLIGHT
-   ============================================================ */
-let highlightShown = false;
-function showHighlightSection(done) {
-    if (highlightShown) { if (typeof done === 'function') done(); return; }
-    highlightShown = true;
-    const sec = document.getElementById('highlightSection');
-    sec.classList.add('visible');
-    const imgWrapper1 = document.getElementById('imgWrapper1');
-    const imgWrapper2 = document.getElementById('imgWrapper2');
-    const img1 = document.getElementById('highlightImg1');
-    const img2 = document.getElementById('highlightImg2');
-    const col2 = document.getElementById('highlightCol2');
-
-    new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                setTimeout(() => { imgWrapper1.classList.add('visible'); setTimeout(() => img1.classList.add('float'), 500); }, 50);
-                setTimeout(() => { imgWrapper2.classList.add('visible'); setTimeout(() => img2.classList.add('float'), 500); }, 250);
-            } else {
-                imgWrapper1.classList.remove('visible'); imgWrapper2.classList.remove('visible');
-                img1.classList.remove('float'); img2.classList.remove('float');
-            }
-        });
-    }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' }).observe(sec);
-
-    watchReversible(document.querySelectorAll('.highlight-text-item'), { stagger: 120 });
-    watchReversible([col2], { threshold: 0.1 });
-
-    if (window.__scrollEngine) {
-        window.__scrollEngine.subscribe((scrollY, vh) => {
-            const rect = sec.getBoundingClientRect();
-            if (rect.bottom < -300 || rect.top > vh + 300) return;
-            const p = getProgress(sec, scrollY, vh);
-            const centered = (p - 0.5) * 2;
-            [[img1, 1, -1], [img2, -1, 1]].forEach(([el, dir, rotDir]) => {
-                if (!el || !el.classList.contains('float')) return;
-                const ty = centered * -30 * dir;
-                const tx = centered * 12 * dir;
-                const rot = centered * 3.5 * rotDir;
-                const scale = 1.01 + Math.abs(centered) * 0.03;
-                el.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rot}deg) scale(${scale})`;
-            });
-        });
-    }
-    if (typeof done === 'function') setTimeout(done, 900);
-}
-
-/* ============================================================
-   FINAL (07/08)
-   ============================================================ */
-const startFinalTyping = (function () {
-    let started = false;
-    return function (done) {
-        if (started) { if (typeof done === 'function') done(); return; }
-        started = true;
-        document.getElementById('finalSection').classList.add('visible');
-        const cursor = document.getElementById('finalTypingCursor');
-        const line1 = document.getElementById('finalLine1');
-        const line2 = document.getElementById('finalLine2');
-        const c1 = line1.querySelector('.final-line-content');
-        const c2 = line2.querySelector('.final-line-content');
-        if (c1) c1.innerHTML = ''; if (c2) c2.innerHTML = '';
-
-        const chars = [];
-        chars.push({ gradient: true, gradientText: '07', container: c1 });
-        ' Finally, I code and'.split('').forEach(ch => chars.push({ char: ch, container: c1 }));
-        chars.push({ numText: '08', container: c2 });
-        ' I publish your website!'.split('').forEach(ch => chars.push({ char: ch, container: c2, blue: true }));
-
-        let i = 0;
-        function step() {
-            if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                revealFinalImages();
-                if (typeof done === 'function') setTimeout(done, 900);
-                return;
-            }
-            const d = chars[i];
-
-            if (d.gradient) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'gradient-wrap';
-                const box = document.createElement('span'); box.className = 'gradient-box';
-                wrapper.appendChild(box);
-                const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
-                num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            if (d.numText) {
-                const span = document.createElement('span');
-                span.className = 'num'; span.textContent = d.numText;
-                span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-                d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
-            else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            d.container.appendChild(span);
-            span.style.opacity = '1';
-            i++; setTimeout(step, 40);
-        }
-        setTimeout(step, 300);
-    };
-})();
-
-/* ============================================================
-   WONDERING (09/10)
-   ============================================================ */
-const startWonderingTyping = (function () {
-    let started = false;
-    return function (done) {
-        if (started) { if (typeof done === 'function') done(); return; }
-        started = true;
-        document.getElementById('wonderingSection').classList.add('visible');
-        const cursor = document.getElementById('wonderingTypingCursor');
-        const line1 = document.getElementById('wonderingLine1');
-        const line2 = document.getElementById('wonderingLine2');
-        const c1 = line1.querySelector('.wondering-line-content');
-        const c2 = line2.querySelector('.wondering-line-content');
-        if (c1) c1.innerHTML = ''; if (c2) c2.innerHTML = '';
-
-        const chars = [];
-        chars.push({ gradient: true, gradientText: '09', container: c1 });
-        ' You must be wondering'.split('').forEach(ch => chars.push({ char: ch, container: c1 }));
-        chars.push({ numText: '10', container: c2 });
-        ' ...'.split('').forEach(ch => chars.push({ char: ch, container: c2, blue: true }));
-
-        let i = 0;
-        function step() {
-            if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                watchReversible(document.querySelectorAll('.faq-row'), { stagger: 100 });
-                if (typeof done === 'function') setTimeout(done, 500);
-                return;
-            }
-            const d = chars[i];
-
-            if (d.gradient) {
-                const wrapper = document.createElement('span');
-                wrapper.className = 'gradient-wrap';
-                const box = document.createElement('span'); box.className = 'gradient-box';
-                wrapper.appendChild(box);
-                const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
-                num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
-                wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            if (d.numText) {
-                const span = document.createElement('span');
-                span.className = 'num'; span.textContent = d.numText;
-                span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-                d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
-            }
-            const span = document.createElement('span');
-            span.textContent = d.char;
-            span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
-            if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
-            else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
-            d.container.appendChild(span);
-            span.style.opacity = '1';
-            i++; setTimeout(step, 40);
-        }
-        setTimeout(step, 300);
-    };
-})();
-
-function revealFinalImages() {
-    const finalImages = document.getElementById('finalImages');
-    if (!finalImages) return;
-    const items = finalImages.querySelectorAll('.final-img-item');
-    new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                items.forEach((item, i) => setTimeout(() => item.classList.add('visible'), i * 120));
-                setTimeout(() => items.forEach((item, i) => setTimeout(() => item.classList.add('float'), i * 150)), 700);
-            } else {
-                items.forEach(item => { item.classList.remove('visible'); item.classList.remove('float'); });
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }).observe(finalImages);
-
-    if (window.__scrollEngine) {
-        window.__scrollEngine.subscribe((scrollY, vh) => {
-            const rect = finalImages.getBoundingClientRect();
-            if (rect.bottom < -300 || rect.top > vh + 300) return;
-            const p = getProgress(finalImages, scrollY, vh);
-            const centered = (p - 0.5) * 2;
-            items.forEach((item, i) => {
-                if (!item.classList.contains('visible') || item.classList.contains('float')) return;
-                const dir = i === 0 ? 1 : -1;
-                item.style.transform = `translate3d(${centered * 8 * dir}px, 0, 0) perspective(1200px) rotateY(${centered * 4 * dir}deg)`;
-            });
-        });
-    }
-}
-
-(function initAbout() {
-    const about = document.getElementById('aboutSection');
-    if (!about) return;
-    new IntersectionObserver(entries => {
-        entries.forEach(e => about.classList.toggle('visible', e.isIntersecting));
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }).observe(about);
-})();
-
-(function initHowItWorks() {
-    const how = document.getElementById('howItWorks');
-    if (!how) return;
-    new IntersectionObserver(entries => {
-        entries.forEach(e => how.classList.toggle('visible', e.isIntersecting));
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }).observe(how);
-})();
-
-/* ============================================================
-   SEQUENTIAL CHAIN
-   ============================================================ */
-(function initSequentialChain() {
-    const stages = [
-        { el: () => document.getElementById('nowSectionWrapper'), run: d => startNowTyping(d) },
-        { immediate: true, run: d => showMarketAnalysis(d) },
-        { el: () => document.getElementById('designSection'),       run: d => startDesignTyping(d) },
-        { el: () => document.getElementById('highlightSection'),    run: d => showHighlightSection(d) },
-        { el: () => document.getElementById('finalSection'),        run: d => startFinalTyping(d) },
-        { el: () => document.getElementById('wonderingSection'),    run: d => startWonderingTyping(d) }
-    ];
-    let idx = 0;
-    let chainStarted = false;
-    let currentObserver = null;
-    let currentCleanup = null;
-
-    function armNext() {
-        if (currentObserver) { currentObserver.disconnect(); currentObserver = null; }
-        if (currentCleanup) { currentCleanup(); currentCleanup = null; }
-        if (idx >= stages.length) return;
-
-        const stage = stages[idx];
-
-        if (stage.immediate) {
-            Promise.resolve().then(() => {
-                stage.run(() => { idx++; armNext(); });
-            });
-            return;
-        }
-
-        const el = stage.el();
-        if (!el) { idx++; armNext(); return; }
-
-        let fired = false;
-        function fire() {
-            if (fired) return;
-            fired = true;
-            if (currentObserver) { currentObserver.disconnect(); currentObserver = null; }
-            if (currentCleanup) { currentCleanup(); currentCleanup = null; }
-            stage.run(() => { idx++; armNext(); });
-        }
-
-        currentObserver = new IntersectionObserver(entries => {
-            entries.forEach(e => { if (e.isIntersecting) fire(); });
-        }, { threshold: 0.15, rootMargin: '0px 0px -15% 0px' });
-        currentObserver.observe(el);
-
-        function fallback() {
-            if (fired) return;
-            const rect = el.getBoundingClientRect();
-            const vh = window.innerHeight || document.documentElement.clientHeight;
-            if (rect.height > 0 && rect.top < vh * 0.85 && rect.bottom > 0) fire();
-        }
-        window.addEventListener('scroll', fallback, { passive: true });
-        window.addEventListener('resize', fallback, { passive: true });
-        currentCleanup = () => {
-            window.removeEventListener('scroll', fallback);
-            window.removeEventListener('resize', fallback);
-        };
-        setTimeout(fallback, 400);
-    }
-
-    function startChain() {
-        if (chainStarted) return;
-        chainStarted = true;
-        setTimeout(armNext, 800);
-    }
-
-    const howWrapper = document.getElementById('howTypingWrapper');
-    if (!howWrapper) return;
-
-    let introFired = false;
-    function tryIntro() {
-        if (introFired) return;
-        const rect = howWrapper.getBoundingClientRect();
-        const vh = window.innerHeight;
-        if (rect.top < vh * 0.9 && rect.bottom > 0) {
-            introFired = true;
-            document.getElementById('howItWorks').classList.add('visible');
-            howStages(startChain);
-        }
-    }
-    new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) tryIntro(); });
-    }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' }).observe(howWrapper);
-
-    window.addEventListener('scroll', tryIntro, { passive: true });
-    window.addEventListener('resize', tryIntro, { passive: true });
-    setTimeout(tryIntro, 400);
-})();
-
-/* ============================================================
-   CAROUSEL / TESTIMONIALS / SLIDER / SCROLL INDICATOR
-   ============================================================ */
-(function initProjectsCarousel() {
-    const section = document.getElementById('projectsShowcase');
-    if (!section) return;
-    const track = document.getElementById('carouselTrack');
-    const tiles = Array.from(track.querySelectorAll('.project-tile'));
-    const prevBtn = document.getElementById('carouselPrev');
-    const nextBtn = document.getElementById('carouselNext');
-    tiles.forEach((tile, i) => {
-        tile.classList.remove('show-name');
-        setTimeout(() => {
-            tile.classList.add('show-name');
-            setInterval(() => { if (!tile.matches(':hover')) tile.classList.toggle('show-name'); }, 3200);
-        }, i * 700 + 3200);
-    });
-    tiles.forEach(tile => tile.addEventListener('mouseenter', () => tile.classList.remove('show-name')));
-    new IntersectionObserver(entries => {
-        entries.forEach(e => section.classList.toggle('visible', e.isIntersecting));
-    }, { threshold: 0.05 }).observe(section);
-
-    let index = 0;
-    const getStep = () => {
-        if (!tiles.length) return 0;
-        return tiles[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).gap) || 0);
-    };
-    const visibleCount = () => Math.max(1, Math.floor(track.parentElement.getBoundingClientRect().width / getStep()));
-    const maxIndex = () => Math.max(0, tiles.length - visibleCount());
-    const update = () => {
-        track.style.transform = `translateX(-${index * getStep()}px)`;
-        prevBtn.disabled = index <= 0;
-        nextBtn.disabled = index >= maxIndex();
-    };
-    prevBtn.addEventListener('click', () => { index = Math.max(0, index - 1); update(); });
-    nextBtn.addEventListener('click', () => { index = Math.min(maxIndex(), index + 1); update(); });
-    window.addEventListener('resize', () => { index = Math.min(index, maxIndex()); update(); });
-    update();
-})();
-
-(function initTestimonials() {
-    const section = document.getElementById('testimonialsSection');
-    if (!section) return;
-    const cards = Array.from(section.querySelectorAll('.testimonial-card'));
-    new IntersectionObserver(entries => {
-        entries.forEach(e => {
-            if (e.isIntersecting) {
-                section.classList.add('visible');
-                cards.forEach((c, i) => setTimeout(() => c.classList.add('visible'), i * 120));
-            } else {
-                section.classList.remove('visible');
-                cards.forEach(c => c.classList.remove('visible'));
-            }
-        });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }).observe(section);
-})();
-
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.querySelectorAll('.laptop-slide');
-    const dots = document.querySelectorAll('.dot');
-    if (!slides.length) return;
-    let current = 0, timer;
-    const go = i => {
-        slides.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-        slides[i].classList.add('active'); dots[i].classList.add('active'); current = i;
-    };
-    dots.forEach((dot, i) => dot.addEventListener('click', () => {
-        clearInterval(timer); go(i); timer = setInterval(() => go((current + 1) % slides.length), 3000);
-    }));
-    timer = setInterval(() => go((current + 1) % slides.length), 3000);
-});
-
-window.addEventListener('load', () => { if (window.__scrollEngine) window.__scrollEngine.kick(); });
-
-let resizeTimeout;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => { if (window.__scrollEngine) window.__scrollEngine.kick(); }, 150);
-});
-
-(function initScrollIndicator() {
-    const btn = document.querySelector('.scroll-indicator');
-    if (!btn) return;
-    const icon = btn.querySelector('i');
-    if (!icon) return;
-    function updateState() {
-        const atBottom = (window.scrollY + window.innerHeight) >= (document.documentElement.scrollHeight - 4);
-        icon.classList.toggle('fa-arrow-down', !atBottom);
-        icon.classList.toggle('fa-arrow-up', atBottom);
-        btn.dataset.dir = atBottom ? 'up' : 'down';
-    }
-    btn.addEventListener('click', () => {
-        window.scrollTo({ top: btn.dataset.dir === 'up' ? 0 : document.documentElement.scrollHeight, behavior: 'smooth' });
-    });
-    if (window.__scrollEngine) window.__scrollEngine.subscribe(updateState);
-    else { window.addEventListener('scroll', updateState, { passive: true }); window.addEventListener('resize', updateState, { passive: true }); }
-    updateState();
-})();
-</script>
-
-</body><script>
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.addEventListener('load', () => window.scrollTo({ top: 0, left: 0, behavior: 'instant' }));
-window.addEventListener('DOMContentLoaded', () => {
-    if (window.scrollY > 0) window.scrollTo(0, 0);
-    setTimeout(() => document.body.classList.add('ready'), 100);
-});
-
-/* ---------- scroll engine ---------- */
-(function scrollEngine() {
-    let ticking = false;
-    const subs = [];
-    function onScroll() {
-        if (!ticking) {
-            ticking = true;
-            requestAnimationFrame(() => {
-                const scrollY = window.scrollY || window.pageYOffset;
-                const vh = window.innerHeight;
-                subs.forEach(fn => { try { fn(scrollY, vh); } catch (e) {} });
-                ticking = false;
-            });
-        }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    window.__scrollEngine = { subscribe: fn => subs.push(fn), kick: onScroll };
-    onScroll();
-})();
-
-function getProgress(el, scrollY, vh) {
-    const rect = el.getBoundingClientRect();
-    const total = vh + rect.height;
-    const seen = vh - rect.top;
-    return Math.max(0, Math.min(1, seen / total));
+function isBelowViewport(el) {
+    if (!el) return false;
+    return el.getBoundingClientRect().top > window.innerHeight;
 }
 
 setTimeout(() => document.getElementById('loadingOverlay').classList.add('hidden'), 1800);
@@ -2440,9 +1594,6 @@ const howStages = (function () {
         while (line2.firstChild) line2.removeChild(line2.firstChild);
         line1.appendChild(c1); line2.appendChild(c2);
 
-        // NOTE: the two-digit label is drawn ONCE by the gradient box.
-        // It is NOT part of the char stream. That's why "3" is no longer
-        // duplicated after the gradient square.
         const chars = [];
         chars.push({ gradient: true, gradientText: '01', container: c1 });
         ' First, we need an'.split('').forEach(ch => chars.push({ char: ch, container: c1, dark: true }));
@@ -2452,8 +1603,8 @@ const howStages = (function () {
         let i = 0;
         function step() {
             if (i >= chars.length) {
-                setTimeout(() => { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; }, 300);
-                setTimeout(() => showMessengerConvo(done), 400);
+                setTimeout(() => { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; }, 200);
+                setTimeout(() => showMessengerConvo(done), 200);
                 return;
             }
             const d = chars[i];
@@ -2466,14 +1617,14 @@ const howStages = (function () {
                 const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
                 num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
                 wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             if (d.numText) {
                 const span = document.createElement('span');
                 span.className = 'num'; span.textContent = d.numText;
                 span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
                 d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
 
             const span = document.createElement('span');
@@ -2483,9 +1634,9 @@ const howStages = (function () {
             else if (d.blue) { span.style.color = '#1d4ed8'; span.style.fontWeight = '600'; }
             d.container.appendChild(span);
             span.style.opacity = '1';
-            i++; setTimeout(step, 40);
+            i++; setTimeout(step, 18);
         }
-        setTimeout(step, 300);
+        setTimeout(step, 60);
     };
 })();
 
@@ -2524,11 +1675,11 @@ function showMessengerConvo(done) {
         convo.appendChild(row); rows.push(row);
     });
 
-    const DELAY = 1100;
+    const DELAY = 450;
     const last = rows.length - 1;
     rows.forEach((el, i) => setTimeout(() => {
         el.classList.add('visible');
-        if (i === last && typeof done === 'function') setTimeout(done, 600);
+        if (i === last && typeof done === 'function') setTimeout(done, 200);
     }, i * DELAY));
 }
 
@@ -2558,9 +1709,9 @@ const startNowTyping = (function () {
         let i = 0;
         function step() {
             if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                setTimeout(() => document.getElementById('nowArrowDown').classList.add('visible'), 400);
-                if (typeof done === 'function') setTimeout(done, 500);
+                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 200);
+                setTimeout(() => document.getElementById('nowArrowDown').classList.add('visible'), 200);
+                if (typeof done === 'function') setTimeout(done, 300);
                 return;
             }
             const d = chars[i];
@@ -2573,14 +1724,14 @@ const startNowTyping = (function () {
                 const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
                 num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
                 wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             if (d.numText) {
                 const span = document.createElement('span');
                 span.className = 'num'; span.textContent = d.numText;
                 span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
                 d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             const span = document.createElement('span');
             span.textContent = d.char;
@@ -2589,9 +1740,9 @@ const startNowTyping = (function () {
             else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
             d.container.appendChild(span);
             span.style.opacity = '1';
-            i++; setTimeout(step, 40);
+            i++; setTimeout(step, 18);
         }
-        setTimeout(step, 300);
+        setTimeout(step, 60);
     };
 })();
 
@@ -2634,8 +1785,8 @@ const startDesignTyping = (function () {
         let i = 0;
         function step() {
             if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
-                if (typeof done === 'function') setTimeout(done, 500);
+                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 200);
+                if (typeof done === 'function') setTimeout(done, 300);
                 return;
             }
             const d = chars[i];
@@ -2648,14 +1799,14 @@ const startDesignTyping = (function () {
                 const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
                 num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
                 wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             if (d.numText) {
                 const span = document.createElement('span');
                 span.className = 'num'; span.textContent = d.numText;
                 span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
                 d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             const span = document.createElement('span');
             span.textContent = d.char;
@@ -2664,9 +1815,9 @@ const startDesignTyping = (function () {
             else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
             d.container.appendChild(span);
             span.style.opacity = '1';
-            i++; setTimeout(step, 40);
+            i++; setTimeout(step, 18);
         }
-        setTimeout(step, 300);
+        setTimeout(step, 60);
     };
 })();
 
@@ -2716,7 +1867,7 @@ function showHighlightSection(done) {
             });
         });
     }
-    if (typeof done === 'function') setTimeout(done, 900);
+    if (typeof done === 'function') setTimeout(done, 500);
 }
 
 /* ============================================================
@@ -2744,9 +1895,9 @@ const startFinalTyping = (function () {
         let i = 0;
         function step() {
             if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
+                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 200);
                 revealFinalImages();
-                if (typeof done === 'function') setTimeout(done, 900);
+                if (typeof done === 'function') setTimeout(done, 400);
                 return;
             }
             const d = chars[i];
@@ -2759,14 +1910,14 @@ const startFinalTyping = (function () {
                 const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
                 num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
                 wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             if (d.numText) {
                 const span = document.createElement('span');
                 span.className = 'num'; span.textContent = d.numText;
                 span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
                 d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             const span = document.createElement('span');
             span.textContent = d.char;
@@ -2775,9 +1926,9 @@ const startFinalTyping = (function () {
             else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
             d.container.appendChild(span);
             span.style.opacity = '1';
-            i++; setTimeout(step, 40);
+            i++; setTimeout(step, 18);
         }
-        setTimeout(step, 300);
+        setTimeout(step, 60);
     };
 })();
 
@@ -2806,9 +1957,9 @@ const startWonderingTyping = (function () {
         let i = 0;
         function step() {
             if (i >= chars.length) {
-                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 300);
+                setTimeout(() => { if (cursor) { cursor.style.opacity = '0'; cursor.style.transition = 'opacity 0.3s ease'; } }, 200);
                 watchReversible(document.querySelectorAll('.faq-row'), { stagger: 100 });
-                if (typeof done === 'function') setTimeout(done, 500);
+                if (typeof done === 'function') setTimeout(done, 300);
                 return;
             }
             const d = chars[i];
@@ -2821,14 +1972,14 @@ const startWonderingTyping = (function () {
                 const num = document.createElement('span'); num.className = 'num'; num.textContent = d.gradientText;
                 num.style.opacity = '0'; num.style.transition = 'opacity 0.05s ease';
                 wrapper.appendChild(num); d.container.appendChild(wrapper); num.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             if (d.numText) {
                 const span = document.createElement('span');
                 span.className = 'num'; span.textContent = d.numText;
                 span.style.opacity = '0'; span.style.transition = 'opacity 0.05s ease';
                 d.container.appendChild(span); span.style.opacity = '1';
-                i++; setTimeout(step, 40); return;
+                i++; setTimeout(step, 18); return;
             }
             const span = document.createElement('span');
             span.textContent = d.char;
@@ -2837,9 +1988,9 @@ const startWonderingTyping = (function () {
             else { span.style.color = '#2e3d5a'; span.style.fontWeight = '500'; }
             d.container.appendChild(span);
             span.style.opacity = '1';
-            i++; setTimeout(step, 40);
+            i++; setTimeout(step, 18);
         }
-        setTimeout(step, 300);
+        setTimeout(step, 60);
     };
 })();
 
@@ -2890,7 +2041,7 @@ function revealFinalImages() {
 })();
 
 /* ============================================================
-   SEQUENTIAL CHAIN
+   SEQUENTIAL CHAIN (fast-scroll aware)
    ============================================================ */
 (function initSequentialChain() {
     const stages = [
@@ -2914,14 +2065,18 @@ function revealFinalImages() {
         const stage = stages[idx];
 
         if (stage.immediate) {
-            Promise.resolve().then(() => {
-                stage.run(() => { idx++; armNext(); });
-            });
+            stage.run(() => { idx++; armNext(); });
             return;
         }
 
         const el = stage.el();
         if (!el) { idx++; armNext(); return; }
+
+        // If already above the viewport (scrolled past), run instantly.
+        if (isAboveViewport(el)) {
+            stage.run(() => { idx++; armNext(); });
+            return;
+        }
 
         let fired = false;
         function fire() {
@@ -2934,14 +2089,14 @@ function revealFinalImages() {
 
         currentObserver = new IntersectionObserver(entries => {
             entries.forEach(e => { if (e.isIntersecting) fire(); });
-        }, { threshold: 0.15, rootMargin: '0px 0px -15% 0px' });
+        }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' });
         currentObserver.observe(el);
 
         function fallback() {
             if (fired) return;
             const rect = el.getBoundingClientRect();
             const vh = window.innerHeight || document.documentElement.clientHeight;
-            if (rect.height > 0 && rect.top < vh * 0.85 && rect.bottom > 0) fire();
+            if (rect.height > 0 && rect.top < vh * 0.95 && rect.bottom > -vh) fire();
         }
         window.addEventListener('scroll', fallback, { passive: true });
         window.addEventListener('resize', fallback, { passive: true });
@@ -2949,13 +2104,13 @@ function revealFinalImages() {
             window.removeEventListener('scroll', fallback);
             window.removeEventListener('resize', fallback);
         };
-        setTimeout(fallback, 400);
+        setTimeout(fallback, 100);
     }
 
     function startChain() {
         if (chainStarted) return;
         chainStarted = true;
-        setTimeout(armNext, 800);
+        setTimeout(armNext, 200);
     }
 
     const howWrapper = document.getElementById('howTypingWrapper');
@@ -2966,7 +2121,7 @@ function revealFinalImages() {
         if (introFired) return;
         const rect = howWrapper.getBoundingClientRect();
         const vh = window.innerHeight;
-        if (rect.top < vh * 0.9 && rect.bottom > 0) {
+        if (rect.top < vh * 0.95 && rect.bottom > -vh) {
             introFired = true;
             document.getElementById('howItWorks').classList.add('visible');
             howStages(startChain);
@@ -2974,11 +2129,11 @@ function revealFinalImages() {
     }
     new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) tryIntro(); });
-    }, { threshold: 0.05, rootMargin: '0px 0px -10% 0px' }).observe(howWrapper);
+    }, { threshold: 0.02, rootMargin: '0px 0px -10% 0px' }).observe(howWrapper);
 
     window.addEventListener('scroll', tryIntro, { passive: true });
     window.addEventListener('resize', tryIntro, { passive: true });
-    setTimeout(tryIntro, 400);
+    setTimeout(tryIntro, 200);
 })();
 
 /* ============================================================
@@ -3081,4 +2236,6 @@ window.addEventListener('resize', () => {
     updateState();
 })();
 </script>
+
+</body>
 </html>
